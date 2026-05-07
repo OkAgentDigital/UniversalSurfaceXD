@@ -148,3 +148,84 @@ export function saveView(view: View): void {
   `);
   stmt.run(view);
 }
+
+// Search across tasks and documents
+export interface SearchResult {
+  id: string;
+  title: string;
+  snippet: string;
+  type: 'task' | 'document';
+  updated_at: number;
+}
+
+export function search(query: string): SearchResult[] {
+  const searchTerm = `%${query}%`;
+  const results: SearchResult[] = [];
+
+  // Search tasks
+  const taskStmt = db.prepare(`
+    SELECT id, title, status as snippet, updated_at
+    FROM tasks
+    WHERE title LIKE ? OR properties LIKE ?
+    ORDER BY updated_at DESC
+    LIMIT 20
+  `);
+  const taskResults = taskStmt.all(searchTerm, searchTerm) as any[];
+  taskResults.forEach((r: any) => {
+    results.push({
+      id: r.id,
+      title: r.title,
+      snippet: `Task - ${r.snippet}`,
+      type: 'task',
+      updated_at: r.updated_at,
+    });
+  });
+
+  // Search documents
+  const docStmt = db.prepare(`
+    SELECT id, title, substr(content, 1, 100) as snippet, updated_at
+    FROM documents
+    WHERE title LIKE ? OR content LIKE ?
+    ORDER BY updated_at DESC
+    LIMIT 20
+  `);
+  const docResults = docStmt.all(searchTerm, searchTerm) as any[];
+  docResults.forEach((r: any) => {
+    results.push({
+      id: r.id,
+      title: r.title,
+      snippet: r.snippet,
+      type: 'document',
+      updated_at: r.updated_at,
+    });
+  });
+
+  // Sort by updated_at descending
+  results.sort((a, b) => b.updated_at - a.updated_at);
+  return results.slice(0, 30);
+}
+
+// Settings storage (using sync_metadata table)
+export function getSetting(key: string): string | undefined {
+  const stmt = db.prepare('SELECT key FROM sync_metadata WHERE key = ?');
+  const row = stmt.get(key) as any;
+  return row?.key;
+}
+
+export function saveSetting(key: string, value: string): void {
+  const stmt = db.prepare(`
+    INSERT OR REPLACE INTO sync_metadata (key, last_sync_time, sync_provider, sync_state)
+    VALUES (?, ?, ?, ?)
+  `);
+  stmt.run(key, Date.now(), value, 'settings');
+}
+
+export function getAllSettings(): Record<string, string> {
+  const stmt = db.prepare("SELECT key, sync_provider FROM sync_metadata WHERE sync_state = 'settings'");
+  const rows = stmt.all() as any[];
+  const settings: Record<string, string> = {};
+  rows.forEach((r: any) => {
+    settings[r.key] = r.sync_provider;
+  });
+  return settings;
+}

@@ -1,46 +1,63 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface StatusBarProps {
-  language?: string;
-  lineCount?: number;
-  taskCount?: number;
-  gitBranch?: string;
+  taskCount: number;
+  gitBranch: string;
+  onGitBranchChange: (branch: string) => void;
+  showPanel: boolean;
+  onPanelToggle: () => void;
 }
 
-export function StatusBar({ language, lineCount, taskCount, gitBranch }: StatusBarProps) {
+export function StatusBar({ taskCount, gitBranch, onGitBranchChange, showPanel, onPanelToggle }: StatusBarProps) {
+  useEffect(() => {
+    const loadBranch = async () => {
+      try {
+        const branch = await window.electron.getGitBranch();
+        onGitBranchChange(branch);
+      } catch {
+        onGitBranchChange('main');
+      }
+    };
+    loadBranch();
+  }, [onGitBranchChange]);
+
   return (
     <div className="status-bar">
       <div className="status-bar-left">
-        <span className="status-item" title="Git Branch">
+        <div className="status-item" title="Git Branch">
           <i className="codicon codicon-source-control"></i>
-          {gitBranch || 'main'}
-        </span>
+          <span>{gitBranch}</span>
+        </div>
+        <div className="status-item" title="Task Count">
+          <i className="codicon codicon-checklist"></i>
+          <span>{taskCount} tasks</span>
+        </div>
       </div>
       <div className="status-bar-right">
-        {taskCount !== undefined && (
-          <span className="status-item" title="Total Tasks">
-            <i className="codicon codicon-checklist"></i>
-            {taskCount} tasks
-          </span>
-        )}
-        {language && (
-          <span className="status-item" title="Language Mode">
-            <i className="codicon codicon-symbol-namespace"></i>
-            {language}
-          </span>
-        )}
-        {lineCount !== undefined && (
-          <span className="status-item" title="Line Count">
-            <i className="codicon codicon-symbol-key"></i>
-            Ln {lineCount}
-          </span>
-        )}
-        <span className="status-item" title="Encoding">
-          UTF-8
-        </span>
-        <span className="status-item" title="Indentation">
-          Spaces: 2
-        </span>
+        <div
+          className={`status-item ${showPanel ? 'active' : ''}`}
+          onClick={onPanelToggle}
+          title="Toggle Terminal"
+        >
+          <i className="codicon codicon-terminal"></i>
+          <span>Terminal</span>
+        </div>
+        <div className="status-item" title="Language Mode">
+          <i className="codicon codicon-code"></i>
+          <span>TypeScript</span>
+        </div>
+        <div className="status-item" title="Line Ending">
+          <i className="codicon codicon-type-hierarchy"></i>
+          <span>UTF-8</span>
+        </div>
+        <div className="status-item" title="Indentation">
+          <i className="codicon codicon-indent"></i>
+          <span>Spaces: 2</span>
+        </div>
+        <div className="status-item" title="Encoding">
+          <i className="codicon codicon-encoding"></i>
+          <span>LF</span>
+        </div>
       </div>
     </div>
   );

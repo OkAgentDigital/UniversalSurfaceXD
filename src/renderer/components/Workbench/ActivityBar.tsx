@@ -9,6 +9,8 @@ interface ActivityItem {
 interface ActivityBarProps {
   activeView: string;
   onViewChange: (viewId: string) => void;
+  showPanel: boolean;
+  onPanelToggle: () => void;
 }
 
 const topItems: ActivityItem[] = [
@@ -23,7 +25,7 @@ const bottomItems: ActivityItem[] = [
   { id: 'account', icon: 'codicon-account', label: 'Accounts' },
 ];
 
-export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
+export function ActivityBar({ activeView, onViewChange, showPanel, onPanelToggle }: ActivityBarProps) {
   return (
     <div className="activity-bar">
       <div className="activity-bar-top">
@@ -39,6 +41,13 @@ export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
         ))}
       </div>
       <div className="activity-bar-bottom">
+        <div
+          className={`activity-item ${showPanel ? 'active' : ''}`}
+          onClick={onPanelToggle}
+          title="Toggle Terminal Panel"
+        >
+          <i className="codicon codicon-terminal"></i>
+        </div>
         {bottomItems.map(item => (
           <div
             key={item.id}

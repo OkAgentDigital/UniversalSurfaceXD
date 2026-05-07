@@ -509,3 +509,99 @@ html, body, #root {
 .modal-button.primary:hover {
   background: #1177bb;
 }
+
+/* Panel (Bottom Terminal) */
+.panel {
+  height: var(--vscode-panel-height);
+  background: #1e1e1e;
+  border-top: 1px solid #3c3c3c;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Action Buttons */
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: #3c3c3c;
+  border: none;
+  border-radius: 4px;
+  color: #cccccc;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.action-button:hover {
+  background: #4c4c4c;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.action-button.active {
+  background: #0e639c;
+  color: #ffffff;
+}
+
+.action-button .codicon {
+  font-size: 14px;
+}
+
+/* Settings Groups */
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setting-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #858585;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Sidebar Section Title */
+.sidebar-section-title {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #858585;
+  user-select: none;
+  border-top: 1px solid #3c3c3c;
+}
+
+/* Status bar active state */
+.status-item.active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Sidebar header right section */
+.sidebar-header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar-header-right .codicon {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  color: #858585;
+}
+
+.sidebar-header-right .codicon:hover {
+  background: #3c3c3c;
+  color: #cccccc;
+}

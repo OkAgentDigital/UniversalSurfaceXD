@@ -4,9 +4,10 @@ import { Task } from '../../types';
 
 interface FileExplorerProps {
   onTaskCountChange?: (count: number) => void;
+  onTaskSelect?: (task: Task | null) => void;
 }
 
-export function FileExplorer({ onTaskCountChange }: FileExplorerProps) {
+export function FileExplorer({ onTaskCountChange, onTaskSelect }: FileExplorerProps) {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
