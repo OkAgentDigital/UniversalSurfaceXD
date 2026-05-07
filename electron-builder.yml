@@ -1,0 +1,21 @@
+appId: com.universui.app
+productName: Universui
+directories:
+  output: dist
+files:
+  - dist/**/*
+  - node_modules/**/*
+  - assets/**/*
+mac:
+  target: dmg
+  category: public.app-category.productivity
+  icon: assets/icons/icon.icns
+win:
+  target: nsis
+  icon: assets/icons/icon.ico
+linux:
+  target: AppImage
+  icon: assets/icons
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
