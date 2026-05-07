@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
+    "@vscode/codicons": "^0.0.45",
     "better-sqlite3": "^11.0.0",
     "react": "^18.2.0",
     "react-dnd": "^14.0.0",

@@ -1,0 +1,511 @@
+/* Universui Global Styles - VS Code Inspired Layout */
+
+:root {
+  /* VS Code Layout Variables */
+  --vscode-activity-bar-width: 48px;
+  --vscode-sidebar-width: 260px;
+  --vscode-panel-height: 200px;
+  --vscode-status-bar-height: 22px;
+
+  /* VS Code Color Tokens */
+  --vscode-bg: #1e1e1e;
+  --vscode-sidebar-bg: #252526;
+  --vscode-sidebar-header-bg: #2d2d2d;
+  --vscode-sidebar-border: #3c3c3c;
+  --vscode-sidebar-title: #cccccc;
+  --vscode-sidebar-icon: #858585;
+  --vscode-sidebar-hover: #2a2d2e;
+  --vscode-sidebar-folder: #cccccc;
+  --vscode-activity-bar-bg: #333333;
+  --vscode-activity-bar-active: #ffffff;
+  --vscode-activity-bar-inactive: #858585;
+  --vscode-activity-bar-hover: #3c3c3c;
+  --vscode-status-bar-bg: #007acc;
+  --vscode-status-bar-fg: #ffffff;
+  --vscode-title-bar-bg: #2c2c2c;
+  --vscode-title-bar-fg: #cccccc;
+  --vscode-selection-bg: #094771;
+  --vscode-hover-bg: #2a2d2e;
+
+  /* Notionish-inspired accents */
+  --notionish-card-radius: 8px;
+  --notionish-hover-transform: translateX(2px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--vscode-bg);
+  color: #cccccc;
+}
+
+/* VS Code Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4e4e4e;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Codicon base styling */
+.codicon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Workbench Layout */
+.workbench {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: var(--vscode-bg);
+}
+
+.workbench-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Activity Bar */
+.activity-bar {
+  display: flex;
+  flex-direction: column;
+  width: var(--vscode-activity-bar-width);
+  background: var(--vscode-activity-bar-bg);
+  border-right: 1px solid var(--vscode-sidebar-border);
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.activity-bar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 2px;
+}
+
+.activity-bar-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 8px;
+  gap: 2px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  color: var(--vscode-activity-bar-inactive);
+  position: relative;
+  transition: color 0.1s ease;
+}
+
+.activity-item:hover {
+  color: var(--vscode-activity-bar-hover);
+}
+
+.activity-item.active {
+  color: var(--vscode-activity-bar-active);
+}
+
+.activity-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--vscode-activity-bar-active);
+  border-radius: 0 2px 2px 0;
+}
+
+.activity-item .codicon {
+  font-size: 24px;
+}
+
+/* Side Bar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: var(--vscode-sidebar-width);
+  background: var(--vscode-sidebar-bg);
+  border-right: 1px solid var(--vscode-sidebar-border);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--vscode-sidebar-header-bg);
+  border-bottom: 1px solid var(--vscode-sidebar-border);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--vscode-sidebar-title);
+  user-select: none;
+}
+
+.sidebar-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.sidebar-header-actions button {
+  background: transparent;
+  border: none;
+  color: var(--vscode-sidebar-icon);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-header-actions button:hover {
+  background: var(--vscode-sidebar-hover);
+  color: #cccccc;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.editor-area {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  height: var(--vscode-status-bar-height);
+  background: var(--vscode-status-bar-bg);
+  color: var(--vscode-status-bar-fg);
+  font-size: 12px;
+  padding: 0 10px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.status-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.status-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 0 4px;
+  height: 100%;
+}
+
+.status-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.status-item .codicon {
+  font-size: 12px;
+}
+
+/* File Explorer Styles */
+.file-explorer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 28px;
+  margin: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #cccccc;
+}
+
+.file-explorer-item:hover {
+  background: var(--vscode-sidebar-hover);
+}
+
+.file-explorer-item.selected {
+  background: var(--vscode-selection-bg);
+  color: #ffffff;
+}
+
+.file-explorer-item .task-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-explorer-item .task-badge {
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: #3c3c3c;
+  color: #858585;
+}
+
+/* Folder Section */
+.folder-section {
+  margin-bottom: 4px;
+}
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 0 4px;
+  color: #cccccc;
+}
+
+.folder-header:hover {
+  background: var(--vscode-sidebar-hover);
+}
+
+.folder-header .codicon-chevron-right {
+  font-size: 14px;
+  margin-right: 4px;
+  transition: transform 0.1s ease;
+}
+
+.folder-header.expanded .codicon-chevron-right {
+  transform: rotate(90deg);
+}
+
+.folder-header .folder-name {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.folder-header .folder-count {
+  font-size: 11px;
+  color: #858585;
+  margin-left: 8px;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  color: #858585;
+}
+
+.empty-state .codicon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.empty-state button {
+  background: #0e639c;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.empty-state button:hover {
+  background: #1177bb;
+}
+
+/* Context Menu */
+.context-menu {
+  position: fixed;
+  background: #2d2d2d;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+  min-width: 180px;
+  padding: 4px 0;
+}
+
+.context-menu-item {
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cccccc;
+}
+
+.context-menu-item:hover {
+  background: var(--vscode-selection-bg);
+}
+
+.context-menu-item.destructive {
+  color: #f48771;
+}
+
+.context-menu-item.destructive:hover {
+  background: #5a1d1d;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background: #3c3c3c;
+  margin: 4px 0;
+}
+
+/* Modal / Dialog */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #2d2d2d;
+  border-radius: 8px;
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #3c3c3c;
+}
+
+.modal-content h3 {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #cccccc;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: #3c3c3c;
+  border: 1px solid #4c4c4c;
+  border-radius: 4px;
+  color: #cccccc;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #0e639c;
+}
+
+.modal-select {
+  width: 100%;
+  padding: 8px 12px;
+  background: #3c3c3c;
+  border: 1px solid #4c4c4c;
+  border-radius: 4px;
+  color: #cccccc;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.modal-button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #cccccc;
+}
+
+.modal-button:hover {
+  background: #3c3c3c;
+}
+
+.modal-button.primary {
+  background: #0e639c;
+  color: white;
+}
+
+.modal-button.primary:hover {
+  background: #1177bb;
+}
