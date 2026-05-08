@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  target: 'electron-renderer',
+  target: 'web',
   entry: './src/renderer/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist/renderer'),
@@ -22,6 +22,10 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(ttf|woff|woff2|eot|svg)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -29,6 +33,9 @@ module.exports = {
       template: './src/renderer/index.html',
     }),
   ],
+  node: {
+    global: true,
+  },
   devServer: {
     port: 3000,
     hot: true,

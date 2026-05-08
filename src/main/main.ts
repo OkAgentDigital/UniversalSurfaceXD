@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import fs from 'fs';
 import { initDatabase } from './database';
 import { registerIpcHandlers } from './ipcHandlers';
 import { APP_NAME } from '../shared/constants';
@@ -21,13 +22,19 @@ function createWindow(): void {
     },
   });
 
-  // In development, load from webpack dev server
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
-    mainWindow.loadURL('http://localhost:3000');
+  // Check if we should use the dev server (port 3000) or built files
+  const devServerUrl = 'http://localhost:3000';
+  const builtIndexPath = path.join(__dirname, '../renderer/index.html');
+
+  // Use dev server if VITE_DEV_SERVER_URL is set, or if app is not packaged and the built file doesn't exist
+  const useDevServer = process.env.VITE_DEV_SERVER_URL === 'true' || (!app.isPackaged && !fs.existsSync(builtIndexPath));
+
+  if (useDevServer) {
+    mainWindow.loadURL(devServerUrl);
     mainWindow.webContents.openDevTools();
   } else {
     // In production, load the built HTML file
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    mainWindow.loadFile(builtIndexPath);
   }
 
   mainWindow.on('closed', () => {
