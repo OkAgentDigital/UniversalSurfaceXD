@@ -1,3 +1,10 @@
+import {
+  MCPServerStatus,
+  MCPServerConfig,
+  MCPToolResult,
+  CommandPaletteItem,
+} from '../../shared/types';
+
 export interface Document {
   id: string;
   title: string;
@@ -44,6 +51,33 @@ export interface GitLogItem {
   message: string;
 }
 
+export interface SonicHealth {
+  status: 'healthy' | 'degraded';
+  secrets: number;
+  containers: { total: number; running: number };
+  routes: number;
+  uptime: number;
+}
+
+export interface SonicAuditEntry {
+  timestamp: number;
+  action: string;
+  actor: string;
+  resource: string;
+  success: boolean;
+  details?: string;
+}
+
+export interface SonicContainerInfo {
+  id: string;
+  name: string;
+  image: string;
+  status: 'stopped' | 'running' | 'error';
+  port?: number;
+  startedAt?: number;
+  env: Record<string, string>;
+}
+
 export interface ElectronAPI {
   // Document operations
   getDocument: (id: string) => Promise<Document | undefined>;
@@ -81,6 +115,61 @@ export interface ElectronAPI {
   // Settings
   getSettings: () => Promise<Record<string, string>>;
   saveSetting: (key: string, value: string) => Promise<void>;
+
+  // AI / DeepSeek operations
+  aiChat: (request: { messages: { role: string; content: string }[]; stream?: boolean }) =>
+    Promise<{ success: boolean; message?: { role: string; content: string }; usage?: any; error?: string }>;
+  aiExplain: (params: { text: string; context?: string }) =>
+    Promise<{ success: boolean; explanation?: string; error?: string }>;
+
+  // MCP (GitHub) operations — multi-server
+  mcpStatus: () => Promise<MCPServerStatus[]>;
+  mcpServerStatus: (serverId: string) => Promise<MCPServerStatus>;
+  mcpStart: (serverId: string) => Promise<{ success: boolean; error?: string }>;
+  mcpStop: (serverId: string) => Promise<{ success: boolean; error?: string }>;
+  mcpCallTool: (serverId: string, tool: string, args: Record<string, unknown>) => Promise<MCPToolResult>;
+  mcpConfigs: () => Promise<MCPServerConfig[]>;
+  mcpExecute: (command: string) => Promise<{ success: boolean; result?: string; error?: string }>;
+
+  // Extension API
+  extensionList: () => Promise<Array<{ id: string; name: string; version: string; description?: string }>>;
+  extensionExecuteCommand: (commandId: string, ...args: unknown[]) => Promise<{ success: boolean; error?: string }>;
+
+  // Command Palette
+  commandPaletteList: () => Promise<CommandPaletteItem[]>;
+  commandPaletteExecute: (commandId: string) => Promise<{ success: boolean; error?: string }>;
+
+  // ============================================================
+  // SonicScrewdriver — Secret Store
+  // ============================================================
+  sonicSetSecret: (key: string, value: string, provider: string, description?: string) =>
+    Promise<{ success: boolean }>;
+  sonicGetSecret: (key: string) =>
+    Promise<{ success: boolean; value: string | null }>;
+  sonicDeleteSecret: (key: string) =>
+    Promise<{ success: boolean }>;
+  sonicListSecrets: () =>
+    Promise<Array<{ key: string; provider: string; description?: string; createdAt: number }>>;
+
+  // SonicScrewdriver — API Proxy
+  sonicProxyRequest: (routeId: string, method: string, path: string, body?: unknown, headers?: Record<string, string>) =>
+    Promise<{ status: number; data: unknown; headers: Record<string, string> }>;
+
+  // SonicScrewdriver — Container Runtime
+  sonicStartContainer: (id: string, name: string, command: string, args: string[], env: Record<string, string>) =>
+    Promise<{ success: boolean; error?: string }>;
+  sonicStopContainer: (id: string) =>
+    Promise<{ success: boolean; error?: string }>;
+  sonicContainerStatus: (id: string) =>
+    Promise<SonicContainerInfo | undefined>;
+  sonicListContainers: () =>
+    Promise<SonicContainerInfo[]>;
+
+  // SonicScrewdriver — Audit & Health
+  sonicAuditLog: (limit?: number, filter?: { action?: string; success?: boolean }) =>
+    Promise<SonicAuditEntry[]>;
+  sonicHealth: () =>
+    Promise<SonicHealth>;
 }
 
 declare global {

@@ -82,14 +82,14 @@ export function SettingsPanel() {
               onClick={() => handleThemeChange('dark')}
               style={{ flex: 1, background: theme === 'dark' ? '#0e639c' : '#3c3c3c' }}
             >
-              <i className="codicon codicon-moon"></i> Dark
+              <i className="codicon codicon-color-mode"></i> Dark
             </button>
             <button
               className={`action-button ${theme === 'light' ? 'active' : ''}`}
               onClick={() => handleThemeChange('light')}
               style={{ flex: 1, background: theme === 'light' ? '#0e639c' : '#3c3c3c' }}
             >
-              <i className="codicon codicon-sun"></i> Light
+              <i className="codicon codicon-light-bulb"></i> Light
             </button>
           </div>
         </div>
@@ -161,7 +161,7 @@ export function SettingsPanel() {
         <div className="setting-group" style={{ borderTop: '1px solid #3c3c3c', paddingTop: 12 }}>
           <label className="setting-label">About Universui</label>
           <div style={{ fontSize: 11, color: '#858585', lineHeight: 1.6 }}>
-            <div>Version: 1.2.0</div>
+            <div>Version: 1.3.0</div>
             <div>Local-first desktop editor</div>
             <div>Electron + React + Monaco + SQLite</div>
           </div>

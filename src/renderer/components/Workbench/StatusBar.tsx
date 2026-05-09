@@ -6,9 +6,19 @@ interface StatusBarProps {
   onGitBranchChange: (branch: string) => void;
   showPanel: boolean;
   onPanelToggle: () => void;
+  showRightPanel?: boolean;
+  onRightPanelToggle?: () => void;
 }
 
-export function StatusBar({ taskCount, gitBranch, onGitBranchChange, showPanel, onPanelToggle }: StatusBarProps) {
+export function StatusBar({
+  taskCount,
+  gitBranch,
+  onGitBranchChange,
+  showPanel,
+  onPanelToggle,
+  showRightPanel,
+  onRightPanelToggle,
+}: StatusBarProps) {
   useEffect(() => {
     const loadBranch = async () => {
       try {
@@ -42,6 +52,16 @@ export function StatusBar({ taskCount, gitBranch, onGitBranchChange, showPanel, 
           <i className="codicon codicon-terminal"></i>
           <span>Terminal</span>
         </div>
+        {onRightPanelToggle && (
+          <div
+            className={`status-item ${showRightPanel ? 'active' : ''}`}
+            onClick={onRightPanelToggle}
+            title="Toggle AI Chat"
+          >
+            <i className="codicon codicon-comment-discussion"></i>
+            <span>AI Chat</span>
+          </div>
+        )}
         <div className="status-item" title="Language Mode">
           <i className="codicon codicon-code"></i>
           <span>TypeScript</span>
@@ -55,7 +75,7 @@ export function StatusBar({ taskCount, gitBranch, onGitBranchChange, showPanel, 
           <span>Spaces: 2</span>
         </div>
         <div className="status-item" title="Encoding">
-          <i className="codicon codicon-encoding"></i>
+          <i className="codicon codicon-library"></i>
           <span>LF</span>
         </div>
       </div>

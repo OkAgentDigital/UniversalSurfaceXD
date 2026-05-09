@@ -3,6 +3,10 @@ import path from 'path';
 import fs from 'fs';
 import { initDatabase } from './database';
 import { registerIpcHandlers } from './ipcHandlers';
+import { registerAiHandlers } from './aiService';
+import { registerMCPHandlers } from './mcpService';
+import { registerExtensionHandlers } from './extensionService';
+import { registerSonicHandlers, sonicScrewdriver } from './sonicScrewdriver';
 import { APP_NAME } from '../shared/constants';
 
 let mainWindow: BrowserWindow | null = null;
@@ -14,6 +18,12 @@ function createWindow(): void {
     minWidth: 800,
     minHeight: 600,
     title: APP_NAME,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#2c2c2c',
+      symbolColor: '#cccccc',
+      height: 38,
+    },
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js'),
       contextIsolation: true,
@@ -26,8 +36,8 @@ function createWindow(): void {
   const devServerUrl = 'http://localhost:3000';
   const builtIndexPath = path.join(__dirname, '../renderer/index.html');
 
-  // Use dev server if VITE_DEV_SERVER_URL is set, or if app is not packaged and the built file doesn't exist
-  const useDevServer = process.env.VITE_DEV_SERVER_URL === 'true' || (!app.isPackaged && !fs.existsSync(builtIndexPath));
+  // Use dev server if DEV_SERVER_URL is set, or if app is not packaged and the built file doesn't exist
+  const useDevServer = process.env.DEV_SERVER_URL === 'true' || (!app.isPackaged && !fs.existsSync(builtIndexPath));
 
   if (useDevServer) {
     mainWindow.loadURL(devServerUrl);
@@ -48,6 +58,18 @@ app.whenReady().then(() => {
 
   // Register IPC handlers
   registerIpcHandlers();
+
+  // Register AI handlers (DeepSeek)
+  registerAiHandlers();
+
+  // Register MCP handlers (GitHub MCP Server)
+  registerMCPHandlers();
+
+  // Register Extension API handlers
+  registerExtensionHandlers();
+
+  // Register SonicScrewdriver handlers (Secret Store, API Proxy, Container Runtime)
+  registerSonicHandlers();
 
   // Create the main window
   createWindow();

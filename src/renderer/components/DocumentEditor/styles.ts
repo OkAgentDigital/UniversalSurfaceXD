@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const EditorContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   background-color: #1e1e1e;
 `;
 

@@ -5,19 +5,19 @@
 
 ---
 
-## 🏆 v1.2.0 — Current Release (Complete)
+## 🏆 v1.3.0 — Current Release (Complete)
 
-A fully functional local-first desktop IDE with:
+A local-first document hub with AI-powered collaboration and GitHub integration.
 
-- ✅ Professional VS Code-inspired Workbench layout
-- ✅ Full SQLite persistence with 4 tables (tasks, documents, views, sync_metadata)
-- ✅ Monaco editor with 8 languages + auto-save
-- ✅ TaskBoard with Kanban + Table views
-- ✅ **5 production-grade panels** (Search, Source Control, Terminal, Settings, Property)
-- ✅ Git integration (branch, status, commit, push/pull)
-- ✅ Integrated terminal (child_process spawn)
-- ✅ Dark theme with VS Code color tokens
-- ✅ Codicons throughout
+- ✅ **3-Column Layout** — Left sidebar (Explorer) + Center (Editor) + Right panel (AI Chat)
+- ✅ **Custom Title Bar** — VS Code-style chrome with app icon, version, and window controls
+- ✅ **Resizable Right Panel** — Draggable divider for AI Chat panel (200-600px)
+- ✅ **DeepSeek AI Integration** — Chat, Explain, and GitHub modes via DeepSeek API
+- ✅ **GitHub MCP Server Bridge** — Connect to GitHub repos, issues, PRs from within the app
+- ✅ **AI Chat Panel** — Three modes: Chat, GitHub, Explain with message history
+- ✅ **Activity Bar toggle** — AI Chat toggle in both Activity Bar and Status Bar
+- ✅ **Status Bar indicators** — Terminal and AI Chat status indicators
+- ✅ All v1.2.0 features preserved and enhanced
 
 ### The Evolution
 
@@ -26,6 +26,7 @@ A fully functional local-first desktop IDE with:
 | v1.0.0 | Core editor + SQLite | 2 | ~800 |
 | v1.1.0 | Workbench layout + FileExplorer | 4 | ~1,500 |
 | v1.2.0 | 5 new functional panels | **9 total** | ~3,000+ |
+| v1.3.0 | 3-column layout + AI + MCP + Custom Chrome | **10 total** | ~4,500+ |
 
 ---
 
@@ -141,7 +142,7 @@ When ready for public release:
 | v1.0.0 | May 2026 | Core editor + SQLite + TaskBoard |
 | v1.1.0 | May 2026 | VS Code Workbench layout + FileExplorer |
 | v1.2.0 | May 2026 | Search, Source Control, Terminal, Settings, Property panels |
-| v1.3.0 | TBD | Polish, performance, testing, distribution |
+| v1.3.0 | May 2026 | 3-column layout, Custom Chrome, DeepSeek AI, GitHub MCP Server |
 
 ---
 

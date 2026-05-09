@@ -1,13 +1,14 @@
 {
   "name": "universui",
   "productName": "Universui",
-  "version": "0.1.0",
+  "version": "1.3.0",
   "description": "Local-first desktop editor combining task management with professional code editing",
   "main": "dist/main/main.js",
   "scripts": {
-    "start": "npm run build:preload && concurrently --kill-others \"npm run build:main:dev\" \"npm run build:renderer:dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "start:dev": "npm run build:preload && concurrently --kill-others \"npm run build:main:dev\" \"npm run build:renderer:dev\" \"wait-on http://localhost:3000 && VITE_DEV_SERVER_URL=true electron .\"",
+    "start": "npm run build:preload && concurrently --kill-others \"npm run build:main:dev\" \"npm run build:renderer:dev\" \"wait-on http://localhost:3000 && DEV_SERVER_URL=true electron .\"",
+    "start:dev": "npm run build:preload && concurrently --kill-others \"npm run build:main:dev\" \"npm run build:renderer:dev\" \"wait-on http://localhost:3000 && DEV_SERVER_URL=true electron .\"",
     "start:prod": "npm run build && electron .",
+
     "build": "npm run build:preload && npm run build:main && npm run build:renderer",
     "build:main": "webpack --config webpack.main.config.js --mode production",
     "build:main:dev": "webpack --config webpack.main.config.js --mode development --watch",
