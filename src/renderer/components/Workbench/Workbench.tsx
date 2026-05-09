@@ -11,7 +11,8 @@ import { TerminalPanel } from '../Panel/TerminalPanel';
 import { AIChatPanel } from '../Panel/AIChatPanel';
 import { AccountPanel } from '../Account/AccountPanel';
 import { ExtensionMarketplace } from '../Extensions/ExtensionMarketplace';
-import { AgentsPanel, SkillsPanel, ChecksPanel, SystemTasksPanel, VariablesPanel, WorkflowsPanel } from '../Panel/SourceControlPanels';
+import { WorkflowsPanel } from '../Panel/SourceControlPanels';
+import { CombinedDevOpsPanel } from '../Sidebar/CombinedDevOpsPanel';
 import { Task } from '../../types';
 
 export function Workbench() {
@@ -100,18 +101,10 @@ export function Workbench() {
         return <SourceControlPanel />;
       case 'extensions':
         return <ExtensionMarketplace />;
-      case 'agents':
-        return <AgentsPanel />;
-      case 'skills':
-        return <SkillsPanel />;
+      case 'devops':
+        return <CombinedDevOpsPanel />;
       case 'workflows':
         return <WorkflowsPanel />;
-      case 'variables':
-        return <VariablesPanel />;
-      case 'checks':
-        return <ChecksPanel />;
-      case 'tasks':
-        return <SystemTasksPanel />;
       case 'settings':
         return <SettingsPanel />;
       case 'account':

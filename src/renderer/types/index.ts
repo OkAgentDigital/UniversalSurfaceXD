@@ -190,6 +190,31 @@ export interface Variable {
 }
 
 // ============================================================
+// Snack Types (GTM-style Tag/Snack system)
+// ============================================================
+export interface Snack {
+  id: string;
+  name: string;
+  description: string;
+  type: 'custom-script' | 'ai-prompt' | 'mcp-tool' | 'shell-command' | 'http-request';
+  script: string;
+  triggers: string[];
+  variables: string[];
+  enabled: boolean;
+  lastRun?: Date;
+  lastSuccess?: boolean;
+  runs: number;
+}
+
+export interface SnackTrigger {
+  id: string;
+  name: string;
+  type: 'event' | 'timer' | 'custom' | 'mcp-webhook';
+  config: Record<string, any>;
+  enabled: boolean;
+}
+
+// ============================================================
 // Workflow Types
 // ============================================================
 export interface Workflow {
@@ -200,6 +225,10 @@ export interface Workflow {
   status: 'active' | 'disabled' | 'error';
   lastRun?: Date;
   runs: number;
+  autonomyLevel?: 1 | 2 | 3 | 4 | 5;
+  tags?: string[];
+  triggers?: string[];
+  variables?: string[];
 }
 
 // ============================================================

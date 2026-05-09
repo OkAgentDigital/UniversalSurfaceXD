@@ -85,6 +85,16 @@ export function CustomTitleBar({
           {/* Mac traffic light spacer (hidden on non-mac) */}
           <div className="mac-traffic-light-spacer" />
 
+          {/* App icon + name + version (moved before controls to avoid overlap) */}
+          <div className="title-bar-app-icon">
+            {Icons.universui}
+          </div>
+          <span className="title-bar-app-name">{APP_NAME}</span>
+          <span className="title-bar-version">v{APP_VERSION}</span>
+
+          {/* Separator */}
+          <div className="title-bar-separator" />
+
           {/* VS Code-style panel toggle controls */}
           <div className="title-bar-controls">
             {onToggleSidebar && (
@@ -113,16 +123,6 @@ export function CustomTitleBar({
               {Icons.chat}
             </button>
           </div>
-
-          {/* Separator */}
-          <div className="title-bar-separator" />
-
-          {/* App icon + name + version */}
-          <div className="title-bar-app-icon">
-            {Icons.universui}
-          </div>
-          <span className="title-bar-app-name">{APP_NAME}</span>
-          <span className="title-bar-version">v{APP_VERSION}</span>
         </div>
 
         {/* Center section: Command center */}

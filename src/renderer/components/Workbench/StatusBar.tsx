@@ -85,16 +85,6 @@ export function StatusBar({
           <i className="codicon codicon-terminal"></i>
           <span>Terminal</span>
         </div>
-        {onRightPanelToggle && (
-          <div
-            className={`status-item ${showRightPanel ? 'active' : ''}`}
-            onClick={onRightPanelToggle}
-            title="Toggle AI Chat"
-          >
-            <i className="codicon codicon-comment-discussion"></i>
-            <span>AI Chat</span>
-          </div>
-        )}
         <div className="status-item" title="Language Mode">
           <i className="codicon codicon-code"></i>
           <span>TypeScript</span>
