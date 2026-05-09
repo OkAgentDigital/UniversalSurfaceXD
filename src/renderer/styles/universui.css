@@ -636,21 +636,48 @@ html, body, #root {
   flex-shrink: 0;
   user-select: none;
   border-bottom: 1px solid var(--vscode-sidebar-border);
+  /* Ensure title bar is above other content */
+  position: relative;
+  z-index: 100;
 }
 
 .title-bar-drag {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 12px;
+  padding: 0 8px;
   -webkit-app-region: drag;
+}
+
+/* Mac traffic light spacer — accounts for red/orange/green window controls */
+.mac-traffic-light-spacer {
+  width: 0;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+/* On macOS, add 70px left padding to avoid overlap with traffic lights */
+.darwin .mac-traffic-light-spacer,
+body.darwin .mac-traffic-light-spacer,
+.platform-darwin .mac-traffic-light-spacer {
+  width: 70px;
+}
+
+/* VS Code-style panel toggle controls on the left */
+.title-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  -webkit-app-region: no-drag;
+  flex-shrink: 0;
 }
 
 .title-bar-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 200px;
+  gap: 6px;
+  min-width: auto;
+  flex-shrink: 0;
 }
 
 .title-bar-app-icon {
@@ -659,6 +686,7 @@ html, body, #root {
   justify-content: center;
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
 }
 
 .title-bar-app-name {
@@ -666,6 +694,7 @@ html, body, #root {
   font-weight: 600;
   color: var(--vscode-title-bar-fg);
   letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .title-bar-version {
@@ -674,6 +703,7 @@ html, body, #root {
   padding: 1px 4px;
   background: #3c3c3c;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
 .title-bar-command-center {
@@ -683,7 +713,7 @@ html, body, #root {
   justify-content: center;
   gap: 8px;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0 12px;
   padding: 4px 12px;
   background: #3c3c3c;
   border: 1px solid #4c4c4c;
@@ -698,7 +728,7 @@ html, body, #root {
   border-color: #5c5c5c;
 }
 
-.title-bar-command-center .codicon {
+.title-bar-command-center svg {
   font-size: 14px;
   color: #858585;
   flex-shrink: 0;
@@ -723,24 +753,26 @@ html, body, #root {
 .title-bar-right {
   display: flex;
   align-items: center;
-  gap: 4px;
-  min-width: 200px;
+  gap: 2px;
+  min-width: auto;
   justify-content: flex-end;
   -webkit-app-region: no-drag;
+  flex-shrink: 0;
 }
 
 .title-bar-action {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border: none;
   background: transparent;
   color: #858585;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.15s ease;
+  -webkit-app-region: no-drag;
 }
 
 .title-bar-action:hover {
@@ -749,13 +781,19 @@ html, body, #root {
 }
 
 .title-bar-action.active {
-  color: var(--ai-chat-accent);
+  color: var(--ai-chat-accent, #4ec9b0);
   background: rgba(78, 201, 176, 0.1);
+}
+
+.title-bar-action svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* ============================================
    RIGHT PANEL (AI Chat / Collaboration Hub)
    ============================================ */
+
 .right-panel {
   display: flex;
   flex-direction: column;

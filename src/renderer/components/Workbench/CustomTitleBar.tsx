@@ -12,6 +12,53 @@ interface CustomTitleBarProps {
   onOpenCommandPalette?: () => void;
 }
 
+// Flowbite-style SVG icons
+const Icons = {
+  sidebar: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <line x1="9" y1="3" x2="9" y2="21" />
+    </svg>
+  ),
+  terminal: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="4 17 10 11 4 5" />
+      <line x1="12" y1="19" x2="20" y2="19" />
+    </svg>
+  ),
+  chat: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
+  settings: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  ),
+  account: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  ),
+  search: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  ),
+  universui: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <rect x="2" y="2" width="9" height="9" rx="2" fill="#007acc" />
+      <rect x="13" y="2" width="9" height="9" rx="2" fill="#4ec9b0" />
+      <rect x="2" y="13" width="9" height="9" rx="2" fill="#ce9178" />
+      <rect x="13" y="13" width="9" height="9" rx="2" fill="#c586c0" />
+    </svg>
+  ),
+};
+
 export function CustomTitleBar({
   showRightPanel,
   onToggleRightPanel,
@@ -33,15 +80,46 @@ export function CustomTitleBar({
   return (
     <div className="custom-title-bar">
       <div className="title-bar-drag">
-        {/* Left section: App icon + name + version */}
+        {/* Left section: Mac traffic light spacer + VS Code-style panel toggles */}
         <div className="title-bar-left">
+          {/* Mac traffic light spacer (hidden on non-mac) */}
+          <div className="mac-traffic-light-spacer" />
+
+          {/* VS Code-style panel toggle controls */}
+          <div className="title-bar-controls">
+            {onToggleSidebar && (
+              <button
+                className={`title-bar-action ${showSidebar ? 'active' : ''}`}
+                onClick={onToggleSidebar}
+                title="Toggle Sidebar (Cmd+B)"
+              >
+                {Icons.sidebar}
+              </button>
+            )}
+            {onTogglePanel && (
+              <button
+                className={`title-bar-action ${showPanel ? 'active' : ''}`}
+                onClick={onTogglePanel}
+                title="Toggle Terminal Panel (Cmd+J)"
+              >
+                {Icons.terminal}
+              </button>
+            )}
+            <button
+              className={`title-bar-action ${showRightPanel ? 'active' : ''}`}
+              onClick={onToggleRightPanel}
+              title="Toggle AI Chat Panel"
+            >
+              {Icons.chat}
+            </button>
+          </div>
+
+          {/* Separator */}
+          <div className="title-bar-separator" />
+
+          {/* App icon + name + version */}
           <div className="title-bar-app-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <rect x="1" y="1" width="6" height="6" rx="1" fill="#007acc" />
-              <rect x="9" y="1" width="6" height="6" rx="1" fill="#4ec9b0" />
-              <rect x="1" y="9" width="6" height="6" rx="1" fill="#ce9178" />
-              <rect x="9" y="9" width="6" height="6" rx="1" fill="#c586c0" />
-            </svg>
+            {Icons.universui}
           </div>
           <span className="title-bar-app-name">{APP_NAME}</span>
           <span className="title-bar-version">v{APP_VERSION}</span>
@@ -53,7 +131,7 @@ export function CustomTitleBar({
           onClick={handleCommandPalette}
           title="Search commands (Cmd+P)"
         >
-          <i className="codicon codicon-search"></i>
+          {Icons.search}
           <span className="title-bar-command-text">
             {currentDocument
               ? `${APP_NAME} • ${currentDocument}`
@@ -61,57 +139,17 @@ export function CustomTitleBar({
           </span>
         </div>
 
-        {/* Right section: Layout controls + settings */}
+        {/* Right section: Settings + Account */}
         <div className="title-bar-right">
-          {/* Sidebar toggle */}
-          {onToggleSidebar && (
-            <button
-              className={`title-bar-action ${showSidebar ? 'active' : ''}`}
-              onClick={onToggleSidebar}
-              title="Toggle Sidebar"
-            >
-              <i className="codicon codicon-symbol-file"></i>
-            </button>
-          )}
-
-          {/* Bottom panel toggle */}
-          {onTogglePanel && (
-            <button
-              className={`title-bar-action ${showPanel ? 'active' : ''}`}
-              onClick={onTogglePanel}
-              title="Toggle Terminal Panel"
-            >
-              <i className="codicon codicon-terminal"></i>
-            </button>
-          )}
-
-          {/* Right panel (AI Chat) toggle */}
-          <button
-            className={`title-bar-action ${showRightPanel ? 'active' : ''}`}
-            onClick={onToggleRightPanel}
-            title="Toggle AI Chat Panel"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 2h12v10H6l-3 2V2z" stroke="currentColor" strokeWidth="1.2" fill="none" />
-              <circle cx="5.5" cy="7" r="0.8" fill="currentColor" />
-              <circle cx="8" cy="7" r="0.8" fill="currentColor" />
-              <circle cx="10.5" cy="7" r="0.8" fill="currentColor" />
-            </svg>
-          </button>
-
-          {/* Separator */}
-          <div className="title-bar-separator"></div>
-
           {/* Settings */}
           <button
             className="title-bar-action"
             onClick={() => {
-              // Dispatch a custom event that the Workbench can listen for
               window.dispatchEvent(new CustomEvent('universui:openSettings'));
             }}
             title="Settings"
           >
-            <i className="codicon codicon-settings-gear"></i>
+            {Icons.settings}
           </button>
 
           {/* Account / User menu */}
@@ -120,7 +158,7 @@ export function CustomTitleBar({
             onClick={() => setShowMenu(!showMenu)}
             title="Account"
           >
-            <i className="codicon codicon-account"></i>
+            {Icons.account}
           </button>
         </div>
       </div>
