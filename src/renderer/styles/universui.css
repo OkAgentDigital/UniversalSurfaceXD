@@ -1843,4 +1843,517 @@ html, body, #root {
   border: 1px solid #3c3c3c;
 }
 
+/* ============================================
+   SIDEBAR PANEL — Shared panel list styles
+   Used by Agents, Skills, Workflows, Variables,
+   Checks, System Tasks panels
+   ============================================ */
+.sidebar-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 8px;
+}
+
+.panel-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: default;
+  transition: background 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.panel-list-item:hover {
+  background: var(--vscode-sidebar-hover, #2a2d2e);
+  border-color: var(--vscode-sidebar-border, #3c3c3c);
+}
+
+.panel-list-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panel-list-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #d4d4d4;
+  flex: 1;
+}
+
+.panel-list-item-type {
+  font-size: 10px;
+  color: #858585;
+  background: #2d2d2d;
+  padding: 1px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.panel-list-item-details {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: #858585;
+  padding-left: 22px;
+}
+
+.panel-list-item-description {
+  font-size: 11px;
+  color: #858585;
+  padding-left: 22px;
+  line-height: 1.4;
+}
+
+.panel-list-item-actions {
+  display: flex;
+  gap: 4px;
+  padding-left: 22px;
+  margin-top: 2px;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.status-dot.running,
+.status-dot.online,
+.status-dot.pass,
+.status-dot.active {
+  background: #4ec9b0;
+  box-shadow: 0 0 4px rgba(78, 201, 176, 0.4);
+}
+
+.status-dot.stopped,
+.status-dot.offline,
+.status-dot.fail {
+  background: #f44747;
+  box-shadow: 0 0 4px rgba(244, 71, 71, 0.4);
+}
+
+.status-dot.paused,
+.status-dot.warn {
+  background: #dcdcaa;
+  box-shadow: 0 0 4px rgba(220, 220, 170, 0.4);
+}
+
+.status-dot.pending,
+.status-dot.queued {
+  background: #569cd6;
+  box-shadow: 0 0 4px rgba(86, 156, 214, 0.4);
+}
+
+/* Small Buttons (VS Code style) */
+.button-small {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease;
+  height: 22px;
+  line-height: 1;
+}
+
+.button-primary {
+  background: #0e639c;
+  color: white;
+}
+
+.button-primary:hover {
+  background: #1177bb;
+}
+
+.button-secondary {
+  background: #3c3c3c;
+  color: #cccccc;
+  border: 1px solid #4c4c4c;
+}
+
+.button-secondary:hover {
+  background: #4c4c4c;
+}
+
+/* Variable Add Form */
+.variable-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--vscode-sidebar-border, #3c3c3c);
+  background: #252526;
+}
+
+.variable-add-form input,
+.variable-add-form select {
+  padding: 4px 8px;
+  background: #3c3c3c;
+  border: 1px solid #4c4c4c;
+  border-radius: 3px;
+  color: #cccccc;
+  font-size: 12px;
+  outline: none;
+}
+
+.variable-add-form input:focus,
+.variable-add-form select:focus {
+  border-color: #0e639c;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #cccccc;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  accent-color: #0e639c;
+}
+
+/* Sidebar Header Action Button */
+.sidebar-header-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  color: var(--vscode-sidebar-icon, #858585);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.sidebar-header-action:hover {
+  background: var(--vscode-sidebar-hover, #2a2d2e);
+  color: #cccccc;
+}
+
+.sidebar-header-action .codicon {
+  font-size: 14px;
+}
+
+/* ============================================
+   POPOVER / TOOLTIP — VS Code Dark Style
+   ============================================ */
+.popover {
+  position: fixed;
+  background: #2d2d2d;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  min-width: 180px;
+  padding: 4px 0;
+}
+
+.popover-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #cccccc;
+  transition: background 0.1s ease;
+}
+
+.popover-item:hover {
+  background: #094771;
+  color: #ffffff;
+}
+
+.popover-item .codicon {
+  font-size: 14px;
+  color: #858585;
+  flex-shrink: 0;
+}
+
+.popover-item:hover .codicon {
+  color: #ffffff;
+}
+
+.popover-item.destructive {
+  color: #f48771;
+}
+
+.popover-item.destructive:hover {
+  background: #5a1d1d;
+}
+
+.popover-divider {
+  height: 1px;
+  background: #3c3c3c;
+  margin: 4px 0;
+}
+
+.popover-header {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #858585;
+  border-bottom: 1px solid #3c3c3c;
+  margin-bottom: 4px;
+}
+
+/* Tooltip (VS Code style) */
+.tooltip {
+  position: fixed;
+  background: #3c3c3c;
+  color: #cccccc;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2000;
+  border: 1px solid #4c4c4c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   DROPDOWN — VS Code Dark Style
+   ============================================ */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: #2d2d2d;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  min-width: 160px;
+  padding: 4px 0;
+}
+
+.dropdown-menu-right {
+  left: auto;
+  right: 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #cccccc;
+  transition: background 0.1s ease;
+}
+
+.dropdown-item:hover {
+  background: #094771;
+  color: #ffffff;
+}
+
+.dropdown-item .codicon {
+  font-size: 14px;
+  color: #858585;
+  flex-shrink: 0;
+}
+
+.dropdown-item:hover .codicon {
+  color: #ffffff;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #3c3c3c;
+  margin: 4px 0;
+}
+
+/* ============================================
+   NOTIFICATION TOAST — VS Code Dark Style
+   ============================================ */
+.notification-toast {
+  position: fixed;
+  bottom: 32px;
+  right: 16px;
+  background: #2d2d2d;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 10px 14px;
+  z-index: 3000;
+  min-width: 280px;
+  max-width: 400px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  animation: notificationSlideIn 0.2s ease;
+}
+
+@keyframes notificationSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-toast.info {
+  border-left: 3px solid #569cd6;
+}
+
+.notification-toast.success {
+  border-left: 3px solid #4ec9b0;
+}
+
+.notification-toast.warning {
+  border-left: 3px solid #dcdcaa;
+}
+
+.notification-toast.error {
+  border-left: 3px solid #f44747;
+}
+
+.notification-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.notification-toast.info .notification-icon { color: #569cd6; }
+.notification-toast.success .notification-icon { color: #4ec9b0; }
+.notification-toast.warning .notification-icon { color: #dcdcaa; }
+.notification-toast.error .notification-icon { color: #f44747; }
+
+.notification-content {
+  flex: 1;
+  font-size: 12px;
+  color: #cccccc;
+  line-height: 1.4;
+}
+
+.notification-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  color: #858585;
+  cursor: pointer;
+  border-radius: 3px;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.notification-close:hover {
+  background: #3c3c3c;
+  color: #cccccc;
+}
+
+/* ============================================
+   BADGE — VS Code Dark Style
+   ============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  line-height: 1.4;
+}
+
+.badge-info {
+  background: #1b3a5c;
+  color: #569cd6;
+}
+
+.badge-success {
+  background: #1b3a1b;
+  color: #4ec9b0;
+}
+
+.badge-warning {
+  background: #3a3a1b;
+  color: #dcdcaa;
+}
+
+.badge-danger {
+  background: #3a1b1b;
+  color: #f44747;
+}
+
+/* ============================================
+   PROGRESS BAR — VS Code Dark Style
+   ============================================ */
+.progress-bar {
+  height: 4px;
+  background: #2d2d2d;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progress-bar-fill.info { background: #569cd6; }
+.progress-bar-fill.success { background: #4ec9b0; }
+.progress-bar-fill.warning { background: #dcdcaa; }
+.progress-bar-fill.danger { background: #f44747; }
+
+/* ============================================
+   KEYBOARD SHORTCUT — VS Code Dark Style
+   ============================================ */
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #3c3c3c;
+  border: 1px solid #4c4c4c;
+  border-radius: 3px;
+  color: #cccccc;
+  min-width: 18px;
+  height: 18px;
+  box-shadow: 0 1px 0 #4c4c4c;
+}
+
+
 
