@@ -1,0 +1,107 @@
+{
+  "folders": [
+    {
+      "name": "universui",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.git": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "files.associations": {
+      "*.yaml": "yaml",
+      "*.yml": "yaml"
+    },
+    "yaml.schemas": {
+      "stacks/stack-schema.json": ["stacks/*.yaml"]
+    },
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.cursorBlinking": true,
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.iconTheme": "vs-seti",
+    "explorer.compactFolders": false,
+    "explorer.sortOrder": "type",
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.git": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "redhat.vscode-yaml",
+      "ms-vscode.vscode-typescript-next",
+      "github.vscode-github-actions"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build Full Stack",
+        "type": "shell",
+        "command": "bash scripts/build-stack.sh stacks/full.yaml",
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Build Cloud Stack",
+        "type": "shell",
+        "command": "bash scripts/build-stack.sh stacks/cloud.yaml",
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Build Embedded Stack",
+        "type": "shell",
+        "command": "bash scripts/build-stack.sh stacks/embedded.yaml",
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Validate All Stacks",
+        "type": "shell",
+        "command": "for f in stacks/*.yaml; do echo \"Validating $f...\"; done",
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Run Stack Manager (list)",
+        "type": "shell",
+        "command": "npx ts-node src/main/stackManager.ts list",
+        "group": "build",
+        "problemMatcher": []
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Stack Manager",
+        "type": "node",
+        "request": "launch",
+        "args": ["list"],
+        "runtimeArgs": ["-r", "ts-node/register"],
+        "cwd": "${workspaceFolder}",
+        "program": "${workspaceFolder}/src/main/stackManager.ts",
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+      }
+    ]
+  }
+}

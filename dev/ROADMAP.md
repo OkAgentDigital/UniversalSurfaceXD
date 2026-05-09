@@ -2,6 +2,7 @@
 
 > **Universui** — A local-first desktop editor where tasks meet documents.
 > Built with Electron + React + Monaco + SQLite.
+> Part of the **DevStudio Framework**.
 
 ---
 
@@ -17,6 +18,11 @@ A local-first document hub with AI-powered collaboration and GitHub integration.
 - ✅ **AI Chat Panel** — Three modes: Chat, GitHub, Explain with message history
 - ✅ **Activity Bar toggle** — AI Chat toggle in both Activity Bar and Status Bar
 - ✅ **Status Bar indicators** — Terminal and AI Chat status indicators
+- ✅ **SonicScrewdriver Security** — AES-256-GCM encrypted secrets, API gateway, audit logging
+- ✅ **Autoloop Optimization** — Self-optimizing SQLite query program
+- ✅ **Sub-Sonic-Stack System** — 6 modular stack definitions (full, cloud, embedded, retro, cli, ci)
+- ✅ **Stack Manager** — Install, build, validate, and run modular stacks
+- ✅ **DevStudio Framework** — Unified workspace, CLI, and documentation
 - ✅ All v1.2.0 features preserved and enhanced
 
 ### The Evolution
@@ -27,6 +33,7 @@ A local-first document hub with AI-powered collaboration and GitHub integration.
 | v1.1.0 | Workbench layout + FileExplorer | 4 | ~1,500 |
 | v1.2.0 | 5 new functional panels | **9 total** | ~3,000+ |
 | v1.3.0 | 3-column layout + AI + MCP + Custom Chrome | **10 total** | ~4,500+ |
+| v1.3.0+ | SonicScrewdriver + Autoloop + Sub-Sonic-Stack | **10 total** | ~6,000+ |
 
 ---
 
@@ -40,12 +47,43 @@ A **local-first, cross-platform alternative** to:
 | **VS Code** | Workbench layout + Monaco + Terminal + Git |
 | **Obsidian** | Local SQLite + markdown editing + file explorer |
 | **Trello** | Kanban drag-drop task management |
+| **1Password** | SonicScrewdriver AES-256 encrypted secrets |
+| **Cloudflare** | SonicScrewdriver API gateway + rate limiting |
+
+---
+
+## 🚀 v1.4.0 — "Sub-Sonic-Stack" Release (In Progress)
+
+### Stack System (✅ Complete)
+- [x] 6 stack YAML definitions (full, cloud, embedded, retro, cli, ci)
+- [x] Stack Manager with CLI (install, build, run, validate, create)
+- [x] Build script for stack binaries
+- [x] Component registry (npm + GitHub Packages)
+- [x] DevStudio workspace configuration
+
+### Distribution
+- [ ] Build production binaries (macOS, Windows, Linux)
+- [ ] Create GitHub Release v1.4.0
+- [ ] Publish npm packages to GitHub Packages
+- [ ] Build and push Docker images
+- [ ] Create Linux package repositories (APT, RPM)
+
+### Documentation
+- [x] `docs/SUB_SONIC_STACK_BRIEF.md` — Stack system architecture
+- [x] `docs/DEVSTUDIO.md` — Framework overview
+- [ ] `docs/INSTALL.md` — Installation guide
+- [ ] `docs/EXTENSIONS.md` — Extension development guide
+- [ ] `docs/SONIC.md` — SonicScrewdriver security guide
+
+### Example Extensions
+- [ ] `@universui/extension-github` — GitHub panel + MCP + Sonic secrets
+- [ ] `@universui/extension-deepseek` — AI chat + skills + rate limiting
+- [ ] `@universui/extension-autoloop` — Self-optimization UI + program runner
+- [ ] `@universui/extension-skills` — Markdown skill loader
 
 ---
 
 ## 🚀 v1.3.0 — "Rock Solid" Polish Release
-
-Before adding more features, focus on making Universui **ready to share**.
 
 ### Performance
 - [ ] Virtual scrolling in FileExplorer (for 1000+ tasks)
@@ -110,7 +148,16 @@ Before adding more features, focus on making Universui **ready to share**.
 | **Export/Import** | JSON, Markdown, HTML |
 | **Keyboard shortcuts** | Fully configurable |
 
-### Path D: Polish & Distribution
+### Path D: Sub-Sonic-Stack Expansion
+| Feature | Description |
+| :--- | :--- |
+| **Component Registry API** | Dynamic component discovery and versioning |
+| **ARM64 Embedded Builds** | Raspberry Pi 5 native binaries |
+| **Docker-based Stack Building** | Reproducible builds in containers |
+| **GUI Stack Configurator** | Visual stack builder UI |
+| **Stack Marketplace** | Community-shared stack definitions |
+
+### Path E: Polish & Distribution
 | Feature | Description |
 | :--- | :--- |
 | **Auto-updater** | electron-updater for seamless updates |
@@ -143,7 +190,41 @@ When ready for public release:
 | v1.1.0 | May 2026 | VS Code Workbench layout + FileExplorer |
 | v1.2.0 | May 2026 | Search, Source Control, Terminal, Settings, Property panels |
 | v1.3.0 | May 2026 | 3-column layout, Custom Chrome, DeepSeek AI, GitHub MCP Server |
+| v1.3.0+ | May 2026 | SonicScrewdriver, Autoloop, Sub-Sonic-Stack, DevStudio Framework |
+
+---
+
+## 📁 Project Structure
+
+```
+DevStudio/
+├── universui/                    # Desktop application
+│   ├── src/
+│   │   ├── main/                 # Electron main process
+│   │   │   ├── main.ts           # App entry point
+│   │   │   ├── stackManager.ts   # Stack management (NEW)
+│   │   │   ├── sonicScrewdriver.ts # Security gateway
+│   │   │   ├── mcpService.ts     # MCP server manager
+│   │   │   ├── extensionService.ts # Extension API
+│   │   │   ├── aiService.ts      # AI integration
+│   │   │   ├── database.ts       # SQLite database
+│   │   │   └── ipcHandlers.ts    # IPC communication
+│   │   ├── preload/              # Preload scripts
+│   │   ├── renderer/             # React UI
+│   │   └── shared/               # Shared types
+│   ├── stacks/                   # Stack definitions (NEW)
+│   ├── scripts/                  # Build scripts (NEW)
+│   └── docs/                     # Documentation (NEW)
+├── sonic-screwdriver/            # API gateway (submodule)
+└── packages/                     # npm packages
+    ├── core/
+    ├── extension-api/
+    ├── mcp-client/
+    └── stack-registry/
+```
 
 ---
 
 *Built with ❤️ using Electron + React + Monaco + SQLite*
+*Part of the **DevStudio Framework** — Build once, deploy everywhere.*
+

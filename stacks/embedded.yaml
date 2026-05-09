@@ -1,0 +1,53 @@
+name: universui-embedded
+version: 1.3.0
+description: Universui for IoT and embedded devices (Raspberry Pi Zero)
+author: DevStudio
+license: MIT
+
+components:
+  - name: core
+    source: "@universui/core"
+    version: ^1.3.0
+    required: true
+    config:
+      log_level: warn
+
+  - name: sonic-run
+    source: "@universui/sonic-run"
+    version: ^1.0.0
+    config:
+      container_runtime: minimal
+      mcp_servers: []
+      default_timeout: 30s
+
+  - name: sonic-health
+    source: "@universui/health"
+    version: ^1.0.0
+    config:
+      check_interval: 60s
+      watchdog: true
+
+# Disabled for embedded
+excluded_components:
+  - workbench-ui
+  - sonic-vault
+  - sonic-agent
+  - sonic-chasis
+  - sonic-logs
+
+build:
+  output: universui-embedded
+  target_os: [linux]
+  target_arch: [armv7l, arm64]
+  strip_symbols: true
+  compression: upx
+  no_cgo: true
+
+runtime:
+  min_memory_mb: 32
+  recommended_memory_mb: 128
+  no_gui: true
+  readonly_root: true
+
+max_size_mb: 10
+actual_size_mb: 8

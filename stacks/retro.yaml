@@ -1,0 +1,69 @@
+name: universui-retro
+version: 1.3.0
+description: Universui for retro gaming (with CHASIS skin/lens engine)
+author: DevStudio
+license: MIT
+
+components:
+  - name: core
+    source: "@universui/core"
+    version: ^1.3.0
+    required: true
+
+  - name: sonic-vault
+    source: "@universui/sonic-vault"
+    version: ^1.0.0
+    config:
+      vault_path: "~/.local/share/universui/vault/"
+
+  - name: sonic-run
+    source: "@universui/sonic-run"
+    version: ^1.0.0
+    config:
+      container_runtime: docker
+      default_containers:
+        - retroarch
+        - dosbox
+        - fs-uae
+        - ppsspp
+      game_library: ~/Games
+
+  - name: sonic-chasis
+    source: "@universui/chasis"
+    version: ^1.0.0
+    config:
+      skin_engine: true
+      lens_engine: false  # Disable for performance
+      default_skin: retro-crt
+      overlays:
+        - scanlines
+        - bezel
+      shaders:
+        - crt-royale
+        - lcd-grid
+
+  - name: sonic-logs
+    source: "@universui/logs"
+    version: ^1.0.0
+    config:
+      max_size_mb: 100
+      log_games: true
+
+excluded_components:
+  - sonic-agent
+  - workbench-ui
+
+build:
+  output: Universui-Retro
+  target_os: [macos, windows, linux]
+  target_arch: [x64, arm64]
+  icon: assets/retro-icon.png
+
+runtime:
+  min_memory_mb: 256
+  recommended_memory_mb: 1024
+  persistence: true
+  game_mode: true
+
+max_size_mb: 50
+actual_size_mb: 35

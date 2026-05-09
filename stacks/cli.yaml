@@ -1,0 +1,39 @@
+name: universui-cli
+version: 1.3.0
+description: Minimal CLI-only Universui for scripting and automation
+author: DevStudio
+license: MIT
+
+components:
+  - name: core
+    source: "@universui/core"
+    version: ^1.3.0
+    required: true
+    config:
+      mode: cli
+
+  - name: sonic-run
+    source: "@universui/sonic-run"
+    version: ^1.0.0
+    config:
+      container_runtime: none
+      mcp_servers: []
+
+excluded_components: all
+
+build:
+  output: universui
+  target_os: [macos, windows, linux]
+  target_arch: [x64, arm64, armv7l]
+  static_linking: true
+  strip_symbols: true
+  single_binary: true
+
+runtime:
+  min_memory_mb: 16
+  recommended_memory_mb: 64
+  no_gui: true
+  no_persistence: true
+
+max_size_mb: 3
+actual_size_mb: 2

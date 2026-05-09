@@ -1,0 +1,87 @@
+name: universui-full
+version: 1.3.0
+description: Complete Universui desktop application with all features
+author: DevStudio
+license: MIT
+
+components:
+  - name: core
+    source: "@universui/core"
+    version: ^1.3.0
+    required: true
+
+  - name: workbench-ui
+    source: "@universui/workbench"
+    version: ^1.3.0
+    required: true
+
+  - name: sonic-vault
+    source: "@universui/sonic-vault"
+    version: ^1.0.0
+    config:
+      encryption: aes-256-gcm
+      vault_path: "~/.local/share/universui/vault/"
+
+  - name: sonic-run
+    source: "@universui/sonic-run"
+    version: ^1.0.0
+    config:
+      container_runtime: auto
+      mcp_servers:
+        - github
+        - deepseek
+
+  - name: sonic-agent
+    source: "@universui/sonic-agent"
+    version: ^1.0.0
+    config:
+      agents:
+        - deepseek-coder
+        - github-assistant
+      rate_limits:
+        deepseek: 60 req/min
+        github: 5000 req/hr
+
+  - name: sonic-chasis
+    source: "@universui/chasis"
+    version: ^1.0.0
+    config:
+      skin_engine: true
+      lens_engine: true
+      themes:
+        - vs-code-dark
+        - vs-code-light
+
+  - name: sonic-logs
+    source: "@universui/logs"
+    version: ^1.0.0
+    config:
+      max_entries: 10000
+      log_level: info
+
+  - name: sonic-health
+    source: "@universui/health"
+    version: ^1.0.0
+    config:
+      check_interval: 30s
+      metrics_endpoint: ":9090"
+
+# Build configuration
+build:
+  output: Universui
+  target_os: [macos, windows, linux]
+  target_arch: [x64, arm64]
+  icon: assets/icon.png
+  notarize: true
+  codesign: true
+
+# Runtime
+runtime:
+  min_memory_mb: 512
+  recommended_memory_mb: 2048
+  persistence: true
+  auto_update: true
+
+# Size target
+max_size_mb: 150
+actual_size_mb: 120

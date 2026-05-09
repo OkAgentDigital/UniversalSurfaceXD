@@ -22,7 +22,25 @@
     "build:linux": "electron-builder --linux",
     "postinstall": "electron-rebuild -f -w better-sqlite3",
     "test": "jest",
-    "lint": "eslint src/**/*.ts src/**/*.tsx"
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
+
+    "stack": "npx ts-node src/main/stackManager.ts",
+    "stack:list": "npx ts-node src/main/stackManager.ts list",
+    "stack:install": "npx ts-node src/main/stackManager.ts install",
+    "stack:build": "npx ts-node src/main/stackManager.ts build",
+    "stack:run": "npx ts-node src/main/stackManager.ts run",
+    "stack:remove": "npx ts-node src/main/stackManager.ts remove",
+    "stack:validate": "npx ts-node src/main/stackManager.ts validate",
+    "stack:create": "npx ts-node src/main/stackManager.ts create",
+
+    "build:stack:full": "bash scripts/build-stack.sh stacks/full.yaml",
+    "build:stack:cloud": "bash scripts/build-stack.sh stacks/cloud.yaml",
+    "build:stack:embedded": "bash scripts/build-stack.sh stacks/embedded.yaml",
+    "build:stack:retro": "bash scripts/build-stack.sh stacks/retro.yaml",
+    "build:stack:cli": "bash scripts/build-stack.sh stacks/cli.yaml",
+    "build:stack:ci": "bash scripts/build-stack.sh stacks/ci.yaml",
+    "build:stack:all": "for f in stacks/*.yaml; do bash scripts/build-stack.sh \"$f\"; done"
+
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",

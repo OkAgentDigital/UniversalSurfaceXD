@@ -1,0 +1,73 @@
+name: universui-cloud
+version: 1.3.0
+description: Headless Universui for cloud servers
+author: DevStudio
+license: MIT
+
+components:
+  - name: core
+    source: "@universui/core"
+    version: ^1.3.0
+    required: true
+
+  - name: sonic-vault
+    source: "@universui/sonic-vault"
+    version: ^1.0.0
+    config:
+      auto_unlock: true
+      tpm_required: false
+      cloud_kms: true
+
+  - name: sonic-run
+    source: "@universui/sonic-run"
+    version: ^1.0.0
+    config:
+      container_runtime: containerd
+      autoscale: true
+      mcp_servers:
+        - github
+        - deepseek
+
+  - name: sonic-agent
+    source: "@universui/sonic-agent"
+    version: ^1.0.0
+    config:
+      cloud_mode: true
+      provider: deepseek
+      concurrent_requests: 10
+
+  - name: sonic-health
+    source: "@universui/health"
+    version: ^1.0.0
+    config:
+      prometheus_endpoint: ":9090"
+      health_endpoint: ":8080/health"
+
+  - name: sonic-logs
+    source: "@universui/logs"
+    version: ^1.0.0
+    config:
+      output: stdout
+      format: json
+      forward_to: cloudwatch
+
+# No GUI components
+excluded_components:
+  - workbench-ui
+  - sonic-chasis
+
+build:
+  output: universui-cloud
+  target_os: [linux]
+  target_arch: [amd64, arm64]
+  static_linking: true
+  strip_symbols: true
+
+runtime:
+  min_memory_mb: 256
+  recommended_memory_mb: 1024
+  no_gui: true
+  service_mode: true
+
+max_size_mb: 50
+actual_size_mb: 45
