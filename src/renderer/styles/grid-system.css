@@ -1,0 +1,186 @@
+/* ============================================
+ * Grid System — Responsive, character-based
+ * 5 breakpoints: XS (0-640), SM (640-768),
+ * MD (768-1024), LG (1024-1280), XL (1280+)
+ * ============================================ */
+
+/* Base grid container */
+.universui-grid {
+  display: grid;
+  gap: var(--grid-gap, 1ch);
+  padding: var(--space-md, 12px);
+  height: 100%;
+}
+
+/* XS: 1 column (mobile) */
+@media (max-width: 639px) {
+  .universui-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar { 
+    position: fixed;
+    left: -280px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.3);
+  }
+  .sidebar.open { left: 0; }
+  .right-panel { display: none; }
+  .activity-bar { width: 56px; }
+  .activity-item .label { display: none; }
+}
+
+/* SM: 1 column with expandable panel */
+@media (min-width: 640px) and (max-width: 767px) {
+  .universui-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar { 
+    position: fixed;
+    left: -280px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.3);
+  }
+  .sidebar.open { left: 0; }
+  .right-panel { display: none; }
+  .activity-bar { width: 56px; }
+  .activity-item .label { display: none; }
+}
+
+/* MD: 2 columns (side-by-side) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .universui-grid {
+    grid-template-columns: minmax(20ch, 30ch) 1fr;
+  }
+  .sidebar { grid-column: 1; }
+  .main-content { grid-column: 2; }
+  .right-panel { display: none; }
+  .activity-bar { width: 56px; }
+  .activity-item .label { display: none; }
+}
+
+/* LG: 3 columns (full workbench) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .universui-grid {
+    grid-template-columns: auto 1fr 320px;
+  }
+  .activity-bar { grid-column: 1; width: 64px; }
+  .sidebar { grid-column: 2; width: auto; }
+  .main-content { grid-column: 3; }
+  .activity-item .codicon { font-size: 24px; }
+}
+
+/* XL: 3+ columns with extra breathing room */
+@media (min-width: 1280px) {
+  .universui-grid {
+    grid-template-columns: auto minmax(30ch, 40ch) minmax(60ch, 100ch) 360px;
+    gap: calc(var(--grid-gap, 1ch) * 2);
+  }
+  .activity-bar { grid-column: 1; width: 72px; }
+  .sidebar { grid-column: 2; }
+  .main-content { grid-column: 3; }
+  .right-panel { grid-column: 4; }
+  .activity-item .codicon { font-size: 28px; }
+  
+  /* Larger base font on big screens */
+  :root { font-size: 16px; }
+}
+
+/* 2XL: Ultra-wide */
+@media (min-width: 1920px) {
+  :root { font-size: 18px; }
+  
+  .universui-grid {
+    grid-template-columns: auto minmax(35ch, 45ch) minmax(70ch, 120ch) 400px;
+    gap: calc(var(--grid-gap, 1ch) * 2.5);
+  }
+  .activity-bar { width: 80px; }
+  .activity-item .codicon { font-size: 32px; }
+}
+
+/* === SIDEBAR RESPONSIVE === */
+.sidebar {
+  min-width: 20ch;
+  max-width: 40ch;
+  width: 30ch;
+  resize: horizontal;
+  overflow: auto;
+}
+
+@media (min-width: 1280px) {
+  .sidebar {
+    min-width: 25ch;
+    max-width: 50ch;
+    width: 35ch;
+  }
+}
+
+/* === MAIN CONTENT READABLE WIDTH === */
+.editor-content {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: var(--space-lg, 16px);
+}
+
+.monaco-editor {
+  max-width: 100%;
+}
+
+/* === RIGHT PANEL === */
+.right-panel {
+  width: 320px;
+  min-width: 260px;
+  max-width: 480px;
+}
+
+@media (min-width: 1280px) {
+  .right-panel {
+    width: 360px;
+    min-width: 300px;
+  }
+}
+
+/* === MOBILE OVERLAY === */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+  display: none;
+}
+
+.mobile-overlay.visible {
+  display: block;
+}
+
+/* === RESPONSIVE UTILITIES === */
+.hide-xs { display: none; }
+.show-xs { display: block; }
+
+@media (min-width: 640px) {
+  .hide-sm { display: none; }
+  .show-sm { display: block; }
+}
+
+@media (min-width: 768px) {
+  .hide-md { display: none; }
+  .show-md { display: block; }
+}
+
+@media (min-width: 1024px) {
+  .hide-lg { display: none; }
+  .show-lg { display: block; }
+}
+
+@media (min-width: 1280px) {
+  .hide-xl { display: none; }
+  .show-xl { display: block; }
+}

@@ -9,6 +9,9 @@ import { SourceControlPanel } from '../Sidebar/SourceControlPanel';
 import { SettingsPanel } from '../Sidebar/SettingsPanel';
 import { TerminalPanel } from '../Panel/TerminalPanel';
 import { AIChatPanel } from '../Panel/AIChatPanel';
+import { AccountPanel } from '../Account/AccountPanel';
+import { ExtensionMarketplace } from '../Extensions/ExtensionMarketplace';
+import { AgentsPanel, SkillsPanel, ChecksPanel, SystemTasksPanel, VariablesPanel, WorkflowsPanel } from '../Panel/SourceControlPanels';
 import { Task } from '../../types';
 
 export function Workbench() {
@@ -96,41 +99,23 @@ export function Workbench() {
       case 'source-control':
         return <SourceControlPanel />;
       case 'extensions':
-        return (
-          <>
-            <div className="sidebar-header">
-              <div className="sidebar-header-left">
-                <i className="codicon codicon-extensions"></i>
-                <span>EXTENSIONS</span>
-              </div>
-            </div>
-            <div className="sidebar-content">
-              <div className="empty-state">
-                <i className="codicon codicon-extensions"></i>
-                <p>Extensions marketplace coming soon</p>
-              </div>
-            </div>
-          </>
-        );
+        return <ExtensionMarketplace />;
+      case 'agents':
+        return <AgentsPanel />;
+      case 'skills':
+        return <SkillsPanel />;
+      case 'workflows':
+        return <WorkflowsPanel />;
+      case 'variables':
+        return <VariablesPanel />;
+      case 'checks':
+        return <ChecksPanel />;
+      case 'tasks':
+        return <SystemTasksPanel />;
       case 'settings':
         return <SettingsPanel />;
       case 'account':
-        return (
-          <>
-            <div className="sidebar-header">
-              <div className="sidebar-header-left">
-                <i className="codicon codicon-account"></i>
-                <span>ACCOUNT</span>
-              </div>
-            </div>
-            <div className="sidebar-content">
-              <div className="empty-state">
-                <i className="codicon codicon-account"></i>
-                <p>Cloud sync coming in a future release</p>
-              </div>
-            </div>
-          </>
-        );
+        return <AccountPanel />;
       default:
         return (
           <>

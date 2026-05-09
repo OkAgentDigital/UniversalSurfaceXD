@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { UniversuiMode } from '../../types';
 
 interface StatusBarProps {
   taskCount: number;
@@ -19,6 +20,9 @@ export function StatusBar({
   showRightPanel,
   onRightPanelToggle,
 }: StatusBarProps) {
+  const [mode, setMode] = useState<UniversuiMode>('docs');
+  const [sonicHealth, setSonicHealth] = useState<'healthy' | 'degraded'>('healthy');
+
   useEffect(() => {
     const loadBranch = async () => {
       try {
@@ -31,6 +35,26 @@ export function StatusBar({
     loadBranch();
   }, [onGitBranchChange]);
 
+  useEffect(() => {
+    const loadMode = async () => {
+      try {
+        const m = await window.electron.modeGet();
+        setMode(m);
+      } catch {}
+    };
+    loadMode();
+  }, []);
+
+  useEffect(() => {
+    const loadHealth = async () => {
+      try {
+        const h = await window.electron.sonicHealth();
+        setSonicHealth(h.status);
+      } catch {}
+    };
+    loadHealth();
+  }, []);
+
   return (
     <div className="status-bar">
       <div className="status-bar-left">
@@ -41,6 +65,15 @@ export function StatusBar({
         <div className="status-item" title="Task Count">
           <i className="codicon codicon-checklist"></i>
           <span>{taskCount} tasks</span>
+        </div>
+        <div className={`status-item ${mode === 'dev' ? 'dev-mode' : 'docs-mode'}`} title="Universui Mode">
+          <i className={`codicon ${mode === 'dev' ? 'codicon-code' : 'codicon-book'}`}></i>
+          <span>{mode === 'dev' ? 'DEV' : 'DOCS'}</span>
+        </div>
+        <div className="status-item" title="SonicScrewdriver Health">
+          <i className={`codicon ${sonicHealth === 'healthy' ? 'codicon-pass' : 'codicon-warning'}`}
+             style={{ color: sonicHealth === 'healthy' ? '#4ec9b0' : '#ce9178' }}></i>
+          <span>Sonic</span>
         </div>
       </div>
       <div className="status-bar-right">

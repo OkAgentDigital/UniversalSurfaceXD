@@ -1,5 +1,5 @@
 export const APP_NAME = 'Universui';
-export const APP_VERSION = '1.3.0';
+export const APP_VERSION = '1.4.0';
 export const DB_FILENAME = 'universui.db';
 
 export const TASK_STATUS = {
@@ -76,6 +76,13 @@ export const IPC_CHANNELS = {
   EXTENSION_LIST: 'extension:list',
   EXTENSION_EXECUTE_COMMAND: 'extension:executeCommand',
 
+  // Extension Marketplace
+  EXTENSION_MARKETPLACE_SEARCH: 'extension:marketplace:search',
+  EXTENSION_MARKETPLACE_INSTALL: 'extension:marketplace:install',
+  EXTENSION_MARKETPLACE_UNINSTALL: 'extension:marketplace:uninstall',
+  EXTENSION_MARKETPLACE_LIST_INSTALLED: 'extension:marketplace:listInstalled',
+  EXTENSION_MARKETPLACE_CHECK_UPDATES: 'extension:marketplace:checkUpdates',
+
   // Command Palette
   COMMAND_PALETTE_LIST: 'commandPalette:list',
   COMMAND_PALETTE_EXECUTE: 'commandPalette:execute',
@@ -102,6 +109,53 @@ export const IPC_CHANNELS = {
   // SonicScrewdriver — Audit & Health
   SONIC_AUDIT_LOG: 'sonic:auditLog',
   SONIC_HEALTH: 'sonic:health',
+
+  // Mode Manager
+  MODE_GET: 'mode:get',
+  MODE_SET: 'mode:set',
+
+  // Agents
+  AGENTS_LIST: 'agents:list',
+  AGENTS_START: 'agents:start',
+  AGENTS_STOP: 'agents:stop',
+  AGENTS_HEALTH: 'agents:health',
+
+  // Skills
+  SKILLS_LIST: 'skills:list',
+  SKILLS_ENABLE: 'skills:enable',
+  SKILLS_DISABLE: 'skills:disable',
+  SKILLS_RUN: 'skills:run',
+
+  // Checks (CI)
+  CHECKS_LIST: 'checks:list',
+  CHECKS_RUN: 'checks:run',
+  CHECKS_RESULTS: 'checks:results',
+
+  // Tasks (system)
+  TASKS_LIST: 'tasks:list',
+  TASKS_CANCEL: 'tasks:cancel',
+  TASKS_RETRY: 'tasks:retry',
+
+  // Variables (Secrets/Env)
+  VARIABLES_LIST: 'variables:list',
+  VARIABLES_SET: 'variables:set',
+  VARIABLES_DELETE: 'variables:delete',
+
+  // Workflows
+  WORKFLOWS_LIST: 'workflows:list',
+  WORKFLOWS_RUN: 'workflows:run',
+  WORKFLOWS_DISABLE: 'workflows:disable',
+
+  // Continue.dev Integration
+  CONTINUE_AUTH: 'continue:auth',
+  CONTINUE_SYNC_EXTENSIONS: 'continue:syncExtensions',
+  CONTINUE_RUN_CHECKS: 'continue:runChecks',
+  CONTINUE_SYNC_SKILLS: 'continue:syncSkills',
+
+  // GitHub Next Integration
+  GH_NEXT_RUN_WORKFLOW: 'ghNext:runWorkflow',
+  GH_NEXT_RUN_AUTOLOOP: 'ghNext:runAutoloop',
+  GH_NEXT_CONTINUOUS_AI: 'ghNext:continuousAI',
 } as const;
 
 export const DEFAULT_SETTINGS = {

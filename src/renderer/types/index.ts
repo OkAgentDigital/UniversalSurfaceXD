@@ -78,6 +78,144 @@ export interface SonicContainerInfo {
   env: Record<string, string>;
 }
 
+// ============================================================
+// Account / Credential Types
+// ============================================================
+export type CredentialService = 'github' | 'deepseek' | 'continue' | 'npm';
+
+export interface AccountCredentials {
+  key: string;
+  service: CredentialService;
+  username?: string;
+  description?: string;
+  scopes?: string[];
+  expiresAt?: number;
+  createdAt: number;
+}
+
+// ============================================================
+// Extension Marketplace Types
+// ============================================================
+export type ExtensionPublisher = 'okagentdigital' | 'udosgo' | 'devstudio';
+
+export interface ExtensionManifest {
+  name: string;
+  version: string;
+  publisher: ExtensionPublisher;
+  description: string;
+  icon?: string;
+  categories: string[];
+  repository: string;
+  license: string;
+  downloads: number;
+  rating?: number;
+  publishedAt: string;
+  universui: {
+    minVersion: string;
+    panels?: string[];
+    commands?: string[];
+    mcpServers?: string[];
+    skills?: string[];
+  };
+}
+
+// ============================================================
+// Mode Manager Types
+// ============================================================
+export type UniversuiMode = 'dev' | 'docs';
+
+// ============================================================
+// Agent Types
+// ============================================================
+export interface Agent {
+  id: string;
+  name: string;
+  type: 'deepseek' | 'github' | 'custom';
+  status: 'running' | 'idle' | 'error' | 'stopped';
+  health: number;
+  creditBalance?: number;
+  rateLimit: { used: number; limit: number; resetsAt: number };
+  tasksCompleted: number;
+}
+
+// ============================================================
+// Skill Types
+// ============================================================
+export interface Skill {
+  id: string;
+  name: string;
+  description: string;
+  trigger: 'manual' | 'event' | 'schedule';
+  eventType?: string;
+  action: string;
+  enabled: boolean;
+  lastRun?: Date;
+}
+
+// ============================================================
+// Check (CI) Types
+// ============================================================
+export interface Check {
+  id: string;
+  name: string;
+  status: 'pass' | 'fail' | 'running' | 'pending';
+  duration: number;
+  timestamp: Date;
+  output: string;
+  repository: string;
+}
+
+// ============================================================
+// System Task Types
+// ============================================================
+export interface SystemTask {
+  id: string;
+  type: 'agent' | 'workflow' | 'autoloop' | 'skill';
+  status: 'queued' | 'running' | 'completed' | 'failed';
+  priority: 1 | 2 | 3 | 4 | 5;
+  createdAt: Date;
+  updatedAt: Date;
+  result?: any;
+}
+
+// ============================================================
+// Variable Types
+// ============================================================
+export interface Variable {
+  key: string;
+  value: string;
+  scope: 'workspace' | 'user' | 'system';
+  encrypted: boolean;
+  usedBy: string[];
+}
+
+// ============================================================
+// Workflow Types
+// ============================================================
+export interface Workflow {
+  id: string;
+  name: string;
+  file: string;
+  type: 'github-actions' | 'gh-aw' | 'autoloop';
+  status: 'active' | 'disabled' | 'error';
+  lastRun?: Date;
+  runs: number;
+}
+
+// ============================================================
+// Continue.dev Types
+// ============================================================
+export interface ContinueConfig {
+  apiKey: string;
+  workspaceId: string;
+  githubConnected: boolean;
+  checksEnabled: boolean;
+  skillsSync: boolean;
+}
+
+// ============================================================
+// Electron API Interface
+// ============================================================
 export interface ElectronAPI {
   // Document operations
   getDocument: (id: string) => Promise<Document | undefined>;
@@ -135,6 +273,13 @@ export interface ElectronAPI {
   extensionList: () => Promise<Array<{ id: string; name: string; version: string; description?: string }>>;
   extensionExecuteCommand: (commandId: string, ...args: unknown[]) => Promise<{ success: boolean; error?: string }>;
 
+  // Extension Marketplace
+  extensionMarketplaceSearch: (query?: string) => Promise<ExtensionManifest[]>;
+  extensionMarketplaceInstall: (packageName: string) => Promise<{ success: boolean; error?: string }>;
+  extensionMarketplaceUninstall: (packageName: string) => Promise<{ success: boolean; error?: string }>;
+  extensionMarketplaceListInstalled: () => Promise<ExtensionManifest[]>;
+  extensionMarketplaceCheckUpdates: () => Promise<Array<{ name: string; current: string; latest: string }>>;
+
   // Command Palette
   commandPaletteList: () => Promise<CommandPaletteItem[]>;
   commandPaletteExecute: (commandId: string) => Promise<{ success: boolean; error?: string }>;
@@ -170,6 +315,53 @@ export interface ElectronAPI {
     Promise<SonicAuditEntry[]>;
   sonicHealth: () =>
     Promise<SonicHealth>;
+
+  // Mode Manager
+  modeGet: () => Promise<UniversuiMode>;
+  modeSet: (mode: UniversuiMode) => Promise<void>;
+
+  // Agents
+  agentsList: () => Promise<Agent[]>;
+  agentsStart: (id: string) => Promise<{ success: boolean; error?: string }>;
+  agentsStop: (id: string) => Promise<{ success: boolean; error?: string }>;
+  agentsHealth: (id: string) => Promise<{ health: number; status: string }>;
+
+  // Skills
+  skillsList: () => Promise<Skill[]>;
+  skillsEnable: (id: string) => Promise<{ success: boolean; error?: string }>;
+  skillsDisable: (id: string) => Promise<{ success: boolean; error?: string }>;
+  skillsRun: (id: string) => Promise<{ success: boolean; result?: string; error?: string }>;
+
+  // Checks (CI)
+  checksList: () => Promise<Check[]>;
+  checksRun: (id: string) => Promise<{ success: boolean; error?: string }>;
+  checksResults: (id: string) => Promise<Check | undefined>;
+
+  // System Tasks
+  tasksList: () => Promise<SystemTask[]>;
+  tasksCancel: (id: string) => Promise<{ success: boolean; error?: string }>;
+  tasksRetry: (id: string) => Promise<{ success: boolean; error?: string }>;
+
+  // Variables
+  variablesList: () => Promise<Variable[]>;
+  variablesSet: (key: string, value: string, scope: string, encrypted: boolean) => Promise<{ success: boolean; error?: string }>;
+  variablesDelete: (key: string) => Promise<{ success: boolean; error?: string }>;
+
+  // Workflows
+  workflowsList: () => Promise<Workflow[]>;
+  workflowsRun: (id: string) => Promise<{ success: boolean; error?: string }>;
+  workflowsDisable: (id: string) => Promise<{ success: boolean; error?: string }>;
+
+  // Continue.dev Integration
+  continueAuth: (apiKey: string) => Promise<{ success: boolean; error?: string }>;
+  continueSyncExtensions: () => Promise<{ success: boolean; error?: string }>;
+  continueRunChecks: () => Promise<{ success: boolean; error?: string }>;
+  continueSyncSkills: () => Promise<{ success: boolean; error?: string }>;
+
+  // GitHub Next Integration
+  ghNextRunWorkflow: (workflowFile: string) => Promise<{ success: boolean; error?: string }>;
+  ghNextRunAutoloop: (programFile: string) => Promise<{ success: boolean; error?: string }>;
+  ghNextContinuousAI: (config: { enabled: boolean; triggers: any[] }) => Promise<{ success: boolean; error?: string }>;
 }
 
 declare global {

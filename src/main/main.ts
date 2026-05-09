@@ -7,7 +7,12 @@ import { registerAiHandlers } from './aiService';
 import { registerMCPHandlers } from './mcpService';
 import { registerExtensionHandlers } from './extensionService';
 import { registerSonicHandlers, sonicScrewdriver } from './sonicScrewdriver';
+import { registerMarketplaceHandlers } from './extensionMarketplace';
+import { registerContinueHandlers } from './continueIntegration';
+import { registerGithubNextHandlers } from './githubNextIntegration';
+import { modeManager } from './modeManager';
 import { APP_NAME } from '../shared/constants';
+
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -53,6 +58,11 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
+  // Detect mode from CLI args
+  const detectedMode = modeManager.getMode();
+  console.log(`[Universui] Starting in ${detectedMode} mode`);
+
+
   // Initialize database
   initDatabase();
 
@@ -70,6 +80,15 @@ app.whenReady().then(() => {
 
   // Register SonicScrewdriver handlers (Secret Store, API Proxy, Container Runtime)
   registerSonicHandlers();
+
+  // Register Extension Marketplace handlers (3 GitHub orgs)
+  registerMarketplaceHandlers();
+
+  // Register Continue.dev integration handlers
+  registerContinueHandlers();
+
+  // Register GitHub Next integration handlers
+  registerGithubNextHandlers();
 
   // Create the main window
   createWindow();

@@ -64,6 +64,18 @@ contextBridge.exposeInMainWorld('electron', {
   extensionExecuteCommand: (commandId: string, ...args: unknown[]) =>
     ipcRenderer.invoke(IPC_CHANNELS.EXTENSION_EXECUTE_COMMAND, commandId, ...args),
 
+  // Extension Marketplace
+  extensionMarketplaceSearch: (query?: string) =>
+    ipcRenderer.invoke(IPC_CHANNELS.EXTENSION_MARKETPLACE_SEARCH, query),
+  extensionMarketplaceInstall: (packageName: string) =>
+    ipcRenderer.invoke(IPC_CHANNELS.EXTENSION_MARKETPLACE_INSTALL, packageName),
+  extensionMarketplaceUninstall: (packageName: string) =>
+    ipcRenderer.invoke(IPC_CHANNELS.EXTENSION_MARKETPLACE_UNINSTALL, packageName),
+  extensionMarketplaceListInstalled: () =>
+    ipcRenderer.invoke(IPC_CHANNELS.EXTENSION_MARKETPLACE_LIST_INSTALLED),
+  extensionMarketplaceCheckUpdates: () =>
+    ipcRenderer.invoke(IPC_CHANNELS.EXTENSION_MARKETPLACE_CHECK_UPDATES),
+
   // Command Palette
   commandPaletteList: () => ipcRenderer.invoke(IPC_CHANNELS.COMMAND_PALETTE_LIST),
   commandPaletteExecute: (commandId: string) =>
@@ -100,4 +112,71 @@ contextBridge.exposeInMainWorld('electron', {
     ipcRenderer.invoke(IPC_CHANNELS.SONIC_AUDIT_LOG, limit, filter),
   sonicHealth: () =>
     ipcRenderer.invoke(IPC_CHANNELS.SONIC_HEALTH),
+
+  // ============================================================
+  // Mode Manager
+  // ============================================================
+  modeGet: () => ipcRenderer.invoke(IPC_CHANNELS.MODE_GET),
+  modeSet: (mode: 'dev' | 'docs') => ipcRenderer.invoke(IPC_CHANNELS.MODE_SET, mode),
+
+  // ============================================================
+  // Agents
+  // ============================================================
+  agentsList: () => ipcRenderer.invoke(IPC_CHANNELS.AGENTS_LIST),
+  agentsStart: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.AGENTS_START, id),
+  agentsStop: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.AGENTS_STOP, id),
+  agentsHealth: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.AGENTS_HEALTH, id),
+
+  // ============================================================
+  // Skills
+  // ============================================================
+  skillsList: () => ipcRenderer.invoke(IPC_CHANNELS.SKILLS_LIST),
+  skillsEnable: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.SKILLS_ENABLE, id),
+  skillsDisable: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.SKILLS_DISABLE, id),
+  skillsRun: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.SKILLS_RUN, id),
+
+  // ============================================================
+  // Checks (CI)
+  // ============================================================
+  checksList: () => ipcRenderer.invoke(IPC_CHANNELS.CHECKS_LIST),
+  checksRun: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.CHECKS_RUN, id),
+  checksResults: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.CHECKS_RESULTS, id),
+
+  // ============================================================
+  // System Tasks
+  // ============================================================
+  tasksList: () => ipcRenderer.invoke(IPC_CHANNELS.TASKS_LIST),
+  tasksCancel: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.TASKS_CANCEL, id),
+  tasksRetry: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.TASKS_RETRY, id),
+
+  // ============================================================
+  // Variables
+  // ============================================================
+  variablesList: () => ipcRenderer.invoke(IPC_CHANNELS.VARIABLES_LIST),
+  variablesSet: (key: string, value: string, scope: string, encrypted: boolean) =>
+    ipcRenderer.invoke(IPC_CHANNELS.VARIABLES_SET, key, value, scope, encrypted),
+  variablesDelete: (key: string) => ipcRenderer.invoke(IPC_CHANNELS.VARIABLES_DELETE, key),
+
+  // ============================================================
+  // Workflows
+  // ============================================================
+  workflowsList: () => ipcRenderer.invoke(IPC_CHANNELS.WORKFLOWS_LIST),
+  workflowsRun: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.WORKFLOWS_RUN, id),
+  workflowsDisable: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.WORKFLOWS_DISABLE, id),
+
+  // ============================================================
+  // Continue.dev Integration
+  // ============================================================
+  continueAuth: (apiKey: string) => ipcRenderer.invoke(IPC_CHANNELS.CONTINUE_AUTH, apiKey),
+  continueSyncExtensions: () => ipcRenderer.invoke(IPC_CHANNELS.CONTINUE_SYNC_EXTENSIONS),
+  continueRunChecks: () => ipcRenderer.invoke(IPC_CHANNELS.CONTINUE_RUN_CHECKS),
+  continueSyncSkills: () => ipcRenderer.invoke(IPC_CHANNELS.CONTINUE_SYNC_SKILLS),
+
+  // ============================================================
+  // GitHub Next Integration
+  // ============================================================
+  ghNextRunWorkflow: (workflowFile: string) => ipcRenderer.invoke(IPC_CHANNELS.GH_NEXT_RUN_WORKFLOW, workflowFile),
+  ghNextRunAutoloop: (programFile: string) => ipcRenderer.invoke(IPC_CHANNELS.GH_NEXT_RUN_AUTOLOOP, programFile),
+  ghNextContinuousAI: (config: { enabled: boolean; triggers: any[] }) =>
+    ipcRenderer.invoke(IPC_CHANNELS.GH_NEXT_CONTINUOUS_AI, config),
 });

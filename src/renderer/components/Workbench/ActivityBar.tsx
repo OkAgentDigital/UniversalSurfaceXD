@@ -20,9 +20,15 @@ const topItems: ActivityItem[] = [
   { id: 'search', icon: 'codicon-search', label: 'Search' },
   { id: 'source-control', icon: 'codicon-source-control', label: 'Source Control' },
   { id: 'extensions', icon: 'codicon-extensions', label: 'Extensions' },
+  { id: 'agents', icon: 'codicon-robot', label: 'Agents' },
+  { id: 'skills', icon: 'codicon-mortar-board', label: 'Skills' },
+  { id: 'workflows', icon: 'codicon-play-circle', label: 'Workflows' },
 ];
 
 const bottomItems: ActivityItem[] = [
+  { id: 'variables', icon: 'codicon-symbol-key', label: 'Variables' },
+  { id: 'checks', icon: 'codicon-pass', label: 'Checks' },
+  { id: 'tasks', icon: 'codicon-list-tree', label: 'Tasks' },
   { id: 'settings', icon: 'codicon-settings-gear', label: 'Settings' },
   { id: 'account', icon: 'codicon-account', label: 'Accounts' },
 ];
