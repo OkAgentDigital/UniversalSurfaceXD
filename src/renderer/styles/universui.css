@@ -7,7 +7,7 @@
   --vscode-right-panel-width: 320px;
   --vscode-panel-height: 200px;
   --vscode-status-bar-height: 22px;
-  --vscode-title-bar-height: 38px;
+  --vscode-title-bar-height: 42px;
 
   /* VS Code Color Tokens */
   --vscode-bg: #1e1e1e;
@@ -628,15 +628,18 @@ html, body, #root {
 }
 
 /* ============================================
-   CUSTOM TITLE BAR
+   CUSTOM TITLE BAR — VS Code Style
    ============================================ */
+:root {
+  --vscode-title-bar-height: 42px;
+}
+
 .custom-title-bar {
   height: var(--vscode-title-bar-height);
   background: var(--vscode-title-bar-bg);
   flex-shrink: 0;
   user-select: none;
   border-bottom: 1px solid var(--vscode-sidebar-border);
-  /* Ensure title bar is above other content */
   position: relative;
   z-index: 100;
 }
@@ -645,7 +648,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 8px;
+  padding: 0 4px;
   -webkit-app-region: drag;
 }
 
@@ -656,27 +659,28 @@ html, body, #root {
   flex-shrink: 0;
 }
 
-/* On macOS, add 80px left padding to avoid overlap with traffic lights */
+/* On macOS, add 90px left padding to avoid overlap with traffic lights */
 .darwin .mac-traffic-light-spacer,
 body.darwin .mac-traffic-light-spacer,
 .platform-darwin .mac-traffic-light-spacer {
-  width: 80px;
+  width: 90px;
 }
 
-/* VS Code-style panel toggle controls on the left */
-.title-bar-controls {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  -webkit-app-region: no-drag;
-  flex-shrink: 0;
-}
-
+/* Left section: app brand + controls */
 .title-bar-left {
   display: flex;
   align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
+}
+
+/* App brand group (icon + name + version) */
+.title-bar-app-brand {
+  display: flex;
+  align-items: center;
   gap: 6px;
-  min-width: auto;
+  padding: 0 4px;
   flex-shrink: 0;
 }
 
@@ -684,9 +688,14 @@ body.darwin .mac-traffic-light-spacer,
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.title-bar-app-icon svg {
   width: 20px;
   height: 20px;
-  flex-shrink: 0;
 }
 
 .title-bar-app-name {
@@ -700,63 +709,27 @@ body.darwin .mac-traffic-light-spacer,
 .title-bar-version {
   font-size: 10px;
   color: #858585;
-  padding: 1px 4px;
+  padding: 1px 5px;
   background: #3c3c3c;
   border-radius: 3px;
   white-space: nowrap;
+  line-height: 1.4;
 }
 
-.title-bar-command-center {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  max-width: 500px;
-  margin: 0 12px;
-  padding: 4px 12px;
-  background: #3c3c3c;
-  border: 1px solid #4c4c4c;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  -webkit-app-region: no-drag;
-}
-
-.title-bar-command-center:hover {
-  background: #454545;
-  border-color: #5c5c5c;
-}
-
-.title-bar-command-center svg {
-  font-size: 14px;
-  color: #858585;
-  flex-shrink: 0;
-}
-
-.title-bar-command-text {
-  font-size: 12px;
-  color: #858585;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
+/* Separator between brand and controls */
 .title-bar-separator {
   width: 1px;
-  height: 20px;
+  height: 22px;
   background: #4c4c4c;
   margin: 0 4px;
   flex-shrink: 0;
 }
 
-.title-bar-right {
+/* VS Code-style panel toggle controls */
+.title-bar-controls {
   display: flex;
   align-items: center;
-  gap: 2px;
-  min-width: auto;
-  justify-content: flex-end;
-  -webkit-app-region: no-drag;
+  gap: 1px;
   flex-shrink: 0;
 }
 
@@ -764,8 +737,8 @@ body.darwin .mac-traffic-light-spacer,
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border: none;
   background: transparent;
   color: #858585;
@@ -782,12 +755,61 @@ body.darwin .mac-traffic-light-spacer,
 
 .title-bar-action.active {
   color: var(--ai-chat-accent, #4ec9b0);
-  background: rgba(78, 201, 176, 0.1);
+  background: rgba(78, 201, 176, 0.12);
 }
 
 .title-bar-action svg {
   width: 18px;
   height: 18px;
+}
+
+/* Center section: Command center */
+.title-bar-command-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 520px;
+  margin: 0 16px;
+  padding: 5px 14px;
+  background: #3c3c3c;
+  border: 1px solid #4c4c4c;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-app-region: no-drag;
+  height: 28px;
+}
+
+.title-bar-command-center:hover {
+  background: #454545;
+  border-color: #5c5c5c;
+}
+
+.title-bar-command-center svg {
+  font-size: 14px;
+  color: #858585;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.title-bar-command-text {
+  font-size: 12px;
+  color: #858585;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Right section: Settings + Account */
+.title-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
 }
 
 /* ============================================

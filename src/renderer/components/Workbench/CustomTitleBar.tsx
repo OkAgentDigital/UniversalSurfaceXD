@@ -80,17 +80,19 @@ export function CustomTitleBar({
   return (
     <div className="custom-title-bar">
       <div className="title-bar-drag">
-        {/* Left section: Mac traffic light spacer + VS Code-style panel toggles */}
-        <div className="title-bar-left">
-          {/* Mac traffic light spacer (hidden on non-mac) */}
-          <div className="mac-traffic-light-spacer" />
+        {/* Mac traffic light spacer — positioned at the outer level */}
+        <div className="mac-traffic-light-spacer" />
 
-          {/* App icon + name + version (moved before controls to avoid overlap) */}
-          <div className="title-bar-app-icon">
-            {Icons.universui}
+        {/* Left section: App branding + VS Code-style panel toggles */}
+        <div className="title-bar-left">
+          {/* App icon + name + version */}
+          <div className="title-bar-app-brand">
+            <div className="title-bar-app-icon">
+              {Icons.universui}
+            </div>
+            <span className="title-bar-app-name">{APP_NAME}</span>
+            <span className="title-bar-version">v{APP_VERSION}</span>
           </div>
-          <span className="title-bar-app-name">{APP_NAME}</span>
-          <span className="title-bar-version">v{APP_VERSION}</span>
 
           {/* Separator */}
           <div className="title-bar-separator" />
