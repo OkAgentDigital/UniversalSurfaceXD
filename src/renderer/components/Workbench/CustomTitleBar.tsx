@@ -83,9 +83,8 @@ export function CustomTitleBar({
         {/* Mac traffic light spacer — positioned at the outer level */}
         <div className="mac-traffic-light-spacer" />
 
-        {/* Left section: App branding + VS Code-style panel toggles */}
+        {/* Left section: App branding only */}
         <div className="title-bar-left">
-          {/* App icon + name + version */}
           <div className="title-bar-app-brand">
             <div className="title-bar-app-icon">
               {Icons.universui}
@@ -93,10 +92,24 @@ export function CustomTitleBar({
             <span className="title-bar-app-name">{APP_NAME}</span>
             <span className="title-bar-version">v{APP_VERSION}</span>
           </div>
+        </div>
 
-          {/* Separator */}
-          <div className="title-bar-separator" />
+        {/* Center section: Command center */}
+        <div
+          className="title-bar-command-center"
+          onClick={handleCommandPalette}
+          title="Search commands (Cmd+P)"
+        >
+          {Icons.search}
+          <span className="title-bar-command-text">
+            {currentDocument
+              ? `${APP_NAME} • ${currentDocument}`
+              : `${APP_NAME} — Local-first Document Hub`}
+          </span>
+        </div>
 
+        {/* Right section: Panel toggles + Settings */}
+        <div className="title-bar-right">
           {/* VS Code-style panel toggle controls */}
           <div className="title-bar-controls">
             {onToggleSidebar && (
@@ -125,24 +138,7 @@ export function CustomTitleBar({
               {Icons.chat}
             </button>
           </div>
-        </div>
 
-        {/* Center section: Command center */}
-        <div
-          className="title-bar-command-center"
-          onClick={handleCommandPalette}
-          title="Search commands (Cmd+P)"
-        >
-          {Icons.search}
-          <span className="title-bar-command-text">
-            {currentDocument
-              ? `${APP_NAME} • ${currentDocument}`
-              : `${APP_NAME} — Local-first Document Hub`}
-          </span>
-        </div>
-
-        {/* Right section: Settings + Account */}
-        <div className="title-bar-right">
           {/* Settings */}
           <button
             className="title-bar-action"
@@ -152,15 +148,6 @@ export function CustomTitleBar({
             title="Settings"
           >
             {Icons.settings}
-          </button>
-
-          {/* Account / User menu */}
-          <button
-            className="title-bar-action"
-            onClick={() => setShowMenu(!showMenu)}
-            title="Account"
-          >
-            {Icons.account}
           </button>
         </div>
       </div>
