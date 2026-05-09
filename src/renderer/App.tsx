@@ -9,7 +9,7 @@ import { DocumentEditor } from './components/DocumentEditor/DocumentEditor';
 export default function App() {
   return (
     <DndProvider backend={HTML5Backend}>
-      <HashRouter>
+      <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/" element={<Workbench />}>
             <Route index element={<TaskBoard />} />
