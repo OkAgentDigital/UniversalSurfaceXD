@@ -98,10 +98,7 @@ export function AccountPanel() {
           <div className="empty-state">
             <i className="codicon codicon-key"></i>
             <p>No credentials stored</p>
-            <button
-              className="action-button"
-              onClick={() => setShowAddModal(true)}
-            >
+            <button onClick={() => setShowAddModal(true)}>
               <i className="codicon codicon-add"></i>
               Add Credential
             </button>
