@@ -42,5 +42,13 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist/renderer'),
     },
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: false,
+      },
+    },
   },
+
 };
