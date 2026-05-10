@@ -1,12 +1,11 @@
 {
   "folders": [
     {
-      "name": "🛸 Universui",
+      "name": "🛸 USXD",
       "path": "."
     }
   ],
   "settings": {
-    // ── Editor ─────────────────────────────────────────────
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.formatOnSave": true,
@@ -15,8 +14,6 @@
     "editor.lineHeight": 22,
     "editor.minimap.enabled": false,
     "editor.stickyScroll.enabled": true,
-
-    // ── Files ──────────────────────────────────────────────
     "files.exclude": {
       "**/.git": true,
       "**/.DS_Store": true,
@@ -25,13 +22,9 @@
     },
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
-
-    // ── Terminal ───────────────────────────────────────────
     "terminal.integrated.fontFamily": "'JetBrains Mono', monospace",
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.defaultLocation": "editor",
-
-    // ── TypeScript / React ─────────────────────────────────
     "[typescript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true
@@ -52,21 +45,15 @@
       "editor.insertSpaces": true,
       "editor.tabSize": 2
     },
-
-    // ── Explorer ───────────────────────────────────────────
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.compactFolders": false,
     "explorer.sortOrder": "type",
-
-    // ── Search ─────────────────────────────────────────────
     "search.exclude": {
       "**/node_modules": true,
       "**/dist": true,
       "**/.git": true
     },
-
-    // ── Electron / Webpack ─────────────────────────────────
     "debug.javascript.terminalOptions": {
       "skipFiles": [
         "<node_internals>/**"
@@ -75,16 +62,11 @@
   },
   "extensions": {
     "recommendations": [
-      // ── Languages ────────────────────────────────────────
       "esbenp.prettier-vscode",
       "dbaeumer.vscode-eslint",
       "bradlc.vscode-tailwindcss",
-
-      // ── React / TypeScript ───────────────────────────────
       "dsznajder.es7-react-js-snippets",
       "ms-vscode.vscode-typescript-next",
-
-      // ── Productivity ─────────────────────────────────────
       "eamodio.gitlens",
       "yzhang.markdown-all-in-one"
     ]
@@ -93,7 +75,7 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Universui (Electron Main)",
+        "name": "USXD (Electron Main)",
         "type": "node",
         "request": "launch",
         "cwd": "${workspaceFolder}",
@@ -112,7 +94,7 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "Build Universui",
+        "label": "Build USXD",
         "type": "npm",
         "script": "build",
         "group": "build",
@@ -122,7 +104,7 @@
         }
       },
       {
-        "label": "Start Universui (Dev)",
+        "label": "Start USXD (Dev)",
         "type": "npm",
         "script": "start",
         "group": {

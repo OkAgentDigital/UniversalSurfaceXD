@@ -1,23 +1,23 @@
-name: universui-retro
-version: 1.3.0
-description: Universui for retro gaming (with CHASIS skin/lens engine)
+name: usxd-retro
+version: 1.4.0
+description: UniversalSurfaceXD for retro gaming (with CHASIS skin/lens engine)
 author: DevStudio
 license: MIT
 
 components:
   - name: core
-    source: "@universui/core"
-    version: ^1.3.0
+    source: "@universalsurfacexd/core"
+    version: ^1.4.0
     required: true
 
   - name: sonic-vault
-    source: "@universui/sonic-vault"
+    source: "@universalsurfacexd/sonic-vault"
     version: ^1.0.0
     config:
-      vault_path: "~/.local/share/universui/vault/"
+      vault_path: "~/.local/share/usxd/vault/"
 
   - name: sonic-run
-    source: "@universui/sonic-run"
+    source: "@universalsurfacexd/sonic-run"
     version: ^1.0.0
     config:
       container_runtime: docker
@@ -29,7 +29,7 @@ components:
       game_library: ~/Games
 
   - name: sonic-chasis
-    source: "@universui/chasis"
+    source: "@universalsurfacexd/chasis"
     version: ^1.0.0
     config:
       skin_engine: true
@@ -43,7 +43,7 @@ components:
         - lcd-grid
 
   - name: sonic-logs
-    source: "@universui/logs"
+    source: "@universalsurfacexd/logs"
     version: ^1.0.0
     config:
       max_size_mb: 100
@@ -54,7 +54,7 @@ excluded_components:
   - workbench-ui
 
 build:
-  output: Universui-Retro
+  output: USXD-Retro
   target_os: [macos, windows, linux]
   target_arch: [x64, arm64]
   icon: assets/retro-icon.png

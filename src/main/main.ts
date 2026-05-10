@@ -60,7 +60,7 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // Detect mode from CLI args
   const detectedMode = modeManager.getMode();
-  console.log(`[Universui] Starting in ${detectedMode} mode`);
+  console.log(`[${APP_NAME}] Starting in ${detectedMode} mode`);
 
 
   // Initialize database

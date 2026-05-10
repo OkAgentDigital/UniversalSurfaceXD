@@ -1,17 +1,17 @@
-name: universui-cloud
-version: 1.3.0
-description: Headless Universui for cloud servers
+name: usxd-cloud
+version: 1.4.0
+description: Headless UniversalSurfaceXD for cloud servers
 author: DevStudio
 license: MIT
 
 components:
   - name: core
-    source: "@universui/core"
-    version: ^1.3.0
+    source: "@universalsurfacexd/core"
+    version: ^1.4.0
     required: true
 
   - name: sonic-vault
-    source: "@universui/sonic-vault"
+    source: "@universalsurfacexd/sonic-vault"
     version: ^1.0.0
     config:
       auto_unlock: true
@@ -19,7 +19,7 @@ components:
       cloud_kms: true
 
   - name: sonic-run
-    source: "@universui/sonic-run"
+    source: "@universalsurfacexd/sonic-run"
     version: ^1.0.0
     config:
       container_runtime: containerd
@@ -29,7 +29,7 @@ components:
         - deepseek
 
   - name: sonic-agent
-    source: "@universui/sonic-agent"
+    source: "@universalsurfacexd/sonic-agent"
     version: ^1.0.0
     config:
       cloud_mode: true
@@ -37,14 +37,14 @@ components:
       concurrent_requests: 10
 
   - name: sonic-health
-    source: "@universui/health"
+    source: "@universalsurfacexd/health"
     version: ^1.0.0
     config:
       prometheus_endpoint: ":9090"
       health_endpoint: ":8080/health"
 
   - name: sonic-logs
-    source: "@universui/logs"
+    source: "@universalsurfacexd/logs"
     version: ^1.0.0
     config:
       output: stdout
@@ -57,7 +57,7 @@ excluded_components:
   - sonic-chasis
 
 build:
-  output: universui-cloud
+  output: usxd-cloud
   target_os: [linux]
   target_arch: [amd64, arm64]
   static_linking: true

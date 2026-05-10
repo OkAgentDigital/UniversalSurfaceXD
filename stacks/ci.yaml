@@ -1,25 +1,25 @@
-name: universui-ci
-version: 1.3.0
-description: Universui for GitHub Actions and CI/CD pipelines
+name: usxd-ci
+version: 1.4.0
+description: UniversalSurfaceXD for GitHub Actions and CI/CD pipelines
 author: DevStudio
 license: MIT
 
 components:
   - name: core
-    source: "@universui/core"
-    version: ^1.3.0
+    source: "@universalsurfacexd/core"
+    version: ^1.4.0
     required: true
     config:
       mode: ci
 
   - name: sonic-vault
-    source: "@universui/sonic-vault"
+    source: "@universalsurfacexd/sonic-vault"
     version: ^1.0.0
     config:
       use_env_vars: true
 
   - name: sonic-run
-    source: "@universui/sonic-run"
+    source: "@universalsurfacexd/sonic-run"
     version: ^1.0.0
     config:
       container_runtime: docker
@@ -27,7 +27,7 @@ components:
         - github
 
   - name: sonic-agent
-    source: "@universui/sonic-agent"
+    source: "@universalsurfacexd/sonic-agent"
     version: ^1.0.0
     config:
       ci_mode: true
@@ -39,7 +39,7 @@ excluded_components:
   - sonic-logs
 
 build:
-  output: universui-ci
+  output: usxd-ci
   target_os: [linux]
   target_arch: [amd64]
   static_linking: true

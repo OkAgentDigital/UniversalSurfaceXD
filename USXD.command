@@ -1,13 +1,13 @@
 #!/bin/bash
-# Universui Launcher
-# Double-click this file to start Universui in development mode
-# Or run from terminal: ./universui.command
+# UniversalSurfaceXD (USXD) Launcher
+# Double-click this file to start USXD in development mode
+# Or run from terminal: ./USXD.command
 
 APP_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$APP_DIR" || { echo "ERROR: Cannot change to $APP_DIR"; exit 1; }
 
 echo "============================================"
-echo "  Universui v1.3.0"
+echo "  UniversalSurfaceXD v1.4.0"
 echo "  Starting development server..."
 echo "============================================"
 echo ""
@@ -51,7 +51,7 @@ fi
 
 # Check if dist exists, if not build first
 if [ ! -d "dist/main" ] || [ ! -d "dist/renderer" ]; then
-    echo "Building Universui for the first time..."
+    echo "Building UniversalSurfaceXD for the first time..."
     echo ""
     npm run build 2>&1
     if [ $? -ne 0 ]; then
@@ -65,15 +65,15 @@ if [ ! -d "dist/main" ] || [ ! -d "dist/renderer" ]; then
     echo ""
 fi
 
-echo "Launching Universui..."
+echo "Launching UniversalSurfaceXD..."
 echo "  - Main process: webpack (watch mode)"
 echo "  - Renderer: webpack-dev-server on http://localhost:3000"
 echo "  - Electron will start once the dev server is ready"
 echo ""
-echo "Close this terminal window to stop Universui."
+echo "Close this terminal window to stop UniversalSurfaceXD."
 echo ""
 
-# Start Universui (builds preload, starts webpack dev servers, launches Electron)
+# Start USXD (builds preload, starts webpack dev servers, launches Electron)
 npm run start 2>&1
 
 
@@ -81,7 +81,7 @@ npm run start 2>&1
 EXIT_CODE=$?
 if [ $EXIT_CODE -ne 0 ]; then
     echo ""
-    echo "Universui exited with code $EXIT_CODE"
+    echo "UniversalSurfaceXD exited with code $EXIT_CODE"
     echo "Check the output above for error details."
     read -n 1 -s -r -p "Press any key to close..."
 fi

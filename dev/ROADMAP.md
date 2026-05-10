@@ -1,14 +1,14 @@
-# Universui Roadmap
+# UniversalSurfaceXD Roadmap
 
-> **Universui** — A local-first desktop editor where tasks meet documents.
+> **UniversalSurfaceXD (USXD)** — A local-first desktop editor where tasks meet documents.
 > Built with Electron + React + Monaco + SQLite.
 > Part of the **DevStudio Framework**.
 
 ---
 
-## 🏆 v1.3.0 — Current Release (Complete)
+## 🏆 v1.4.0 — Current Release (Complete)
 
-A local-first document hub with AI-powered collaboration and GitHub integration.
+A local-first document hub with AI-powered collaboration and GitHub integration, repackaged as UniversalSurfaceXD.
 
 - ✅ **3-Column Layout** — Left sidebar (Explorer) + Center (Editor) + Right panel (AI Chat)
 - ✅ **Custom Title Bar** — VS Code-style chrome with app icon, version, and window controls
@@ -23,7 +23,9 @@ A local-first document hub with AI-powered collaboration and GitHub integration.
 - ✅ **Sub-Sonic-Stack System** — 6 modular stack definitions (full, cloud, embedded, retro, cli, ci)
 - ✅ **Stack Manager** — Install, build, validate, and run modular stacks
 - ✅ **DevStudio Framework** — Unified workspace, CLI, and documentation
-- ✅ All v1.2.0 features preserved and enhanced
+- ✅ **MIT License** for open distribution
+- ✅ **GitHub Releases** publishing pipeline
+- ✅ **electron-builder** configured for macOS, Windows, Linux
 
 ### The Evolution
 
@@ -34,14 +36,15 @@ A local-first document hub with AI-powered collaboration and GitHub integration.
 | v1.2.0 | 5 new functional panels | **9 total** | ~3,000+ |
 | v1.3.0 | 3-column layout + AI + MCP + Custom Chrome | **10 total** | ~4,500+ |
 | v1.3.0+ | SonicScrewdriver + Autoloop + Sub-Sonic-Stack | **10 total** | ~6,000+ |
+| v1.4.0 | Repackaged as UniversalSurfaceXD (USXD) | **10 total** | ~6,000+ |
 
 ---
 
-## 🎯 What Universui Is
+## 🎯 What UniversalSurfaceXD Is
 
 A **local-first, cross-platform alternative** to:
 
-| Tool | Universui Equivalent |
+| Tool | USXD Equivalent |
 | :--- | :--- |
 | **Notion** | TaskBoard + Property Panel + Kanban views |
 | **VS Code** | Workbench layout + Monaco + Terminal + Git |
@@ -52,7 +55,7 @@ A **local-first, cross-platform alternative** to:
 
 ---
 
-## 🚀 v1.4.0 — "Sub-Sonic-Stack" Release (In Progress)
+## 🚀 v1.5.0 — "Sub-Sonic-Stack" Release (Planned)
 
 ### Stack System (✅ Complete)
 - [x] 6 stack YAML definitions (full, cloud, embedded, retro, cli, ci)
@@ -63,7 +66,7 @@ A **local-first, cross-platform alternative** to:
 
 ### Distribution
 - [ ] Build production binaries (macOS, Windows, Linux)
-- [ ] Create GitHub Release v1.4.0
+- [ ] Create GitHub Release v1.5.0
 - [ ] Publish npm packages to GitHub Packages
 - [ ] Build and push Docker images
 - [ ] Create Linux package repositories (APT, RPM)
@@ -76,14 +79,14 @@ A **local-first, cross-platform alternative** to:
 - [ ] `docs/SONIC.md` — SonicScrewdriver security guide
 
 ### Example Extensions
-- [ ] `@universui/extension-github` — GitHub panel + MCP + Sonic secrets
-- [ ] `@universui/extension-deepseek` — AI chat + skills + rate limiting
-- [ ] `@universui/extension-autoloop` — Self-optimization UI + program runner
-- [ ] `@universui/extension-skills` — Markdown skill loader
+- [ ] `@universalsurfacexd/extension-github` — GitHub panel + MCP + Sonic secrets
+- [ ] `@universalsurfacexd/extension-deepseek` — AI chat + skills + rate limiting
+- [ ] `@universalsurfacexd/extension-autoloop` — Self-optimization UI + program runner
+- [ ] `@universalsurfacexd/extension-skills` — Markdown skill loader
 
 ---
 
-## 🚀 v1.3.0 — "Rock Solid" Polish Release
+## 🚀 v1.4.0 — "Rock Solid" Polish Release
 
 ### Performance
 - [ ] Virtual scrolling in FileExplorer (for 1000+ tasks)
@@ -163,7 +166,7 @@ A **local-first, cross-platform alternative** to:
 | **Auto-updater** | electron-updater for seamless updates |
 | **Analytics (opt-in)** | Usage metrics (if you want) |
 | **Onboarding tour** | First-run experience |
-| **Website / Docs** | universui.com with screenshots |
+| **Website / Docs** | universalsurfacexd.com with screenshots |
 | **Homebrew / Chocolatey** | Package managers |
 
 ---
@@ -191,40 +194,33 @@ When ready for public release:
 | v1.2.0 | May 2026 | Search, Source Control, Terminal, Settings, Property panels |
 | v1.3.0 | May 2026 | 3-column layout, Custom Chrome, DeepSeek AI, GitHub MCP Server |
 | v1.3.0+ | May 2026 | SonicScrewdriver, Autoloop, Sub-Sonic-Stack, DevStudio Framework |
+| v1.4.0 | May 2026 | Repackaged as UniversalSurfaceXD (USXD) |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-DevStudio/
-├── universui/                    # Desktop application
-│   ├── src/
-│   │   ├── main/                 # Electron main process
-│   │   │   ├── main.ts           # App entry point
-│   │   │   ├── stackManager.ts   # Stack management (NEW)
-│   │   │   ├── sonicScrewdriver.ts # Security gateway
-│   │   │   ├── mcpService.ts     # MCP server manager
-│   │   │   ├── extensionService.ts # Extension API
-│   │   │   ├── aiService.ts      # AI integration
-│   │   │   ├── database.ts       # SQLite database
-│   │   │   └── ipcHandlers.ts    # IPC communication
-│   │   ├── preload/              # Preload scripts
-│   │   ├── renderer/             # React UI
-│   │   └── shared/               # Shared types
-│   ├── stacks/                   # Stack definitions (NEW)
-│   ├── scripts/                  # Build scripts (NEW)
-│   └── docs/                     # Documentation (NEW)
-├── sonic-screwdriver/            # API gateway (submodule)
-└── packages/                     # npm packages
-    ├── core/
-    ├── extension-api/
-    ├── mcp-client/
-    └── stack-registry/
+UniversalSurfaceXD/
+├── src/
+│   ├── main/                 # Electron main process
+│   │   ├── main.ts           # App entry point
+│   │   ├── stackManager.ts   # Stack management
+│   │   ├── sonicScrewdriver.ts # Security gateway
+│   │   ├── mcpService.ts     # MCP server manager
+│   │   ├── extensionService.ts # Extension API
+│   │   ├── aiService.ts      # AI integration
+│   │   ├── database.ts       # SQLite database
+│   │   └── ipcHandlers.ts    # IPC communication
+│   ├── preload/              # Preload scripts
+│   ├── renderer/             # React UI
+│   └── shared/               # Shared types
+├── stacks/                   # Stack definitions
+├── scripts/                  # Build scripts
+└── docs/                     # Documentation
 ```
 
 ---
 
 *Built with ❤️ using Electron + React + Monaco + SQLite*
 *Part of the **DevStudio Framework** — Build once, deploy everywhere.*
-

@@ -1,19 +1,19 @@
-name: universui-embedded
-version: 1.3.0
-description: Universui for IoT and embedded devices (Raspberry Pi Zero)
+name: usxd-embedded
+version: 1.4.0
+description: UniversalSurfaceXD for IoT and embedded devices (Raspberry Pi Zero)
 author: DevStudio
 license: MIT
 
 components:
   - name: core
-    source: "@universui/core"
-    version: ^1.3.0
+    source: "@universalsurfacexd/core"
+    version: ^1.4.0
     required: true
     config:
       log_level: warn
 
   - name: sonic-run
-    source: "@universui/sonic-run"
+    source: "@universalsurfacexd/sonic-run"
     version: ^1.0.0
     config:
       container_runtime: minimal
@@ -21,7 +21,7 @@ components:
       default_timeout: 30s
 
   - name: sonic-health
-    source: "@universui/health"
+    source: "@universalsurfacexd/health"
     version: ^1.0.0
     config:
       check_interval: 60s
@@ -36,7 +36,7 @@ excluded_components:
   - sonic-logs
 
 build:
-  output: universui-embedded
+  output: usxd-embedded
   target_os: [linux]
   target_arch: [armv7l, arm64]
   strip_symbols: true

@@ -1,6 +1,7 @@
-export const APP_NAME = 'Universui';
+export const APP_NAME = 'UniversalSurfaceXD';
+export const APP_SHORT_NAME = 'USXD';
 export const APP_VERSION = '1.4.0';
-export const DB_FILENAME = 'universui.db';
+export const DB_FILENAME = 'usxd.db';
 
 export const TASK_STATUS = {
   ACTIVE: 'active',
