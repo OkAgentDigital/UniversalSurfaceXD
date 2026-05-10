@@ -8,7 +8,6 @@
     "start": "npm run build:preload && concurrently --kill-others \"npm run build:main:dev\" \"npm run build:renderer:dev\" \"wait-on http://localhost:3000 && DEV_SERVER_URL=true electron .\"",
     "start:dev": "npm run build:preload && concurrently --kill-others \"npm run build:main:dev\" \"npm run build:renderer:dev\" \"wait-on http://localhost:3000 && DEV_SERVER_URL=true electron .\"",
     "start:prod": "npm run build && electron .",
-
     "build": "npm run build:preload && npm run build:main && npm run build:renderer",
     "build:main": "webpack --config webpack.main.config.js --mode production",
     "build:main:dev": "webpack --config webpack.main.config.js --mode development --watch",
@@ -23,7 +22,6 @@
     "postinstall": "electron-rebuild -f -w better-sqlite3",
     "test": "jest",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
-
     "stack": "npx ts-node src/main/stackManager.ts",
     "stack:list": "npx ts-node src/main/stackManager.ts list",
     "stack:install": "npx ts-node src/main/stackManager.ts install",
@@ -32,7 +30,6 @@
     "stack:remove": "npx ts-node src/main/stackManager.ts remove",
     "stack:validate": "npx ts-node src/main/stackManager.ts validate",
     "stack:create": "npx ts-node src/main/stackManager.ts create",
-
     "build:stack:full": "bash scripts/build-stack.sh stacks/full.yaml",
     "build:stack:cloud": "bash scripts/build-stack.sh stacks/cloud.yaml",
     "build:stack:embedded": "bash scripts/build-stack.sh stacks/embedded.yaml",
@@ -40,7 +37,6 @@
     "build:stack:cli": "bash scripts/build-stack.sh stacks/cli.yaml",
     "build:stack:ci": "bash scripts/build-stack.sh stacks/ci.yaml",
     "build:stack:all": "for f in stacks/*.yaml; do bash scripts/build-stack.sh \"$f\"; done"
-
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
@@ -67,7 +63,7 @@
     "concurrently": "^8.2.0",
     "css-loader": "^6.8.0",
     "electron": "^28.0.0",
-    "electron-builder": "^24.0.0",
+    "electron-builder": "^26.8.1",
     "electron-rebuild": "^3.2.0",
     "eslint": "^8.55.0",
     "html-webpack-plugin": "^5.5.0",
