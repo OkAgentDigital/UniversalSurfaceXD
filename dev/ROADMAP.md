@@ -171,6 +171,59 @@ A **local-first, cross-platform alternative** to:
 
 ---
 
+## 🚀 v2.0.0 — "Surface Convergence" Release (Planned)
+
+**Goal:** Reunite the three USXD eras — beta surface documents, current Electron app, and OBF style guide — into a single coherent application.
+
+> **Context:** See [`docs/USXD_LEGACY_ASSESSMENT.md`](https://github.com/OkAgentDigital/DevStudio/blob/main/docs/USXD_LEGACY_ASSESSMENT.md) for the full evolutionary analysis of the beta archive, current app, and OBF spec.
+
+### Phase 1: Theme System (v2.0.0-alpha)
+- [ ] Add design token system (color, typography, spacing JSON)
+- [ ] Implement CSS variable theming
+- [ ] Port Classic Modern palette as built-in theme
+- [ ] Add theme switcher UI in AppearancePanel
+- [ ] Document theme development guide
+
+### Phase 2: Surface Documents (v2.0.0-beta)
+- [ ] Integrate surface-document JSON schema from beta archive
+- [ ] Add surface import/export (JSON + YAML)
+- [ ] Implement grid canon rendering (80×30 viewport, 16×24 cells)
+- [ ] Add surface composer panel
+- [ ] Validate against `interchange/schemas/surface-document.schema.json`
+
+### Phase 3: OBF Light (v2.0.0)
+- [ ] Define lightweight OBF theme bundle format (`.usxd-theme`)
+- [ ] Add bundle import/export
+- [ ] Publish example themes (Classic Modern, Chunky, Dark)
+- [ ] Theme marketplace / gallery
+
+### Phase 4: Marksmith Bridge (v2.1.0)
+- [ ] Share theme system with Marksmith
+- [ ] Cross-app surface document compatibility
+- [ ] Unified design token registry
+- [ ] Shared component library
+
+### Surface Examples to Support
+| Profile | Source | Description |
+|---------|--------|-------------|
+| `udos.classic-modern` | Beta archive | Classic Modern desktop wireframe |
+| `sonic.console` | Beta archive | Sonic Screwdriver operator console |
+| `udos.thinui` | Beta archive | uDOS ThinUI workspace |
+| `udos.host` | Beta archive | uDOS host command centre |
+| `uhome.thin` | Beta archive | uHOME thin kiosk handoff |
+| `usxd.default` | New | Default USXD workspace layout |
+
+### Design Tokens to Port
+| Token File | Source | Contents |
+|-----------|--------|----------|
+| `color.json` | Beta `spine/tokens/` | Color palette |
+| `typography.json` | Beta `spine/tokens/` | Font families, sizes, weights |
+| `spacing.json` | Beta `spine/tokens/` | 8px-based spacing scale |
+| `radius.json` | Beta `spine/tokens/` | Border radius values |
+| `classic-modern-inspiration.yaml` | Beta `tokens/` | Classic Modern palette + fonts |
+
+---
+
 ## 📦 Share the Project
 
 When ready for public release:
