@@ -1641,56 +1641,6 @@ body.darwin .mac-traffic-light-spacer,
   margin-bottom: 10px;
 }
 
-/* Theme Options */
-.theme-options {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.theme-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: transparent;
-  border: 1px solid var(--vscode-sidebar-border);
-  border-radius: 8px;
-  color: #cccccc;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  text-align: left;
-}
-
-.theme-option:hover {
-  background: var(--vscode-sidebar-hover);
-  border-color: #4c4c4c;
-}
-
-.theme-option.active {
-  background: var(--vscode-selection-bg);
-  border-color: #0e639c;
-}
-
-.theme-option .codicon:first-child {
-  font-size: 18px;
-  color: #858585;
-}
-
-.theme-option.active .codicon:first-child {
-  color: #569cd6;
-}
-
-.theme-option span {
-  flex: 1;
-}
-
-.theme-check {
-  color: #4ec9b0;
-  font-size: 16px;
-}
-
 /* Icon Size Options */
 .icon-size-options {
   display: flex;

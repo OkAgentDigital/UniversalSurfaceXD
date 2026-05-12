@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardBody } from '../UI/Card';
 import { Button } from '../UI/Button';
-import { Select } from '../UI/Input';
 
-type Theme = 'vscode-dark' | 'chunky' | 'material' | 'fluent';
 type IconSize = 'small' | 'medium' | 'large';
 type CornerRadius = '4px' | '8px' | '12px' | '16px';
 
 interface AppearanceSettings {
-  theme: Theme;
   iconSize: IconSize;
   cornerRadius: CornerRadius;
   fontSize: number;
@@ -18,7 +15,6 @@ interface AppearanceSettings {
 }
 
 const DEFAULT_SETTINGS: AppearanceSettings = {
-  theme: 'chunky',
   iconSize: 'medium',
   cornerRadius: '8px',
   fontSize: 14,
@@ -35,39 +31,11 @@ export function AppearancePanel() {
     value: AppearanceSettings[K]
   ) => {
     setSettings(prev => ({ ...prev, [key]: value }));
-    // Apply theme change
-    if (key === 'theme') {
-      applyTheme(value as Theme);
-    }
   };
 
   return (
     <div className="appearance-panel">
       <h3 className="sidebar-section-title">Appearance</h3>
-
-      <div className="appearance-section">
-        <h4 className="appearance-section-title">Theme</h4>
-        <div className="theme-options">
-          {[
-            { id: 'vscode-dark' as Theme, label: 'VS Code Dark', icon: 'symbol-color' },
-            { id: 'chunky' as Theme, label: 'Chunky (Modern)', icon: 'symbol-ruler' },
-            { id: 'material' as Theme, label: 'Material Design', icon: 'symbol-misc' },
-            { id: 'fluent' as Theme, label: 'Fluent/Notion', icon: 'symbol-namespace' },
-          ].map(theme => (
-            <button
-              key={theme.id}
-              className={`theme-option ${settings.theme === theme.id ? 'active' : ''}`}
-              onClick={() => updateSetting('theme', theme.id)}
-            >
-              <i className={`codicon codicon-${theme.icon}`}></i>
-              <span>{theme.label}</span>
-              {settings.theme === theme.id && (
-                <i className="codicon codicon-check theme-check"></i>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
 
       <div className="appearance-section">
         <h4 className="appearance-section-title">Icon Size</h4>
@@ -199,17 +167,4 @@ export function AppearancePanel() {
       </div>
     </div>
   );
-}
-
-function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-
-  // Remove all theme classes
-  root.classList.remove('theme-vscode-dark', 'theme-chunky', 'theme-material', 'theme-fluent');
-
-  // Add selected theme class
-  root.classList.add(`theme-${theme}`);
-
-  // Store preference
-  localStorage.setItem('universui-theme', theme);
 }

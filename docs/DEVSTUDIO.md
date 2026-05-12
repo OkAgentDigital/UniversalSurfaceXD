@@ -43,6 +43,18 @@ DevStudio is the overarching framework that unifies **UniversalSurfaceXD** (the 
 | **Security** | SonicScrewdriver | AES-256 secrets, proxy, containers, audit |
 | **Build** | Sub-Sonic-Stack | Modular stack definitions, component registry |
 
+### USX Surface Format
+
+UniversalSurfaceXD uses the **USX (Universal Surface eXchange)** format for all surface layouts. USX combines:
+
+- **JSON/YAML schemas** — Portable layout trees describing grid-based UIs
+- **Liquid templates** — Dynamic content rendering via the uCode1 Liquid Engine
+- **Grid canon** — 80×30 viewport with teletext heritage
+
+The USX pipeline flows through uCode1's Python core (`core_py/usxd/` and `core_py/liquid_engine/`) for parsing, component mapping, and rendering before being displayed in the Electron + React frontend.
+
+See the [Surface Document Specification](./specs/SURFACE_DOCUMENT_SPEC.md) for the full schema reference.
+
 ### Component Map
 
 ```

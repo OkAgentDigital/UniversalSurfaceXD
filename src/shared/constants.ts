@@ -160,7 +160,6 @@ export const IPC_CHANNELS = {
 } as const;
 
 export const DEFAULT_SETTINGS = {
-  theme: 'dark' as 'dark' | 'light',
   fontSize: 14,
   autoSaveInterval: 1000,
   fontFamily: "Monaco, Menlo, 'Courier New', monospace",

@@ -168,7 +168,6 @@ export interface ExtensionManifest {
         category?: string;
       }>;
       mcpServers?: string[];
-      themes?: string[];
     };
   };
   main?: string; // Entry point

@@ -3,19 +3,77 @@
 > **Version:** 1.0.0  
 > **Status:** Draft  
 > **Part of:** UniversalSurfaceXD v2.0.0 "Surface Convergence"  
-> **Source:** Ported from USXD beta archive (Era 1) interchange schemas
+> **Source:** Ported from USX beta archive (Era 1) interchange schemas
 
 ---
 
 ## 1. Overview
 
-The Surface Document format is a portable layout tree for describing grid-based UIs. It was originally designed for the USXD beta UX designer composer and is being revived for USXD v2.0.0 as the foundation for themeable, interchangeable surface layouts.
+The Surface Document format is a portable layout tree for describing grid-based UIs. It was originally designed for the USX beta UX designer composer and is being revived for UniversalSurfaceXD v2.0.0 as the foundation for interchangeable surface layouts.
 
 A surface document describes:
 - A **viewport** (grid dimensions)
 - A **layout tree** (grid or stack containers)
 - **Component instances** (catalog references with props)
 - **Metadata** (title, description, profile ID)
+
+### USX (Universal Surface eXchange)
+
+Surface Documents are the JSON/YAML serialization of the **USX** format. USX is the human-readable surface format that combines Liquid templates with structured data to define how a surface looks and behaves. It is the "open-box" part of the system — making surface theme files human readable.
+
+The USX pipeline works as follows:
+
+```
+Surface Document (JSON/YAML)
+        │
+        ▼
+  USX Parser (uCode1 core_py/usxd/)
+        │
+        ├── Grid Parser ──► ASCII grid layout
+        ├── Component Mapper ──► ThinUI component mapping
+        └── Grid Renderer ──► Terminal/UI rendering
+        │
+        ▼
+  Liquid Engine (uCode1 core_py/liquid_engine/)
+        │
+        ├── render_usx() ──► Renders USX document data
+        ├── render_snack() ──► Renders snack execution data
+        └── render_binder() ──► Renders binder state data
+        │
+        ▼
+  UniversalSurfaceXD App
+  (Electron + React + Monaco)
+```
+
+### Liquid Template Integration
+
+Surface Documents can embed Liquid template syntax for dynamic content:
+
+```liquid
+{
+  "version": "1",
+  "meta": {
+    "title": "{{ surface.title }}",
+    "description": "{{ surface.description }}",
+    "profileId": "{{ surface.profile }}"
+  },
+  "root": {
+    "kind": "grid",
+    "templateColumns": "repeat({{ columns }}, 1fr)",
+    "gap": "{{ gap | default: '0.75rem' }}",
+    "cells": [
+      {% for cell in surface.cells %}
+      {
+        "catalogId": "{{ cell.component }}",
+        "props": {{ cell.props | json }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+}
+```
+
+This allows surface documents to be parameterized and reused across different profiles, making them ideal for layout design systems.
 
 ---
 
@@ -196,10 +254,10 @@ Each surface is identified by a unique profile ID following the `namespace.profi
 |---------|---------|--------|
 | `udos.classic-modern` | Classic Modern desktop wireframe | Beta archive |
 | `sonic.console` | Sonic Screwdriver operator console | Beta archive |
-| `udos.thinui` | uDOS ThinUI workspace | Beta archive |
+| `usxd.default` | Default USXD workspace layout | UniversalSurfaceXD App |
 | `udos.host` | uDOS host command centre | Beta archive |
 | `uhome.thin` | uHOME thin kiosk handoff | Beta archive |
-| `usxd.default` | Default USXD workspace layout | New |
+| `usxd.editor` | USXD surface editor layout | UniversalSurfaceXD App |
 
 ---
 
@@ -210,6 +268,7 @@ Each surface is identified by a unique profile ID following the `namespace.profi
 | JSON | `.surface.json` | `application/vnd.usxd.surface+json` |
 | YAML | `.surface.yaml` | `application/vnd.usxd.surface+yaml` |
 | Bundle | `.uxbundle.json` | `application/vnd.usxd.bundle+json` |
+| USX Liquid | `.usx.liquid` | `application/vnd.usxd.template+liquid` |
 
 ---
 
@@ -226,7 +285,65 @@ Each surface is identified by a unique profile ID following the `namespace.profi
 
 ---
 
-## 9. Example: Full Surface Document
+## 9. Layout Design with USX
+
+### Design Workflow
+
+The recommended workflow for designing surfaces with USX:
+
+1. **Sketch** — Define the grid layout in YAML or JSON
+2. **Template** — Add Liquid template variables for dynamic content
+3. **Preview** — Render in UniversalSurfaceXD using the USX preview panel
+4. **Export** — Save as `.surface.json` or `.surface.yaml` for distribution
+
+### Example: Parameterized Dashboard
+
+```liquid
+{% assign columns = 3 %}
+{% assign gap = "1rem" %}
+{
+  "version": "1",
+  "meta": {
+    "title": "{{ dashboard.name }}",
+    "description": "{{ dashboard.description }}",
+    "profileId": "usxd.dashboard"
+  },
+  "root": {
+    "kind": "grid",
+    "templateColumns": "repeat({{ columns }}, 1fr)",
+    "gap": "{{ gap }}",
+    "cells": [
+      {% for widget in dashboard.widgets %}
+      {
+        "catalogId": "widget.{{ widget.type }}",
+        "props": {
+          "title": "{{ widget.title }}",
+          "width": {{ widget.width | default: 1 }},
+          "height": {{ widget.height | default: 1 }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+}
+```
+
+### Component Catalog
+
+The UniversalSurfaceXD component catalog provides these built-in components:
+
+| Catalog ID | Description | Props |
+|-----------|-------------|-------|
+| `shell.panel` | Content panel with header | kicker, title, body, bullets |
+| `shell.sidebar` | Side navigation bar | items[], activeItem |
+| `shell.statusbar` | Status bar | left[], right[] |
+| `widget.metrics` | Metrics display | value, label, unit, trend |
+| `widget.chart` | Chart widget | type, data[], options{} |
+| `widget.list` | List widget | items[], columns[] |
+
+---
+
+## 10. Example: Full Surface Document
 
 ```json
 {
@@ -270,4 +387,40 @@ Each surface is identified by a unique profile ID following the `namespace.profi
 
 ---
 
-*Part of UniversalSurfaceXD v2.0.0 "Surface Convergence". See [DESIGN_TOKENS_SPEC.md](./DESIGN_TOKENS_SPEC.md) and [OBF_LIGHT_SPEC.md](./OBF_LIGHT_SPEC.md) for related specifications.*
+## 11. USX Processing Pipeline
+
+When a surface document is loaded in UniversalSurfaceXD, it flows through the USX processing pipeline:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                  UniversalSurfaceXD App                   │
+│                                                          │
+│  ┌──────────┐   ┌──────────┐   ┌────────────────────┐   │
+│  │  Surface  │──▶│  USX     │──▶│  Liquid Engine     │   │
+│  │  Document │   │  Parser  │   │  (uCode1 core_py)  │   │
+│  └──────────┘   └──────────┘   └────────────────────┘   │
+│                      │                                   │
+│                      ▼                                   │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │           Grid Renderer                           │    │
+│  │  ┌─────────┐  ┌──────────┐  ┌───────────────┐   │    │
+│  │  │  ASCII  │  │ Component│  │   Terminal    │   │    │
+│  │  │  Grid   │──▶│  Mapper  │──▶│   Renderer   │   │    │
+│  │  │  Parser │  │          │  │               │   │    │
+│  │  └─────────┘  └──────────┘  └───────────────┘   │    │
+│  └──────────────────────────────────────────────────┘    │
+│                      │                                   │
+│                      ▼                                   │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │           Electron + React Renderer               │    │
+│  │  ┌─────────┐  ┌──────────┐  ┌───────────────┐   │    │
+│  │  │  Monaco │  │  Surface │  │   Component   │   │    │
+│  │  │  Editor │  │  Preview │  │   Catalog     │   │    │
+│  │  └─────────┘  └──────────┘  └───────────────┘   │    │
+│  └──────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+*Part of UniversalSurfaceXD v2.0.0 "Surface Convergence".*

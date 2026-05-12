@@ -66,6 +66,7 @@ The complete UniversalSurfaceXD experience with all features:
 - MCP servers (GitHub, DeepSeek)
 - Extension API with panels/icons/commands
 - Self-optimization via Autoloop
+- **USX surface rendering** — Load and preview `.surface.json` and `.surface.yaml` layouts
 
 ### 2. Cloud Server (`stacks/cloud.yaml`)
 **Size:** 45MB | **Target:** Linux (amd64, arm64)
@@ -76,6 +77,7 @@ Headless UniversalSurfaceXD for cloud deployment:
 - Cloud KMS integration
 - Prometheus metrics endpoint
 - JSON structured logging to CloudWatch
+- **USX headless processing** — Render surfaces to terminal output via uCode1 grid renderer
 
 ### 3. Embedded / IoT (`stacks/embedded.yaml`)
 **Size:** 8MB | **Target:** Linux (armv7l, arm64)
@@ -95,6 +97,7 @@ UniversalSurfaceXD configured for retro gaming with CHASIS:
 - RetroArch, DOSBox, FS-UAE, PPSSP containers
 - Game library browser
 - Performance-optimized skin engine
+- **USX surface layouts** — Retro-themed surface profiles for game launchers
 
 ### 5. CLI / Terminal (`stacks/cli.yaml`)
 **Size:** 2MB | **Target:** macOS, Windows, Linux (x64, arm64, armv7l)
@@ -103,6 +106,7 @@ Minimal CLI-only UniversalSurfaceXD for scripting:
 - Single binary, statically linked
 - No GUI, no persistence
 - Perfect for CI/CD scripts and automation
+- **USX terminal rendering** — Render surfaces as ASCII art via uCode1 grid renderer
 
 ### 6. CI/CD Pipeline (`stacks/ci.yaml`)
 **Size:** 15MB | **Target:** Linux (amd64)
@@ -163,6 +167,16 @@ Each stack is defined by a YAML file that specifies:
 4. **Assemble** — Combine into final binary
 5. **Measure** — Verify size against target
 
+### USX Integration
+
+Stacks that include the **chasis** component also support USX surface rendering. The USX pipeline (uCode1 Python core) processes surface documents through:
+
+1. **USX Parser** — Parses JSON/YAML surface documents into grid layouts
+2. **Grid Renderer** — Renders grids to terminal/ASCII output
+3. **Liquid Engine** — Processes Liquid template variables for dynamic content
+
+This allows stacks to render surface layouts even in headless or terminal-only modes.
+
 ---
 
 ## 🎯 Use Cases
@@ -179,7 +193,7 @@ Each stack is defined by a YAML file that specifies:
 
 ---
 
-## � License
+## 📄 License
 
 MIT — OkAgentDigital / UniversalSurfaceXD
 
