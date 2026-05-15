@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MCPServerStatus } from '../../../shared/types';
+import { Icon } from '../UI/Icon';
 
 interface ChatMessage {
   id: string;
@@ -9,133 +10,6 @@ interface ChatMessage {
 }
 
 type ChatMode = 'chat' | 'github' | 'explain';
-
-const styles = {
-  panel: {
-    display: 'flex' as const,
-    flexDirection: 'column' as const,
-    height: '100%',
-    backgroundColor: '#212121',
-  },
-  header: {
-    display: 'flex' as const,
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    padding: '14px 16px',
-    borderBottom: '1px solid #2f2f2f',
-    flexShrink: 0,
-    position: 'relative' as const,
-  },
-  headerTitle: {
-    fontSize: 14,
-    fontWeight: 600,
-    color: '#ececec',
-    letterSpacing: '-0.2px',
-  },
-  headerActions: {
-    display: 'flex' as const,
-    gap: 2,
-    position: 'absolute' as const,
-    right: 12,
-    top: '50%',
-    transform: 'translateY(-50%)',
-  },
-  iconBtn: {
-    background: 'transparent',
-    border: 'none',
-    color: '#666',
-    cursor: 'pointer',
-    padding: 6,
-    borderRadius: 6,
-    display: 'flex',
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    transition: 'all 0.15s ease',
-  },
-  messages: {
-    flex: 1,
-    overflowY: 'auto' as const,
-    padding: '24px 16px',
-    display: 'flex' as const,
-    flexDirection: 'column' as const,
-    gap: 8,
-  },
-  messageRow: (role: string) => ({
-    display: 'flex' as const,
-    justifyContent: role === 'user' ? 'flex-end' as const : 'flex-start' as const,
-    padding: '0 0',
-  }),
-  messageContent: (role: string) => ({
-    maxWidth: '90%',
-    fontSize: 14,
-    lineHeight: 1.7,
-    color: role === 'user' ? '#ececec' : '#d4d4d4',
-    whiteSpace: 'pre-wrap' as const,
-    wordBreak: 'break-word' as const,
-    padding: role === 'user' ? '10px 16px' : '4px 4px',
-    backgroundColor: role === 'user' ? '#2f2f2f' : 'transparent',
-    borderRadius: role === 'user' ? 16 : 0,
-    borderBottomRightRadius: role === 'user' ? 4 : 16,
-  }),
-  systemMessage: {
-    textAlign: 'center' as const,
-    fontSize: 12,
-    color: '#666',
-    padding: '12px 16px',
-    lineHeight: 1.5,
-  },
-  inputArea: {
-    flexShrink: 0,
-    padding: '12px 16px 16px',
-    backgroundColor: '#212121',
-  },
-  inputContainer: {
-    display: 'flex' as const,
-    alignItems: 'flex-end' as const,
-    gap: 8,
-    backgroundColor: '#2f2f2f',
-    border: '1px solid #3f3f3f',
-    borderRadius: 16,
-    padding: '8px 8px 8px 16px',
-    maxWidth: 600,
-    margin: '0 auto',
-  },
-  textarea: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    border: 'none',
-    padding: '6px 0',
-    fontSize: 14,
-    color: '#ececec',
-    fontFamily: 'inherit',
-    resize: 'none' as const,
-    outline: 'none',
-    lineHeight: 1.5,
-    maxHeight: 120,
-  },
-  sendBtn: (disabled: boolean) => ({
-    display: 'flex' as const,
-    alignItems: 'center' as const,
-    justifyContent: 'center' as const,
-    width: 32,
-    height: 32,
-    border: 'none',
-    borderRadius: 8,
-    backgroundColor: disabled ? '#3f3f3f' : '#ffffff',
-    color: disabled ? '#666' : '#1e1e1e',
-    cursor: disabled ? 'default' as const : 'pointer' as const,
-    transition: 'all 0.15s ease',
-    flexShrink: 0,
-  }),
-  typingIndicator: {
-    display: 'flex' as const,
-    alignItems: 'center' as const,
-    gap: 4,
-    color: '#888',
-    fontSize: 14,
-    padding: '4px 4px',
-  },
-};
 
 interface OKChatPanelProps {
   onClose?: () => void;
@@ -152,8 +26,10 @@ export function OKChatPanel({ onClose }: OKChatPanelProps) {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const [chatMode] = useState<ChatMode>('chat');
   const [mcpStatuses, setMcpStatuses] = useState<MCPServerStatus[]>([]);
+  const [showTools, setShowTools] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -252,111 +128,286 @@ export function OKChatPanel({ onClose }: OKChatPanelProps) {
     ]);
   };
 
+  const getPrimaryActionState = () => {
+    if (isLoading) return 'cancel';
+    if (isRecording) return 'stop-dictation';
+    if (input.trim()) return 'send';
+    return 'dictate';
+  };
+
+  const primaryAction = getPrimaryActionState();
+
   const renderMessage = (msg: ChatMessage) => {
     if (msg.role === 'system') {
       return (
-        <div key={msg.id} style={styles.systemMessage}>
+        <div key={msg.id} className="chat-system-message">
           {msg.content}
         </div>
       );
     }
 
     return (
-      <div key={msg.id} style={styles.messageRow(msg.role)}>
-        <div style={styles.messageContent(msg.role)}>
+      <div key={msg.id} className={`chat-message chat-message--${msg.role}`}>
+        <div className={`chat-message-content chat-message-content--${msg.role}`}>
           {msg.content}
         </div>
+        {msg.role === 'user' && (
+          <div className="chat-message-actions">
+            <Icon name="more" size="sm" />
+          </div>
+        )}
       </div>
     );
   };
 
+  // Empty state: centered welcome composer
+  if (messages.length === 1 && messages[0].role === 'system') {
+    return (
+      <div className="ok-chat-panel">
+        <div className="ok-chat-header">
+          <div className="ok-chat-header-left">
+            <span className="ok-chat-header-title">OK Chat</span>
+          </div>
+          <div className="ok-chat-header-actions">
+            <Icon name="trash" size="sm" onClick={handleClearChat} title="Clear Chat" />
+            {onClose && <Icon name="close" size="sm" onClick={onClose} title="Close" />}
+          </div>
+        </div>
+        <div className="chat-empty-state">
+          <div className="chat-empty-container">
+            <h1 className="chat-welcome-heading">Where should we begin?</h1>
+            <div className="chat-composer chat-composer--centered">
+              <textarea
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask anything..."
+                className="chat-input"
+                rows={1}
+                disabled={isLoading}
+              />
+              <div className="chat-composer-actions">
+                <div className="tools-dropdown">
+                  <button
+                    className="tools-dropdown-button"
+                    onClick={() => setShowTools(!showTools)}
+                    title="Tools"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="3" />
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    <span>Tools</span>
+                  </button>
+                  {showTools && (
+                    <div className="tools-dropdown-menu">
+                      {mcpStatuses.map(server => (
+                        <div key={server.id} className="tools-dropdown-item">
+                          <span style={{
+                            width: 8,
+                            height: 8,
+                            borderRadius: '50%',
+                            backgroundColor: server.running ? '#4ec9b0' : '#d4a04a',
+                            flexShrink: 0,
+                          }} />
+                          <span>{server.name || server.id}</span>
+                        </div>
+                      ))}
+                      <div className="tools-dropdown-item">
+                        <Icon name="search" size="sm" />
+                        <span>Search documents</span>
+                      </div>
+                      <div className="tools-dropdown-item">
+                        <Icon name="file" size="sm" />
+                        <span>Create document</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <button
+                  className={`chat-primary-action chat-primary-action--${primaryAction}`}
+                  onClick={() => {
+                    if (primaryAction === 'send') handleSend();
+                    if (primaryAction === 'cancel') setIsLoading(false);
+                    if (primaryAction === 'dictate') setIsRecording(true);
+                    if (primaryAction === 'stop-dictation') setIsRecording(false);
+                  }}
+                  title={
+                    primaryAction === 'send' ? 'Send message' :
+                    primaryAction === 'cancel' ? 'Cancel' :
+                    primaryAction === 'dictate' ? 'Start dictation' :
+                    'Stop dictation'
+                  }
+                >
+                  {primaryAction === 'send' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  )}
+                  {primaryAction === 'cancel' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="6" y="6" width="12" height="12" rx="2" />
+                    </svg>
+                  )}
+                  {primaryAction === 'dictate' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                      <line x1="12" y1="19" x2="12" y2="23" />
+                      <line x1="8" y1="23" x2="16" y2="23" />
+                    </svg>
+                  )}
+                  {primaryAction === 'stop-dictation' && (
+                    <span className="recording-indicator">●</span>
+                  )}
+                </button>
+              </div>
+            </div>
+            <p className="chat-disclaimer">OK Chat can make mistakes. Consider checking important information.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Chat state with messages
   return (
-    <div style={styles.panel}>
+    <div className="ok-chat-panel">
       {/* Header */}
-      <div style={styles.header}>
-        <span style={styles.headerTitle}>OK Chat</span>
-        <div style={styles.headerActions}>
-          <button
-            onClick={handleClearChat}
-            style={styles.iconBtn}
-            title="Clear Chat"
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#3f3f3f'; e.currentTarget.style.color = '#ececec'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#666'; }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
-          </button>
-          {onClose && (
-            <button
-              onClick={onClose}
-              style={styles.iconBtn}
-              title="Close"
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#3f3f3f'; e.currentTarget.style.color = '#ececec'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#666'; }}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          )}
+      <div className="ok-chat-header">
+        <div className="ok-chat-header-left">
+          <span className="ok-chat-header-title">OK Chat</span>
+        </div>
+        <div className="ok-chat-header-actions">
+          <Icon name="trash" size="sm" onClick={handleClearChat} title="Clear Chat" />
+          {onClose && <Icon name="close" size="sm" onClick={onClose} title="Close" />}
         </div>
       </div>
 
       {/* Messages */}
-      <div style={styles.messages}>
+      <div className="chat-messages">
         {messages.map(renderMessage)}
+
         {isLoading && (
-          <div style={styles.messageRow('assistant')}>
-            <div style={styles.typingIndicator}>
+          <div className="chat-message chat-message--assistant">
+            <div className="chat-typing-indicator">
               <span>Thinking</span>
-              <span style={{ animation: 'none', opacity: 1 }}>.</span>
-              <span style={{ animation: 'none', opacity: 1 }}>.</span>
-              <span style={{ animation: 'none', opacity: 1 }}>.</span>
+              <span className="typing-dot">.</span>
+              <span className="typing-dot">.</span>
+              <span className="typing-dot">.</span>
             </div>
           </div>
         )}
+
+        {/* Assistant action bar (always visible for assistant messages) */}
+        {messages.filter(m => m.role === 'assistant').length > 0 && (
+          <div className="assistant-action-bar">
+            <Icon name="thumb_up" size="sm" />
+            <Icon name="thumb_down" size="sm" />
+            <Icon name="copy" size="sm" />
+            <Icon name="share" size="sm" />
+            <Icon name="reload" size="sm" />
+            <Icon name="more" size="sm" />
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
-      <div style={styles.inputArea}>
-        <div style={styles.inputContainer}>
+      {/* Sticky footer composer */}
+      <div className="chat-footer">
+        <div className="chat-composer chat-composer--footer">
           <textarea
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Message OK Chat..."
+            placeholder="Ask anything..."
+            className="chat-input"
             rows={1}
             disabled={isLoading}
-            style={styles.textarea}
           />
-          <button
-            onClick={handleSend}
-            disabled={!input.trim() || isLoading}
-            style={styles.sendBtn(!input.trim() || isLoading)}
-            onMouseEnter={(e) => {
-              if (input.trim() && !isLoading) {
-                e.currentTarget.style.backgroundColor = '#e8e8e8';
-                e.currentTarget.style.transform = 'scale(1.05)';
+          <div className="chat-composer-actions">
+            <div className="tools-dropdown">
+              <button
+                className="tools-dropdown-button"
+                onClick={() => setShowTools(!showTools)}
+                title="Tools"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="3" />
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                <span>Tools</span>
+              </button>
+              {showTools && (
+                <div className="tools-dropdown-menu">
+                  {mcpStatuses.map(server => (
+                    <div key={server.id} className="tools-dropdown-item">
+                      <span style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: '50%',
+                        backgroundColor: server.running ? '#4ec9b0' : '#d4a04a',
+                        flexShrink: 0,
+                      }} />
+                      <span>{server.name || server.id}</span>
+                    </div>
+                  ))}
+                  <div className="tools-dropdown-item">
+                    <Icon name="search" size="sm" />
+                    <span>Search documents</span>
+                  </div>
+                  <div className="tools-dropdown-item">
+                    <Icon name="file" size="sm" />
+                    <span>Create document</span>
+                  </div>
+                </div>
+              )}
+            </div>
+            <button
+              className={`chat-primary-action chat-primary-action--${primaryAction}`}
+              onClick={() => {
+                if (primaryAction === 'send') handleSend();
+                if (primaryAction === 'cancel') setIsLoading(false);
+                if (primaryAction === 'dictate') setIsRecording(true);
+                if (primaryAction === 'stop-dictation') setIsRecording(false);
+              }}
+              title={
+                primaryAction === 'send' ? 'Send message' :
+                primaryAction === 'cancel' ? 'Cancel' :
+                primaryAction === 'dictate' ? 'Start dictation' :
+                'Stop dictation'
               }
-            }}
-            onMouseLeave={(e) => {
-              if (input.trim() && !isLoading) {
-                e.currentTarget.style.backgroundColor = '#ffffff';
-                e.currentTarget.style.transform = 'scale(1)';
-              }
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13" />
-              <polygon points="22 2 15 22 11 13 2 9 22 2" />
-            </svg>
-          </button>
+            >
+              {primaryAction === 'send' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              )}
+              {primaryAction === 'cancel' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="6" y="6" width="12" height="12" rx="2" />
+                </svg>
+              )}
+              {primaryAction === 'dictate' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                  <line x1="8" y1="23" x2="16" y2="23" />
+                </svg>
+              )}
+              {primaryAction === 'stop-dictation' && (
+                <span className="recording-indicator">●</span>
+              )}
+            </button>
+          </div>
         </div>
+        <p className="chat-disclaimer">OK Chat can make mistakes. Consider checking important information.</p>
       </div>
     </div>
   );

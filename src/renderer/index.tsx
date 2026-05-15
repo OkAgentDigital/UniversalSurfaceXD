@@ -4,6 +4,7 @@ import '@vscode/codicons/dist/codicon.css';
 import './styles/usx-fonts.css';
 import './styles/usx/tokens.css';
 import './styles/universui.css';
+import './styles/chat.css';
 import App from './App';
 
 // Detect macOS and add darwin class to body for traffic light spacing
