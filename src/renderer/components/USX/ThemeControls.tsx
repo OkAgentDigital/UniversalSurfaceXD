@@ -178,7 +178,7 @@ export const ThemeControls: React.FC = () => {
             minWidth: '36px',
             minHeight: '36px',
             padding: '6px',
-            fontSize: '16px',
+            fontSize: 'var(--usx-font-size-base)',
             fontWeight: 700,
             lineHeight: 1,
           }}
@@ -206,7 +206,7 @@ export const ThemeControls: React.FC = () => {
             minWidth: '36px',
             minHeight: '36px',
             padding: '6px',
-            fontSize: '16px',
+            fontSize: 'var(--usx-font-size-base)',
             fontWeight: 700,
             lineHeight: 1,
           }}
@@ -227,14 +227,14 @@ export const ThemeControls: React.FC = () => {
           minWidth: '36px',
           minHeight: '36px',
           padding: '6px 10px',
-          fontSize: '13px',
+          fontSize: 'var(--usx-font-size-base)',
           lineHeight: 1,
           display: 'flex',
           alignItems: 'center',
           gap: '4px',
         }}
       >
-        <span style={{ fontSize: '16px' }}>{FONT_PACKS[activePack >= 0 ? activePack : 0].icon}</span>
+        <span style={{ fontSize: 'var(--usx-font-size-base)' }}>{FONT_PACKS[activePack >= 0 ? activePack : 0].icon}</span>
         <span style={{ fontFamily: 'var(--usx-font-family-ui)', fontSize: 'var(--usx-font-size-xs)', fontWeight: 600 }}>
           {FONT_PACKS[activePack >= 0 ? activePack : 0].label}
         </span>

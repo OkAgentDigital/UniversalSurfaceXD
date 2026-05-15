@@ -51,7 +51,7 @@ export function KanbanView({ tasks, onTaskClick, onTaskStatusChange }: KanbanVie
           >
             <ColumnHeader>
               <span>{column.label}</span>
-              <span style={{ color: '#666', fontSize: 12 }}>{columnTasks.length}</span>
+              <span style={{ color: '#666', fontSize: "var(--usx-font-size-sm)" }}>{columnTasks.length}</span>
             </ColumnHeader>
             {columnTasks.map(task => (
               <TaskCard

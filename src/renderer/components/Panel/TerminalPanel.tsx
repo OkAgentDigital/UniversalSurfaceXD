@@ -80,7 +80,7 @@ export function TerminalPanel() {
         padding: '4px 12px',
         background: '#252526',
         borderBottom: '1px solid #3c3c3c',
-        fontSize: 11,
+        fontSize: "var(--usx-font-size-sm)",
         color: '#cccccc',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -89,15 +89,15 @@ export function TerminalPanel() {
         </div>
         <div style={{ display: 'flex', gap: 4 }}>
           {!isActive ? (
-            <button className="action-button" onClick={handleSpawn} style={{ fontSize: 11 }}>
+            <button className="action-button" onClick={handleSpawn} style={{ fontSize: "var(--usx-font-size-sm)" }}>
               <i className="codicon codicon-play"></i> Start
             </button>
           ) : (
-            <button className="action-button" onClick={handleKill} style={{ fontSize: 11 }}>
+            <button className="action-button" onClick={handleKill} style={{ fontSize: "var(--usx-font-size-sm)" }}>
               <i className="codicon codicon-stop"></i> Kill
             </button>
           )}
-          <button className="action-button" onClick={handleClear} style={{ fontSize: 11 }}>
+          <button className="action-button" onClick={handleClear} style={{ fontSize: "var(--usx-font-size-sm)" }}>
             <i className="codicon codicon-clear-all"></i> Clear
           </button>
         </div>
@@ -110,7 +110,7 @@ export function TerminalPanel() {
           background: '#1e1e1e',
           padding: 8,
           fontFamily: "Monaco, Menlo, 'Courier New', monospace",
-          fontSize: 13,
+          fontSize: "var(--usx-font-size-base)",
           lineHeight: 1.5,
           color: '#d4d4d4',
         }}
@@ -135,7 +135,7 @@ export function TerminalPanel() {
                 border: 'none',
                 color: '#d4d4d4',
                 fontFamily: "Monaco, Menlo, 'Courier New', monospace",
-                fontSize: 13,
+                fontSize: "var(--usx-font-size-base)",
                 outline: 'none',
                 marginLeft: 4,
               }}

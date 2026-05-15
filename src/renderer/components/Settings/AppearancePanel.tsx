@@ -180,7 +180,7 @@ export function AppearancePanel() {
               </div>
               <div className="preview-card-row">
                 <div className="card" style={{ padding: '12px', borderRadius: settings.cornerRadius }}>
-                  <p style={{ fontSize: '13px', color: '#b0b0b0' }}>
+                  <p style={{ fontSize: 'var(--usx-font-size-base)', color: '#b0b0b0' }}>
                     This is how cards, buttons, and inputs will look with your current settings.
                   </p>
                 </div>

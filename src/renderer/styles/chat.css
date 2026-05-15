@@ -166,7 +166,7 @@
 
 .recording-indicator {
   animation: pulse 1s infinite;
-  font-size: 20px;
+  font-size: var(--usx-font-size-xl);
 }
 
 @keyframes pulse {

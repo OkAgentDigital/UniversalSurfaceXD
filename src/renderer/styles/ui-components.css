@@ -34,19 +34,19 @@
 .ui-button-small {
   height: var(--button-height-sm, 32px);
   padding: 0 var(--space-md, 12px);
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
 }
 
 .ui-button-medium {
   height: var(--button-height-md, 40px);
   padding: 0 var(--space-lg, 16px);
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-button-large {
   height: var(--button-height-lg, 48px);
   padding: 0 var(--space-xl, 24px);
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 }
 
 /* Variants */
@@ -124,7 +124,7 @@
 }
 
 .ui-input-label {
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   font-weight: 500;
   color: var(--text-secondary, #858585);
 }
@@ -141,7 +141,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-tertiary, #7a7a7a);
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   pointer-events: none;
   z-index: 1;
 }
@@ -152,7 +152,7 @@
   border: 1px solid var(--border-light, #3c3c3c);
   color: var(--text-primary, #cccccc);
   border-radius: var(--radius-md, 8px);
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   transition: all var(--transition-fast, 0.1s ease);
   outline: none;
   font-family: inherit;
@@ -170,7 +170,7 @@
 .ui-input-small {
   height: var(--input-height-sm, 36px);
   padding: 0 var(--space-md, 12px);
-  font-size: 13px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-input-medium {
@@ -181,7 +181,7 @@
 .ui-input-large {
   height: var(--input-height-lg, 52px);
   padding: 0 var(--space-xl, 24px);
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-input-has-icon {
@@ -197,12 +197,12 @@
 }
 
 .ui-input-error-text {
-  font-size: 11px;
+  font-size: var(--usx-font-size-sm);
   color: #f48771;
 }
 
 .ui-input-hint {
-  font-size: 11px;
+  font-size: var(--usx-font-size-sm);
   color: var(--text-tertiary, #7a7a7a);
 }
 
@@ -213,7 +213,7 @@
   border: 1px solid var(--border-light, #3c3c3c);
   color: var(--text-primary, #cccccc);
   border-radius: var(--radius-md, 8px);
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   padding: var(--space-md, 12px);
   transition: all var(--transition-fast, 0.1s ease);
   outline: none;
@@ -227,7 +227,7 @@
 }
 
 .ui-textarea-small {
-  font-size: 13px;
+  font-size: var(--usx-font-size-base);
   padding: var(--space-sm, 8px) var(--space-md, 12px);
   min-height: 60px;
 }
@@ -237,7 +237,7 @@
 }
 
 .ui-textarea-large {
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   padding: var(--space-lg, 16px);
   min-height: 120px;
 }
@@ -262,7 +262,7 @@
   border: 1px solid var(--border-light, #3c3c3c);
   color: var(--text-primary, #cccccc);
   border-radius: var(--radius-md, 8px);
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   outline: none;
   font-family: inherit;
   cursor: pointer;
@@ -279,7 +279,7 @@
 .ui-select-small {
   height: var(--input-height-sm, 36px);
   padding: 0 var(--space-md, 12px);
-  font-size: 13px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-select-medium {
@@ -290,7 +290,7 @@
 .ui-select-large {
   height: var(--input-height-lg, 52px);
   padding: 0 var(--space-xl, 24px);
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-select-arrow {
@@ -300,7 +300,7 @@
   transform: translateY(-50%);
   color: var(--text-tertiary, #7a7a7a);
   pointer-events: none;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 }
 
 /* === CARD === */
@@ -365,7 +365,7 @@
 }
 
 .ui-card-header-content {
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   font-weight: 600;
   color: var(--text-primary, #cccccc);
 }
@@ -378,7 +378,7 @@
 /* Card body */
 .ui-card-body {
   padding: var(--space-lg, 16px);
-  font-size: 13px;
+  font-size: var(--usx-font-size-base);
   color: var(--text-secondary, #b0b0b0);
   line-height: 1.5;
 }
@@ -481,7 +481,7 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  font-size: 11px;
+  font-size: var(--usx-font-size-sm);
   font-weight: 500;
   border-radius: var(--radius-full, 9999px);
   white-space: nowrap;
@@ -534,7 +534,7 @@
   color: var(--text-primary, #cccccc);
   padding: var(--space-xs, 4px) var(--space-sm, 8px);
   border-radius: var(--radius-sm, 6px);
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
@@ -556,7 +556,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   font-weight: 600;
   flex-shrink: 0;
   overflow: hidden;
@@ -565,13 +565,13 @@
 .ui-avatar-small {
   width: 24px;
   height: 24px;
-  font-size: 11px;
+  font-size: var(--usx-font-size-sm);
 }
 
 .ui-avatar-large {
   width: 40px;
   height: 40px;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-avatar-image {
@@ -588,16 +588,16 @@
 }
 
 .ui-spinner .codicon {
-  font-size: 20px;
+  font-size: var(--usx-font-size-xl);
   color: var(--accent-primary, #0e639c);
 }
 
 .ui-spinner-small .codicon {
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
 }
 
 .ui-spinner-large .codicon {
-  font-size: 32px;
+  font-size: var(--usx-font-size-4xl);
 }
 
 /* === EMPTY STATE === */
@@ -612,13 +612,13 @@
 }
 
 .ui-empty-state .codicon {
-  font-size: 32px;
+  font-size: var(--usx-font-size-4xl);
   margin-bottom: var(--space-md, 12px);
   opacity: 0.5;
 }
 
 .ui-empty-state p {
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   margin-bottom: var(--space-lg, 16px);
   max-width: 300px;
   line-height: 1.5;

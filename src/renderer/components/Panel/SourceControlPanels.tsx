@@ -531,7 +531,7 @@ export function SnacksPanel() {
           <div className="empty-state">
             <i className="codicon codicon-package"></i>
             <p>No snacks configured</p>
-            <p style={{ fontSize: 11, color: '#666' }}>Snacks are GTM-style tags that fire on triggers</p>
+            <p style={{ fontSize: "var(--usx-font-size-sm)", color: '#666' }}>Snacks are GTM-style tags that fire on triggers</p>
           </div>
         ) : (
           <div className="panel-list">
@@ -543,7 +543,7 @@ export function SnacksPanel() {
               >
                 <div className="panel-list-item-header">
                   <span className={`status-dot ${snack.enabled ? 'running' : 'stopped'}`}></span>
-                  <i className={`codicon ${snackTypeIcon(snack.type)}`} style={{ fontSize: 14, color: snack.enabled ? '#4ec9b0' : '#858585' }}></i>
+                  <i className={`codicon ${snackTypeIcon(snack.type)}`} style={{ fontSize: "var(--usx-font-size-base)", color: snack.enabled ? '#4ec9b0' : '#858585' }}></i>
                   <span className="panel-list-item-title">{snack.name}</span>
                   <span className="panel-list-item-type">{snackTypeLabel(snack.type)}</span>
                 </div>
@@ -702,7 +702,7 @@ export function WorkflowsPanel() {
                   ))}
                   {wf.triggers?.map(tr => (
                     <span key={tr} className="wf-chip wf-chip-trigger">
-                      <i className="codicon codicon-zap" style={{ fontSize: 10 }}></i> {tr.replace('on-', '')}
+                      <i className="codicon codicon-zap" style={{ fontSize: "var(--usx-font-size-xs)" }}></i> {tr.replace('on-', '')}
                     </span>
                   ))}
                 </div>
@@ -714,7 +714,7 @@ export function WorkflowsPanel() {
                     {showAutonomy && (
                       <div className="wf-autonomy-detail" style={{ marginBottom: 8 }}>
                         <div className="wf-autonomy-slider-container">
-                          <span className="wf-autonomy-slider-label" style={{ fontSize: 10, color: '#858585' }}>Autonomy:</span>
+                          <span className="wf-autonomy-slider-label" style={{ fontSize: "var(--usx-font-size-xs)", color: '#858585' }}>Autonomy:</span>
                           <div className="wf-autonomy-slider">
                             {[1, 2, 3, 4, 5].map(level => (
                               <div
@@ -734,7 +734,7 @@ export function WorkflowsPanel() {
                     {/* Variables */}
                     {wf.variables && wf.variables.length > 0 && (
                       <div style={{ marginBottom: 6 }}>
-                        <span style={{ fontSize: 10, color: '#858585', textTransform: 'uppercase', letterSpacing: 0.3 }}>Variables:</span>
+                        <span style={{ fontSize: "var(--usx-font-size-xs)", color: '#858585', textTransform: 'uppercase', letterSpacing: 0.3 }}>Variables:</span>
                         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
                           {wf.variables.map(v => (
                             <span key={v} className="wf-chip wf-chip-variable">{v}</span>

@@ -175,7 +175,7 @@ export function FileExplorer({ onTaskCountChange, onTaskSelect }: FileExplorerPr
       <i className="codicon codicon-symbol-file" style={{ color: 'rgb(var(--usx-color-text-muted))' }}></i>
       <span className="task-title">{task.title}</span>
       {task.status === 'completed' && (
-        <i className="codicon codicon-check" style={{ color: '#6a9955', fontSize: 12 }}></i>
+        <i className="codicon codicon-check" style={{ color: '#6a9955', fontSize: "var(--usx-font-size-sm)" }}></i>
       )}
       {!task.document_id && (
         <span className="task-badge">new</span>

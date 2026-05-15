@@ -146,14 +146,14 @@
 
 /* ===== FONT ZOOM SUPPORT ===== */
 :root {
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 }
 
-[data-font-size="small"] { font-size: 14px; }
-[data-font-size="medium"] { font-size: 16px; }
-[data-font-size="large"] { font-size: 18px; }
-[data-font-size="xlarge"] { font-size: 20px; }
-[data-font-size="xxlarge"] { font-size: 24px; }
+[data-font-size="small"] { font-size: var(--usx-font-size-base); }
+[data-font-size="medium"] { font-size: var(--usx-font-size-base); }
+[data-font-size="large"] { font-size: var(--usx-font-size-lg); }
+[data-font-size="xlarge"] { font-size: var(--usx-font-size-xl); }
+[data-font-size="xxlarge"] { font-size: var(--usx-font-size-2xl); }
 
 /* ===== FLOWBITE CSS VARIABLE BRIDGE ===== */
 @layer base {

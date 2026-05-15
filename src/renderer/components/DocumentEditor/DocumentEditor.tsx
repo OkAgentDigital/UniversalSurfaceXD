@@ -176,7 +176,7 @@ export function DocumentEditor() {
           onChange={handleContentChange}
           theme="vs-dark"
           options={{
-            fontSize: 14,
+            fontSize: "var(--usx-font-size-base)",
             fontFamily: 'SourceCodePro, Consolas, "Courier New", monospace',
             automaticLayout: true,
             minimap: { enabled: true },

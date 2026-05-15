@@ -209,7 +209,7 @@ export function SettingsPanel() {
       <div className="sidebar-content" style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 16 }}>
         {saved && (
           <div style={{
-            fontSize: 11,
+            fontSize: "var(--usx-font-size-sm)",
             padding: '4px 8px',
             borderRadius: 4,
             background: '#1e3a2e',
@@ -248,7 +248,7 @@ export function SettingsPanel() {
             <button className="action-button" onClick={decreaseFontSize} disabled={!usxTheme || usxTheme.fontSize === 'small'}>
               <i className="codicon codicon-remove"></i>
             </button>
-            <span style={{ fontSize: 14, color: '#cccccc', minWidth: 24, textAlign: 'center' }}>
+            <span style={{ fontSize: "var(--usx-font-size-base)", color: '#cccccc', minWidth: 24, textAlign: 'center' }}>
               {usxTheme ? (usxTheme.fontSize === 'small' ? 'S' : usxTheme.fontSize === 'medium' ? 'M' : usxTheme.fontSize === 'large' ? 'L' : usxTheme.fontSize === 'xlarge' ? 'XL' : 'XXL') : 'M'}
             </span>
             <button className="action-button" onClick={increaseFontSize} disabled={!usxTheme || usxTheme.fontSize === 'xxlarge'}>
@@ -270,7 +270,7 @@ export function SettingsPanel() {
               borderRadius: 4,
               padding: '4px 8px',
               color: '#cccccc',
-              fontSize: 12,
+              fontSize: "var(--usx-font-size-sm)",
               outline: 'none',
             }}
           >
@@ -297,7 +297,7 @@ export function SettingsPanel() {
               borderRadius: 4,
               padding: '4px 8px',
               color: '#cccccc',
-              fontSize: 12,
+              fontSize: "var(--usx-font-size-sm)",
               outline: 'none',
               fontFamily: fontFamily,
             }}
@@ -307,13 +307,13 @@ export function SettingsPanel() {
         {/* USX Font Pack Settings (only when USXThemeProvider is active) */}
         {usxTheme && (
           <div className="setting-group" style={{ borderTop: '1px solid #3c3c3c', paddingTop: 12 }}>
-            <label className="setting-label" style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>
+            <label className="setting-label" style={{ fontSize: "var(--usx-font-size-base)", fontWeight: 600, marginBottom: 12 }}>
               <i className="codicon codicon-font"></i> USX Font Pack
             </label>
 
             {/* 3-Mode Font Pack Toggle */}
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 11, color: '#858585', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: "var(--usx-font-size-sm)", color: '#858585', display: 'block', marginBottom: 6 }}>
                 Quick Presets
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -334,11 +334,11 @@ export function SettingsPanel() {
                       background: getActivePackIndex() === idx ? '#0e639c22' : '#3c3c3c',
                       color: getActivePackIndex() === idx ? '#75beff' : '#cccccc',
                       cursor: 'pointer',
-                      fontSize: 11,
+                      fontSize: "var(--usx-font-size-sm)",
                       transition: 'all 0.15s ease',
                     }}
                   >
-                    <span style={{ fontSize: 20 }}>{pack.icon}</span>
+                    <span style={{ fontSize: "var(--usx-font-size-xl)" }}>{pack.icon}</span>
                     <span style={{ fontWeight: getActivePackIndex() === idx ? 600 : 400 }}>{pack.label}</span>
                   </button>
                 ))}
@@ -348,7 +348,7 @@ export function SettingsPanel() {
             {/* Per-Role Font Selectors */}
             {(Object.keys(FONT_OPTIONS) as FontRole[]).map((role) => (
               <div key={role} style={{ marginBottom: 12 }}>
-                <label style={{ fontSize: 11, color: '#858585', display: 'block', marginBottom: 4 }}>
+                <label style={{ fontSize: "var(--usx-font-size-sm)", color: '#858585', display: 'block', marginBottom: 4 }}>
                   {ROLE_LABELS[role]}
                 </label>
                 <select
@@ -361,7 +361,7 @@ export function SettingsPanel() {
                     borderRadius: 4,
                     padding: '4px 8px',
                     color: '#cccccc',
-                    fontSize: 12,
+                    fontSize: "var(--usx-font-size-sm)",
                     outline: 'none',
                   }}
                 >
@@ -371,7 +371,7 @@ export function SettingsPanel() {
                     </option>
                   ))}
                 </select>
-                <div style={{ fontSize: 10, color: '#666', marginTop: 2 }}>
+                <div style={{ fontSize: "var(--usx-font-size-xs)", color: '#666', marginTop: 2 }}>
                   {ROLE_DESCRIPTIONS[role]}
                 </div>
               </div>
@@ -390,23 +390,23 @@ export function SettingsPanel() {
                 gap: 8,
               }}
             >
-              <div style={{ fontSize: 10, color: '#666', marginBottom: 4 }}>Preview</div>
-              <p style={{ fontFamily: 'var(--usx-font-family-body)', fontSize: 13, margin: 0, color: '#cccccc' }}>
+              <div style={{ fontSize: "var(--usx-font-size-xs)", color: '#666', marginBottom: 4 }}>Preview</div>
+              <p style={{ fontFamily: 'var(--usx-font-family-body)', fontSize: "var(--usx-font-size-base)", margin: 0, color: '#cccccc' }}>
                 The quick brown fox jumps over the lazy dog. (Body)
               </p>
-              <div style={{ fontFamily: 'var(--usx-font-family-desktop)', fontSize: 16, fontWeight: 700, color: '#cccccc' }}>
+              <div style={{ fontFamily: 'var(--usx-font-family-desktop)', fontSize: "var(--usx-font-size-base)", fontWeight: 700, color: '#cccccc' }}>
                 Desktop Title Preview
               </div>
-              <div style={{ fontFamily: 'var(--usx-font-family-document)', fontSize: 14, fontWeight: 600, color: '#cccccc' }}>
+              <div style={{ fontFamily: 'var(--usx-font-family-document)', fontSize: "var(--usx-font-size-base)", fontWeight: 600, color: '#cccccc' }}>
                 Document Title Preview
               </div>
-              <code style={{ fontFamily: 'var(--usx-font-family-mono)', fontSize: 12, color: '#ce9178' }}>
+              <code style={{ fontFamily: 'var(--usx-font-family-mono)', fontSize: "var(--usx-font-size-sm)", color: '#ce9178' }}>
                 console.log('Code preview');
               </code>
               <button
                 style={{
                   fontFamily: 'var(--usx-font-family-ui)',
-                  fontSize: 12,
+                  fontSize: "var(--usx-font-size-sm)",
                   padding: '4px 12px',
                   borderRadius: 4,
                   border: '1px solid #0e639c',
@@ -425,11 +425,11 @@ export function SettingsPanel() {
         {/* About */}
         <div className="setting-group" style={{ borderTop: '1px solid #3c3c3c', paddingTop: 12 }}>
           <label className="setting-label">About Surface</label>
-          <div style={{ fontSize: 11, color: '#858585', lineHeight: 1.6 }}>
+          <div style={{ fontSize: "var(--usx-font-size-sm)", color: '#858585', lineHeight: 1.6 }}>
             <div>Version: 1.5.0</div>
             <div>Local-first desktop editor</div>
             <div>Electron + React + Monaco + SQLite</div>
-            <div style={{ marginTop: 8, fontSize: 10, color: '#666' }}>
+            <div style={{ marginTop: 8, fontSize: "var(--usx-font-size-xs)", color: '#666' }}>
               USX Font Pack: SourceCodePro, SF Pro, Poppins, Quicksand, ChicagoFLF, Teletext50, PetMe128, PressStart2P
             </div>
           </div>

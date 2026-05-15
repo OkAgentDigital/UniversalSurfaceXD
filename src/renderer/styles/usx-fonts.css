@@ -222,14 +222,14 @@
 /* PETSCII — PetMe128 */
 .usx-code--petscii {
   font-family: 'PetMe128', monospace;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   line-height: 1.2;
 }
 
 /* PETSCII Double Height — PetMe128 Double */
 .usx-code--petscii-double {
   font-family: 'PetMe128 Double', 'PetMe128', monospace;
-  font-size: 32px;
+  font-size: var(--usx-font-size-4xl);
   line-height: 1;
   transform: scaleY(2);
   transform-origin: top;
@@ -238,7 +238,7 @@
 /* NES-style — PressStart2P */
 .usx-code--nes {
   font-family: 'PressStart2P', monospace;
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   line-height: 1.5;
   letter-spacing: 0.5px;
 }
@@ -258,26 +258,26 @@
 
 .usx-teletext-block--standard {
   font-family: 'Teletext50', monospace;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   line-height: 1.2;
 }
 
 .usx-teletext-block--condensed {
   font-family: 'Teletext50 Condensed', monospace;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   line-height: 1;
   letter-spacing: -0.5px;
 }
 
 .usx-teletext-block--double {
   font-family: 'PetMe128 Double', monospace;
-  font-size: 32px;
+  font-size: var(--usx-font-size-4xl);
   line-height: 1;
 }
 
 .usx-teletext-block--press-start {
   font-family: 'PressStart2P', monospace;
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   line-height: 1.5;
 }
 
@@ -287,7 +287,7 @@
   grid-template-columns: repeat(40, 1fr);
   gap: 0;
   font-family: 'Teletext50', monospace;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   line-height: 1;
   background-color: black;
   color: white;

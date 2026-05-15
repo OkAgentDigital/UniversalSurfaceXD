@@ -59,11 +59,11 @@ export function SourceControlPanel() {
 
   const getStatusIcon = (statusChar: string) => {
     switch (statusChar) {
-      case 'M': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-warning))', fontSize: 12 }}></i>;
-      case 'A': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-success))', fontSize: 12 }}></i>;
-      case 'D': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-danger))', fontSize: 12 }}></i>;
-      case '??': return <i className="codicon codicon-circle-outline" style={{ color: 'rgb(var(--usx-color-text-muted))', fontSize: 12 }}></i>;
-      default: return <i className="codicon codicon-circle-outline" style={{ color: 'rgb(var(--usx-color-text-muted))', fontSize: 12 }}></i>;
+      case 'M': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-warning))', fontSize: "var(--usx-font-size-sm)" }}></i>;
+      case 'A': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-success))', fontSize: "var(--usx-font-size-sm)" }}></i>;
+      case 'D': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-danger))', fontSize: "var(--usx-font-size-sm)" }}></i>;
+      case '??': return <i className="codicon codicon-circle-outline" style={{ color: 'rgb(var(--usx-color-text-muted))', fontSize: "var(--usx-font-size-sm)" }}></i>;
+      default: return <i className="codicon codicon-circle-outline" style={{ color: 'rgb(var(--usx-color-text-muted))', fontSize: "var(--usx-font-size-sm)" }}></i>;
     }
   };
 

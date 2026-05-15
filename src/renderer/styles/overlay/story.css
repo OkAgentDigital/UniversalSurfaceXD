@@ -152,7 +152,7 @@
 .story-rating-star {
   background: transparent;
   border: none;
-  font-size: 48px;
+  font-size: var(--usx-font-size-5xl);
   cursor: pointer;
   color: rgb(var(--usx-color-border));
   transition: all var(--usx-transition-base);

@@ -84,7 +84,7 @@ export function Sidebar({ task, onSave, onDelete, onClose }: SidebarProps) {
             border: 'none',
             color: '#888',
             cursor: 'pointer',
-            fontSize: 18,
+            fontSize: "var(--usx-font-size-lg)",
             padding: '4px 8px',
             borderRadius: 4,
           }}

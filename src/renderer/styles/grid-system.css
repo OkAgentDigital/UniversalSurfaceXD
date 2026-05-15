@@ -72,7 +72,7 @@
   .activity-bar { grid-column: 1; width: 64px; }
   .sidebar { grid-column: 2; width: auto; }
   .main-content { grid-column: 3; }
-  .activity-item .codicon { font-size: 24px; }
+  .activity-item .codicon { font-size: var(--usx-font-size-2xl); }
 }
 
 /* XL: 3+ columns with extra breathing room */
@@ -85,22 +85,22 @@
   .sidebar { grid-column: 2; }
   .main-content { grid-column: 3; }
   .right-panel { grid-column: 4; }
-  .activity-item .codicon { font-size: 28px; }
+  .activity-item .codicon { font-size: var(--usx-font-size-3xl); }
   
   /* Larger base font on big screens */
-  :root { font-size: 16px; }
+  :root { font-size: var(--usx-font-size-base); }
 }
 
 /* 2XL: Ultra-wide */
 @media (min-width: 1920px) {
-  :root { font-size: 18px; }
+  :root { font-size: var(--usx-font-size-lg); }
   
   .universui-grid {
     grid-template-columns: auto minmax(35ch, 45ch) minmax(70ch, 120ch) 400px;
     gap: calc(var(--grid-gap, 1ch) * 2.5);
   }
   .activity-bar { width: 80px; }
-  .activity-item .codicon { font-size: 32px; }
+  .activity-item .codicon { font-size: var(--usx-font-size-4xl); }
 }
 
 /* === SIDEBAR RESPONSIVE === */

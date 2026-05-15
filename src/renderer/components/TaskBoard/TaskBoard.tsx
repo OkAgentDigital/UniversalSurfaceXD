@@ -131,7 +131,7 @@ export function TaskBoard() {
           {tasks.length === 0 ? (
             <EmptyState>
               <span>No tasks yet</span>
-              <span style={{ fontSize: 14 }}>Click "+ New Task" to get started</span>
+              <span style={{ fontSize: "var(--usx-font-size-base)" }}>Click "+ New Task" to get started</span>
             </EmptyState>
           ) : viewType === 'kanban' ? (
             <KanbanView
