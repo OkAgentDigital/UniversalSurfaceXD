@@ -1,0 +1,260 @@
+/* ============================================
+ * Story Form — Typeform-style multi-step flows
+ * ============================================ */
+
+.story-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.story-form--forward {
+  animation: story-slide-left 300ms ease;
+}
+
+.story-form--back {
+  animation: story-slide-right 300ms ease;
+}
+
+@keyframes story-slide-left {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes story-slide-right {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.story-progress {
+  height: 3px;
+  background-color: rgb(var(--usx-color-border));
+  margin-bottom: var(--usx-spacing-8);
+}
+
+.story-progress-bar {
+  height: 100%;
+  background-color: rgb(var(--usx-color-highlight));
+  transition: width 300ms ease;
+}
+
+.story-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--usx-spacing-6) 0;
+}
+
+.story-title {
+  font-family: var(--usx-font-family-heading);
+  font-size: var(--usx-font-size-3xl);
+  font-weight: var(--usx-font-weight-semibold);
+  margin-bottom: var(--usx-spacing-4);
+  color: rgb(var(--usx-color-text));
+}
+
+.story-description {
+  font-size: var(--usx-font-size-lg);
+  color: rgb(var(--usx-color-text-muted));
+  line-height: 1.5;
+}
+
+.story-question {
+  font-family: var(--usx-font-family-heading);
+  font-size: var(--usx-font-size-2xl);
+  font-weight: var(--usx-font-weight-medium);
+  margin-bottom: var(--usx-spacing-6);
+  color: rgb(var(--usx-color-text));
+}
+
+.story-input {
+  width: 100%;
+  padding: var(--usx-spacing-4);
+  font-size: var(--usx-font-size-lg);
+  background-color: rgb(var(--usx-color-background));
+  border: 1px solid rgb(var(--usx-color-border));
+  border-radius: var(--usx-radius-lg);
+  color: rgb(var(--usx-color-text));
+}
+
+.story-input:focus {
+  outline: none;
+  border-color: rgb(var(--usx-color-highlight));
+}
+
+.story-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--usx-spacing-3);
+}
+
+.story-option {
+  padding: var(--usx-spacing-4);
+  text-align: left;
+  background-color: rgb(var(--usx-color-surface));
+  border: 1px solid rgb(var(--usx-color-border));
+  border-radius: var(--usx-radius-lg);
+  font-size: var(--usx-font-size-base);
+  cursor: pointer;
+  transition: all var(--usx-transition-base);
+}
+
+.story-option:hover {
+  background-color: rgb(var(--usx-color-background));
+  border-color: rgb(var(--usx-color-highlight));
+}
+
+.story-option--selected {
+  background-color: rgb(var(--usx-color-highlight));
+  color: rgb(var(--usx-color-highlight-text));
+  border-color: transparent;
+}
+
+.story-scale {
+  display: flex;
+  gap: var(--usx-spacing-2);
+  justify-content: center;
+}
+
+.story-scale-btn {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(var(--usx-color-surface));
+  border: 1px solid rgb(var(--usx-color-border));
+  border-radius: var(--usx-radius-lg);
+  font-size: var(--usx-font-size-xl);
+  font-weight: var(--usx-font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--usx-transition-base);
+}
+
+.story-scale-btn:hover {
+  background-color: rgb(var(--usx-color-background));
+  border-color: rgb(var(--usx-color-highlight));
+}
+
+.story-scale-btn--selected {
+  background-color: rgb(var(--usx-color-highlight));
+  color: rgb(var(--usx-color-highlight-text));
+  border-color: transparent;
+}
+
+.story-rating {
+  display: flex;
+  gap: var(--usx-spacing-2);
+  justify-content: center;
+}
+
+.story-rating-star {
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  color: rgb(var(--usx-color-border));
+  transition: all var(--usx-transition-base);
+}
+
+.story-rating-star--active {
+  color: #ffd700;
+}
+
+.story-rating-star--hover {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+.story-validation-error {
+  color: rgb(var(--usx-color-danger));
+  font-size: var(--usx-font-size-sm);
+  margin-top: var(--usx-spacing-2);
+  padding: var(--usx-spacing-2) var(--usx-spacing-3);
+  background-color: rgb(var(--usx-color-danger) / 0.1);
+  border-radius: var(--usx-radius-md);
+}
+
+.story-option-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgb(var(--usx-color-border));
+  border-radius: var(--usx-radius-sm);
+  margin-right: var(--usx-spacing-3);
+  flex-shrink: 0;
+  font-size: var(--usx-font-size-sm);
+}
+
+.story-option--selected .story-option-checkbox {
+  background-color: rgb(var(--usx-color-highlight));
+  border-color: rgb(var(--usx-color-highlight));
+  color: rgb(var(--usx-color-highlight-text));
+}
+
+.story-option-description {
+  display: block;
+  font-size: var(--usx-font-size-sm);
+  color: rgb(var(--usx-color-text-muted));
+  margin-top: var(--usx-spacing-1);
+}
+
+.story-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--usx-spacing-3);
+  font-size: var(--usx-font-size-sm);
+  color: rgb(var(--usx-color-text-muted));
+}
+
+.story-content-markdown {
+  font-size: var(--usx-font-size-base);
+  line-height: 1.6;
+  color: rgb(var(--usx-color-text));
+}
+
+.story-navigation {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: var(--usx-spacing-8);
+  padding-top: var(--usx-spacing-4);
+  border-top: 1px solid rgb(var(--usx-color-border));
+}
+
+.story-nav-btn {
+  padding: var(--usx-spacing-3) var(--usx-spacing-6);
+  font-size: var(--usx-font-size-base);
+  font-weight: var(--usx-font-weight-medium);
+  border-radius: var(--usx-radius-xl);
+  cursor: pointer;
+  transition: all var(--usx-transition-base);
+}
+
+.story-nav-btn--back {
+  background: transparent;
+  border: 1px solid rgb(var(--usx-color-border));
+  color: rgb(var(--usx-color-text));
+}
+
+.story-nav-btn--back:hover {
+  background-color: rgb(var(--usx-color-surface));
+}
+
+.story-nav-btn--next {
+  background-color: rgb(var(--usx-color-highlight));
+  border: none;
+  color: rgb(var(--usx-color-highlight-text));
+}
+
+.story-nav-btn--next:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.story-nav-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

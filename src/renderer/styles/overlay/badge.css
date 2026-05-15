@@ -1,0 +1,75 @@
+/* ============================================
+ * Badge — Centered, stackable, auto-closing
+ * ============================================ */
+
+.badge-container {
+  position: fixed;
+  bottom: var(--usx-spacing-20);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--usx-spacing-2);
+  z-index: 1050;
+  pointer-events: none;
+}
+
+.badge {
+  pointer-events: auto;
+  position: relative;
+  min-width: 200px;
+  max-width: 360px;
+  padding: var(--usx-spacing-2) var(--usx-spacing-4);
+  background-color: rgb(var(--usx-color-surface));
+  border: 1px solid rgb(var(--usx-color-border));
+  border-radius: 9999px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.badge:hover {
+  background-color: rgb(var(--usx-color-background));
+}
+
+.badge--enter {
+  animation: badge-slide-up 200ms ease;
+}
+
+.badge--exit {
+  animation: badge-fade-out 300ms ease forwards;
+}
+
+@keyframes badge-slide-up {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes badge-fade-out {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+.badge-content {
+  display: flex;
+  align-items: center;
+  gap: var(--usx-spacing-2);
+}
+
+.badge-message {
+  font-size: var(--usx-font-size-sm);
+  font-weight: var(--usx-font-weight-medium);
+}
+
+.badge--info .badge-message { color: rgb(var(--usx-color-text-muted)); }
+.badge--success .badge-message { color: rgb(var(--usx-color-success)); }
+.badge--warning .badge-message { color: rgb(var(--usx-color-warning)); }
+.badge--error .badge-message { color: rgb(var(--usx-color-danger)); }
+
+.badge-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: rgb(var(--usx-color-highlight));
+  transition: width 16ms linear;
+}

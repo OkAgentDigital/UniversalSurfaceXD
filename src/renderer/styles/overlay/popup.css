@@ -1,0 +1,99 @@
+/* ============================================
+ * Popup — Partial overlay with backdrop blur
+ * ============================================ */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(var(--usx-color-background) / 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popup-fade-in 150ms ease;
+}
+
+@keyframes popup-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-container {
+  background-color: rgb(var(--usx-color-surface));
+  border: 1px solid rgb(var(--usx-color-border));
+  border-radius: var(--usx-radius-2xl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  animation: popup-slide-up 200ms ease;
+}
+
+@keyframes popup-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.popup--sm {
+  width: 400px;
+  max-width: 90vw;
+}
+
+.popup--md {
+  width: 560px;
+  max-width: 90vw;
+}
+
+.popup--lg {
+  width: 720px;
+  max-width: 90vw;
+}
+
+.popup--xl {
+  width: 900px;
+  max-width: 90vw;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  padding: var(--usx-spacing-4) var(--usx-spacing-5);
+  border-bottom: 1px solid rgb(var(--usx-color-border));
+  position: relative;
+}
+
+.popup-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--usx-radius-md);
+  color: rgb(var(--usx-color-text));
+}
+
+.popup-close:hover {
+  background-color: rgb(var(--usx-color-background));
+}
+
+.popup-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--usx-font-family-heading);
+  font-size: var(--usx-font-size-lg);
+  font-weight: var(--usx-font-weight-semibold);
+  margin: 0;
+}
+
+.popup-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--usx-spacing-5);
+}

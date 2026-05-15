@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DEFAULT_SETTINGS } from '../../../shared/constants';
 import { useUSXTheme } from '../USX/USXThemeProvider';
-import type { FontRole } from '../../types/usx';
+import type { FontRole, FontSize } from '../../types/usx';
 
 /** Font pack presets — 3-mode toggle (matches ThemeControls snackbar) */
 const FONT_PACKS = [
@@ -104,9 +104,11 @@ const ROLE_DESCRIPTIONS: Record<FontRole, string> = {
   ui: 'Buttons, tabs, inputs, controls',
 };
 
+/** Font size progression for +/- controls */
+const FONT_SIZES: FontSize[] = ['small', 'medium', 'large', 'xlarge', 'xxlarge'];
+
 export function SettingsPanel() {
   const [theme, setTheme] = useState<'dark' | 'light'>((DEFAULT_SETTINGS.theme as 'dark' | 'light'));
-  const [fontSize, setFontSize] = useState(DEFAULT_SETTINGS.fontSize);
   const [autoSaveInterval, setAutoSaveInterval] = useState(DEFAULT_SETTINGS.autoSaveInterval);
   const [fontFamily, setFontFamily] = useState(DEFAULT_SETTINGS.fontFamily);
   const [saved, setSaved] = useState(false);
@@ -127,7 +129,6 @@ export function SettingsPanel() {
     try {
       const settings = await window.electron.getSettings();
       if (settings.theme) setTheme(settings.theme as 'dark' | 'light');
-      if (settings.fontSize) setFontSize(parseInt(settings.fontSize));
       if (settings.autoSaveInterval) setAutoSaveInterval(parseInt(settings.autoSaveInterval));
       if (settings.fontFamily) setFontFamily(settings.fontFamily);
     } catch (err) {
@@ -149,12 +150,28 @@ export function SettingsPanel() {
     setTheme(newTheme);
     saveSetting('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+    // Sync with USXThemeProvider
+    if (usxTheme && usxTheme.theme !== newTheme) {
+      usxTheme.toggleTheme();
+    }
   };
 
-  const handleFontSizeChange = (delta: number) => {
-    const newSize = Math.max(10, Math.min(24, fontSize + delta));
-    setFontSize(newSize);
-    saveSetting('fontSize', newSize.toString());
+  /** Increase font size via USXThemeProvider */
+  const increaseFontSize = () => {
+    if (!usxTheme) return;
+    const idx = FONT_SIZES.indexOf(usxTheme.fontSize);
+    if (idx < FONT_SIZES.length - 1) {
+      usxTheme.setFontSize(FONT_SIZES[idx + 1]);
+    }
+  };
+
+  /** Decrease font size via USXThemeProvider */
+  const decreaseFontSize = () => {
+    if (!usxTheme) return;
+    const idx = FONT_SIZES.indexOf(usxTheme.fontSize);
+    if (idx > 0) {
+      usxTheme.setFontSize(FONT_SIZES[idx - 1]);
+    }
   };
 
   const handleAutoSaveChange = (value: number) => {
@@ -228,13 +245,13 @@ export function SettingsPanel() {
         <div className="setting-group">
           <label className="setting-label">Font Size</label>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <button className="action-button" onClick={() => handleFontSizeChange(-1)}>
+            <button className="action-button" onClick={decreaseFontSize} disabled={!usxTheme || usxTheme.fontSize === 'small'}>
               <i className="codicon codicon-remove"></i>
             </button>
             <span style={{ fontSize: 14, color: '#cccccc', minWidth: 24, textAlign: 'center' }}>
-              {fontSize}
+              {usxTheme ? (usxTheme.fontSize === 'small' ? 'S' : usxTheme.fontSize === 'medium' ? 'M' : usxTheme.fontSize === 'large' ? 'L' : usxTheme.fontSize === 'xlarge' ? 'XL' : 'XXL') : 'M'}
             </span>
-            <button className="action-button" onClick={() => handleFontSizeChange(1)}>
+            <button className="action-button" onClick={increaseFontSize} disabled={!usxTheme || usxTheme.fontSize === 'xxlarge'}>
               <i className="codicon codicon-add"></i>
             </button>
           </div>

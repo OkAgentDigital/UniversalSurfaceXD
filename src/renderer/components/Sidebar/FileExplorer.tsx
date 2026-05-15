@@ -172,7 +172,7 @@ export function FileExplorer({ onTaskCountChange, onTaskSelect }: FileExplorerPr
       onClick={() => openDocument(task)}
       onContextMenu={(e) => handleContextMenu(e, task.id)}
     >
-      <i className="codicon codicon-symbol-file" style={{ color: '#75beff' }}></i>
+      <i className="codicon codicon-symbol-file" style={{ color: 'rgb(var(--usx-color-text-muted))' }}></i>
       <span className="task-title">{task.title}</span>
       {task.status === 'completed' && (
         <i className="codicon codicon-check" style={{ color: '#6a9955', fontSize: 12 }}></i>

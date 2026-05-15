@@ -32,6 +32,8 @@ npm-debug.log*
 
 # Electron
 electron-builder.yml.env
+*.app
+
 
 # TypeScript
 *.tsbuildinfo

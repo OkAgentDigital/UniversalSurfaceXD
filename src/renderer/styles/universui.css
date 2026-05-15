@@ -9,7 +9,7 @@
   --vscode-right-panel-width: 320px;
   --vscode-panel-height: 200px;
   --vscode-status-bar-height: 22px;
-  --vscode-title-bar-height: 42px;
+  --vscode-title-bar-height: 48px;
 
   /* VS Code Color Tokens — Mono scheme */
   --vscode-bg: #1e1e1e;
@@ -30,14 +30,6 @@
   --vscode-title-bar-fg: #cccccc;
   --vscode-selection-bg: #505050;
   --vscode-hover-bg: #2a2d2e;
-
-  /* OK Chat Colors */
-  --ok-chat-user-bg: #2b3a4a;
-  --ok-chat-assistant-bg: #1e2a36;
-  --ok-chat-system-bg: #252526;
-  --ok-chat-input-bg: #3c3c3c;
-  --ok-chat-accent: #4ec9b0;
-  --ok-chat-github-accent: #58a6ff;
 
   /* Notionish-inspired accents */
   --notionish-card-radius: 8px;
@@ -668,10 +660,6 @@ html, body, #root {
 /* ============================================
    CUSTOM TITLE BAR — VS Code Style
    ============================================ */
-:root {
-  --vscode-title-bar-height: 42px;
-}
-
 .custom-title-bar {
   height: var(--vscode-title-bar-height);
   background: var(--vscode-title-bar-bg);
@@ -686,7 +674,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 8px;
+  padding: 0 12px;
   -webkit-app-region: drag;
 }
 
@@ -767,7 +755,7 @@ body.darwin .mac-traffic-light-spacer,
 .title-bar-controls {
   display: flex;
   align-items: center;
-  gap: 1px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
@@ -775,13 +763,13 @@ body.darwin .mac-traffic-light-spacer,
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border: none;
   background: transparent;
   color: #858585;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: all 0.15s ease;
   -webkit-app-region: no-drag;
 }
@@ -845,7 +833,7 @@ body.darwin .mac-traffic-light-spacer,
 .title-bar-right {
   display: flex;
   align-items: center;
-  gap: 1px;
+  gap: 4px;
   flex-shrink: 0;
   -webkit-app-region: no-drag;
   margin-left: auto;
@@ -889,263 +877,6 @@ body.darwin .mac-traffic-light-spacer,
     transform: translateX(0);
     opacity: 1;
   }
-}
-
-/* ============================================
-   AI CHAT PANEL
-   ============================================ */
-.ok-chat-panel {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
-
-.ok-chat-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background: var(--vscode-sidebar-header-bg);
-  border-bottom: 1px solid var(--vscode-sidebar-border);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--vscode-sidebar-title);
-  user-select: none;
-  flex-shrink: 0;
-}
-
-.ok-chat-header-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ok-chat-header-actions {
-  display: flex;
-  gap: 4px;
-}
-
-.ok-chat-mode-selector {
-  display: flex;
-  gap: 2px;
-  padding: 6px 8px;
-  background: #1e1e1e;
-  border-bottom: 1px solid var(--vscode-sidebar-border);
-  flex-shrink: 0;
-}
-
-.ok-chat-mode-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border: none;
-  border-radius: 4px;
-  background: transparent;
-  color: #858585;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.ok-chat-mode-btn:hover {
-  background: #3c3c3c;
-  color: #cccccc;
-}
-
-.ok-chat-mode-btn.active {
-  background: #cccccc;
-  color: #1e1e1e;
-}
-
-.ok-chat-mode-btn .codicon {
-  font-size: 14px;
-}
-
-.ok-chat-mcp-status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  font-size: 11px;
-  border-bottom: 1px solid var(--vscode-sidebar-border);
-  flex-shrink: 0;
-}
-
-.ok-chat-mcp-status.connected {
-  color: #4ec9b0;
-  background: rgba(78, 201, 176, 0.05);
-}
-
-.ok-chat-mcp-status.disconnected {
-  color: #d4a04a;
-  background: rgba(212, 160, 74, 0.05);
-}
-
-.ok-chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.ok-chat-message {
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  line-height: 1.5;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-
-.ok-chat-message.user {
-  background: var(--ok-chat-user-bg);
-  border-left: 3px solid #58a6ff;
-}
-
-.ok-chat-message.assistant {
-  background: var(--ok-chat-assistant-bg);
-  border-left: 3px solid var(--ok-chat-accent);
-}
-
-.ok-chat-message.system {
-  background: var(--ok-chat-system-bg);
-  border-left: 3px solid #858585;
-  color: #a0a0a0;
-}
-
-.ok-chat-message-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-}
-
-.ok-chat-message-role {
-  font-weight: 600;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.ok-chat-message.user .ok-chat-message-role {
-  color: #58a6ff;
-}
-
-.ok-chat-message.assistant .ok-chat-message-role {
-  color: var(--ok-chat-accent);
-}
-
-.ok-chat-message.system .ok-chat-message-role {
-  color: #858585;
-}
-
-.ok-chat-message-time {
-  font-size: 10px;
-  color: #858585;
-}
-
-.ok-chat-message-content {
-  font-size: 12px;
-  line-height: 1.5;
-  color: #d4d4d4;
-  white-space: pre-wrap;
-}
-
-.ok-chat-typing {
-  color: var(--ok-chat-accent);
-}
-
-.ok-chat-typing-dots span {
-  animation: aiChatTyping 1.4s infinite;
-  opacity: 0;
-  font-size: 18px;
-  line-height: 1;
-}
-
-.ok-chat-typing-dots span:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.ok-chat-typing-dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.ok-chat-typing-dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes aiChatTyping {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-.ok-chat-input-area {
-  display: flex;
-  gap: 6px;
-  padding: 8px;
-  border-top: 1px solid var(--vscode-sidebar-border);
-  background: #1e1e1e;
-  flex-shrink: 0;
-}
-
-.ok-chat-input {
-  flex: 1;
-  padding: 8px 10px;
-  background: var(--ok-chat-input-bg);
-  border: 1px solid #4c4c4c;
-  border-radius: 6px;
-  color: #d4d4d4;
-  font-size: 12px;
-  font-family: inherit;
-  resize: none;
-  outline: none;
-  line-height: 1.4;
-}
-
-.ok-chat-input:focus {
-  border-color: #0e639c;
-}
-
-.ok-chat-input::placeholder {
-  color: #666;
-}
-
-.ok-chat-send-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 6px;
-  background: #cccccc;
-  color: #1e1e1e;
-  cursor: pointer;
-  align-self: flex-end;
-  transition: background 0.15s ease;
-}
-
-.ok-chat-send-btn:hover {
-  background: #e0e0e0;
-}
-
-.ok-chat-send-btn:disabled {
-  background: #3c3c3c;
-  color: #666;
-  cursor: default;
-}
-
-.ok-chat-send-btn .codicon {
-  font-size: 16px;
 }
 
 /* ===== Agents Panel ===== */
@@ -2007,232 +1738,123 @@ body.darwin .mac-traffic-light-spacer,
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
+  transition: background 0.2s ease;
 }
 
-.wf-autonomy-dot.active {
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 4px var(--dot-color, #4ec9b0);
-}
+.wf-autonomy-dot.level-0 { background: #f44747; }
+.wf-autonomy-dot.level-1 { background: #dcdcaa; }
+.wf-autonomy-dot.level-2 { background: #4ec9b0; }
+.wf-autonomy-dot.level-3 { background: #569cd6; }
+.wf-autonomy-dot.level-4 { background: #c586c0; }
 
 .wf-autonomy-label {
   font-size: 10px;
   font-weight: 500;
-  white-space: nowrap;
-}
-
-/* Autonomy Slider (expanded) */
-.wf-autonomy-slider-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.wf-autonomy-slider {
-  display: flex;
-  gap: 2px;
-}
-
-.wf-autonomy-slider-step {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 4px 2px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  background: transparent;
-  border: 1px solid transparent;
-}
-
-.wf-autonomy-slider-step.active {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--step-color, #4ec9b0);
-}
-
-.wf-autonomy-slider-step:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.wf-autonomy-step-num {
-  font-size: 12px;
-  font-weight: 600;
   color: #858585;
 }
 
-.wf-autonomy-slider-step.active .wf-autonomy-step-num {
-  color: var(--step-color, #4ec9b0);
+/* ============================================
+   WORKFLOW CHIPS — Tag-style labels
+   ============================================ */
+.wf-chips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
-.wf-autonomy-step-label {
-  font-size: 8px;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
-  white-space: nowrap;
-}
-
-.wf-autonomy-slider-step.active .wf-autonomy-step-label {
-  color: var(--step-color, #4ec9b0);
-}
-
-/* Workflow Chips */
 .wf-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
+  font-size: 10px;
   padding: 1px 6px;
-  font-size: 9px;
   border-radius: 3px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
   white-space: nowrap;
 }
 
 .wf-chip-tag {
-  background: #1b3a5c;
-  color: #569cd6;
+  background: #264f78;
+  color: #75beff;
 }
 
 .wf-chip-trigger {
-  background: #3a3a1b;
-  color: #dcdcaa;
+  background: #3c3c3c;
+  color: #858585;
 }
 
 .wf-chip-variable {
-  background: #2d2d2d;
-  color: #ce9178;
-  font-family: 'Cascadia Code', 'Fira Code', monospace;
-  font-size: 9px;
-}
-
-/* Sidebar header action active state */
-.sidebar-header-action.active {
-  color: #cccccc;
   background: #3c3c3c;
+  color: #ce9178;
+  font-family: monospace;
 }
 
-/* Status Dot */
+/* ============================================
+   STATUS DOT — Shared indicator
+   ============================================ */
 .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
-  display: inline-block;
 }
 
-.status-dot.running,
-.status-dot.online,
-.status-dot.pass,
-.status-dot.active {
-  background: #4ec9b0;
-  box-shadow: 0 0 4px rgba(78, 201, 176, 0.4);
-}
+.status-dot.running { background: #4ec9b0; }
+.status-dot.stopped { background: #858585; }
+.status-dot.failed { background: #f14c4c; }
+.status-dot.pending { background: #ffcc00; }
 
-.status-dot.stopped,
-.status-dot.offline,
-.status-dot.fail {
-  background: #f44747;
-  box-shadow: 0 0 4px rgba(244, 71, 71, 0.4);
-}
-
-.status-dot.paused,
-.status-dot.warn {
-  background: #dcdcaa;
-  box-shadow: 0 0 4px rgba(220, 220, 170, 0.4);
-}
-
-.status-dot.pending,
-.status-dot.queued {
-  background: #569cd6;
-  box-shadow: 0 0 4px rgba(86, 156, 214, 0.4);
-}
-
-/* Small Buttons (VS Code style) */
+/* ============================================
+   BUTTON VARIANTS — Small, Primary, Secondary
+   ============================================ */
 .button-small {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   padding: 3px 8px;
-  font-size: 11px;
-  border-radius: 3px;
-  cursor: pointer;
-  border: none;
-  transition: background 0.15s ease;
-  height: 22px;
-  line-height: 1;
-}
-
-/* Default buttons (used in modals, panels) */
-.button-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: #0e639c;
-  color: white;
   border: none;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 11px;
   cursor: pointer;
-  transition: background 0.15s ease;
+  white-space: nowrap;
+  transition: background 0.1s ease;
 }
 
-.button-primary:hover:not(:disabled) {
+.button-primary {
+  background: #0e639c;
+  color: white;
+}
+
+.button-primary:hover {
   background: #1177bb;
 }
 
-.button-primary:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
 .button-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: transparent;
+  background: #3c3c3c;
   color: #cccccc;
-  border: 1px solid #555;
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .button-secondary:hover {
-  background: #3c3c3c;
-  border-color: #666;
+  background: #4c4c4c;
 }
 
-/* Variable Add Form */
+/* ============================================
+   VARIABLE ADD FORM
+   ============================================ */
 .variable-add-form {
   display: flex;
   flex-direction: column;
   gap: 6px;
   padding: 8px 12px;
-  border-bottom: 1px solid var(--vscode-sidebar-border, #3c3c3c);
-  background: #252526;
+  border-bottom: 1px solid #3c3c3c;
 }
 
 .variable-add-form input,
 .variable-add-form select {
-  padding: 4px 8px;
+  width: 100%;
   background: #3c3c3c;
-  border: 1px solid #4c4c4c;
-  border-radius: 3px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
   color: #cccccc;
   font-size: 12px;
   outline: none;
-}
-
-.variable-add-form input:focus,
-.variable-add-form select:focus {
-  border-color: #0e639c;
 }
 
 .checkbox-label {
@@ -2241,261 +1863,30 @@ body.darwin .mac-traffic-light-spacer,
   gap: 6px;
   font-size: 12px;
   color: #cccccc;
-  cursor: pointer;
 }
 
-.checkbox-label input[type="checkbox"] {
-  width: auto;
-  height: auto;
-  accent-color: #0e639c;
-}
-
-/* Sidebar Header Action Button */
+/* ============================================
+   SIDEBAR HEADER ACTION
+   ============================================ */
 .sidebar-header-action {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: transparent;
   border: none;
-  color: var(--vscode-sidebar-icon, #858585);
+  background: transparent;
+  color: #858585;
   cursor: pointer;
   border-radius: 4px;
-  padding: 0;
 }
 
 .sidebar-header-action:hover {
-  background: var(--vscode-sidebar-hover, #2a2d2e);
-  color: #cccccc;
-}
-
-.sidebar-header-action .codicon {
-  font-size: 14px;
-}
-
-/* ============================================
-   POPOVER / TOOLTIP — VS Code Dark Style
-   ============================================ */
-.popover {
-  position: fixed;
-  background: #2d2d2d;
-  border: 1px solid #3c3c3c;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-  min-width: 180px;
-  padding: 4px 0;
-}
-
-.popover-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  font-size: 12px;
-  cursor: pointer;
-  color: #cccccc;
-  transition: background 0.1s ease;
-}
-
-.popover-item:hover {
-  background: #094771;
-  color: #ffffff;
-}
-
-.popover-item .codicon {
-  font-size: 14px;
-  color: #858585;
-  flex-shrink: 0;
-}
-
-.popover-item:hover .codicon {
-  color: #ffffff;
-}
-
-.popover-item.destructive {
-  color: #f48771;
-}
-
-.popover-item.destructive:hover {
-  background: #5a1d1d;
-}
-
-.popover-divider {
-  height: 1px;
-  background: #3c3c3c;
-  margin: 4px 0;
-}
-
-.popover-header {
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #858585;
-  border-bottom: 1px solid #3c3c3c;
-  margin-bottom: 4px;
-}
-
-/* Tooltip (VS Code style) */
-.tooltip {
-  position: fixed;
   background: #3c3c3c;
   color: #cccccc;
-  padding: 4px 8px;
-  border-radius: 3px;
-  font-size: 11px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 2000;
-  border: 1px solid #4c4c4c;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ============================================
-   DROPDOWN — VS Code Dark Style
-   ============================================ */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 4px;
-  background: #2d2d2d;
-  border: 1px solid #3c3c3c;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-  min-width: 160px;
-  padding: 4px 0;
-}
-
-.dropdown-menu-right {
-  left: auto;
-  right: 0;
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  font-size: 12px;
-  cursor: pointer;
-  color: #cccccc;
-  transition: background 0.1s ease;
-}
-
-.dropdown-item:hover {
-  background: #094771;
-  color: #ffffff;
-}
-
-.dropdown-item .codicon {
-  font-size: 14px;
-  color: #858585;
-  flex-shrink: 0;
-}
-
-.dropdown-item:hover .codicon {
-  color: #ffffff;
-}
-
-.dropdown-divider {
-  height: 1px;
-  background: #3c3c3c;
-  margin: 4px 0;
-}
-
-/* ============================================
-   NOTIFICATION TOAST — VS Code Dark Style
-   ============================================ */
-.notification-toast {
-  position: fixed;
-  bottom: 32px;
-  right: 16px;
-  background: #2d2d2d;
-  border: 1px solid #3c3c3c;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  padding: 10px 14px;
-  z-index: 3000;
-  min-width: 280px;
-  max-width: 400px;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  animation: notificationSlideIn 0.2s ease;
-}
-
-@keyframes notificationSlideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.notification-toast.info {
-  border-left: 3px solid #569cd6;
-}
-
-.notification-toast.success {
-  border-left: 3px solid #4ec9b0;
-}
-
-.notification-toast.warning {
-  border-left: 3px solid #dcdcaa;
-}
-
-.notification-toast.error {
-  border-left: 3px solid #f44747;
-}
-
-.notification-icon {
-  font-size: 16px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.notification-toast.info .notification-icon { color: #569cd6; }
-.notification-toast.success .notification-icon { color: #4ec9b0; }
-.notification-toast.warning .notification-icon { color: #dcdcaa; }
-.notification-toast.error .notification-icon { color: #f44747; }
-
-.notification-content {
-  flex: 1;
-  font-size: 12px;
-  color: #cccccc;
-  line-height: 1.4;
-}
-
-.notification-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  background: transparent;
-  border: none;
-  color: #858585;
-  cursor: pointer;
-  border-radius: 3px;
-  flex-shrink: 0;
-  padding: 0;
-}
-
-.notification-close:hover {
-  background: #3c3c3c;
+.sidebar-header-action.active {
   color: #cccccc;
 }
 
@@ -3037,170 +2428,279 @@ kbd {
 }
 
 /* ============================================
-   AI CHAT PANEL — Assistant UI Style with VS Code Colors
+   SEARCH PANEL
    ============================================ */
-.ok-chat-panel {
-  background: var(--vscode-sidebar-bg);
+.search-input-container {
+  padding: 8px 12px;
 }
 
-.ok-chat-header {
-  background: var(--vscode-sidebar-header-bg);
-  border-bottom: 1px solid var(--vscode-sidebar-border);
-}
-
-.ok-chat-header-left .codicon {
-  color: var(--vscode-sidebar-title);
-}
-
-.ok-chat-mode-selector {
-  background: #1e1e1e;
-  padding: 8px 10px;
-  gap: 4px;
-  border-bottom: 1px solid var(--vscode-sidebar-border);
-}
-
-.ok-chat-mode-btn {
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 11px;
-  font-weight: 500;
-  transition: all 0.15s ease;
-}
-
-.ok-chat-mode-btn.active {
-  background: #cccccc;
-  color: #1e1e1e;
-}
-
-.ok-chat-mode-btn:hover:not(.active) {
-  background: #3c3c3c;
-  color: #cccccc;
-}
-
-.ok-chat-mcp-status {
-  background: #252526;
-  border-bottom: 1px solid var(--vscode-sidebar-border);
-}
-
-.ok-chat-messages {
-  padding: 12px;
-  gap: 10px;
-}
-
-.ok-chat-message {
-  border-radius: 10px;
-  padding: 10px 12px;
-  border-left: none;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.ok-chat-message.user {
-  background: #2b3a4a;
-  border: 1px solid rgba(88, 166, 255, 0.25);
-  margin-left: 20px;
-}
-
-.ok-chat-message.assistant {
-  background: #1e2a36;
-  border: 1px solid rgba(78, 201, 176, 0.2);
-  margin-right: 20px;
-}
-
-.ok-chat-message.system {
-  background: #252526;
-  border: 1px solid rgba(133, 133, 133, 0.2);
-  color: #a0a0a0;
-  text-align: center;
-  font-size: 12px;
-}
-
-.ok-chat-message-header {
-  margin-bottom: 6px;
-}
-
-.ok-chat-message-role {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.search-input-wrapper {
   display: flex;
   align-items: center;
+  background: #3c3c3c;
+  border-radius: 4px;
+  padding: 4px 8px;
   gap: 6px;
 }
 
-.ok-chat-message.user .ok-chat-message-role::before {
-  content: '👤';
+.search-input-wrapper .codicon-search {
+  color: #858585;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #cccccc;
   font-size: 12px;
+  outline: none;
 }
 
-.ok-chat-message.assistant .ok-chat-message-role::before {
-  content: '🤖';
-  font-size: 12px;
+.search-input::placeholder {
+  color: #858585;
 }
 
-.ok-chat-message-content {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #d4d4d4;
+.search-input-clear {
+  color: #858585;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
-.ok-chat-input-area {
-  background: #1e1e1e;
-  border-top: 1px solid var(--vscode-sidebar-border);
-  padding: 10px;
+.search-input-clear:hover {
+  color: #cccccc;
+}
+
+.search-result-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-result-snippet {
+  font-size: 10px;
+  color: #858585;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================
+   SOURCE CONTROL PANEL
+   ============================================ */
+.source-control-body {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
-.ok-chat-input {
+.source-control-branch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #cccccc;
+}
+
+.source-control-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.source-control-commit-row {
+  display: flex;
+  gap: 4px;
+}
+
+.source-control-commit-input {
+  flex: 1;
   background: #3c3c3c;
-  border: 1px solid #4c4c4c;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 13px;
-  transition: border-color 0.15s ease;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #cccccc;
+  font-size: 12px;
+  outline: none;
 }
 
-.ok-chat-input:focus {
-  border-color: #0e639c;
-  box-shadow: 0 0 0 3px rgba(14, 99, 156, 0.15);
-  background: #3c3c3c;
+.source-control-commit-input:focus {
+  border-color: #858585;
 }
 
-.ok-chat-send-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #cccccc;
-  color: #1e1e1e;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: all 0.15s ease;
+.source-control-commit-btn {
+  background: #0e639c !important;
 }
 
-.ok-chat-send-btn:hover:not(:disabled) {
-  background: #e0e0e0;
-  transform: scale(1.05);
+.source-control-result {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.ok-chat-send-btn:disabled {
-  background: #3c3c3c;
-  box-shadow: none;
-}
-
-.ok-chat-send-btn .codicon {
-  font-size: 18px;
-}
-
-/* Typing indicator */
-.ok-chat-typing {
+.source-control-result.success {
+  background: #1e3a2e;
   color: #4ec9b0;
+}
+
+.source-control-result.error {
+  background: #3a1e1e;
+  color: #f14c4c;
+}
+
+/* Git status badges */
+.git-status-badge {
+  width: 20px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.git-status-m {
+  background: rgba(255, 204, 0, 0.13);
+  color: #ffcc00;
+}
+
+.git-status-a {
+  background: rgba(78, 201, 176, 0.13);
+  color: #4ec9b0;
+}
+
+.git-status-d {
+  background: rgba(241, 76, 76, 0.13);
+  color: #f14c4c;
+}
+
+.git-status-untracked {
+  background: rgba(133, 133, 133, 0.13);
+  color: #858585;
+}
+
+.git-commit-hash {
+  color: #75beff;
+  font-size: 11px;
+  font-family: monospace;
+  width: 48px;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   PROPERTY PANEL
+   ============================================ */
+.property-panel-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.property-value {
+  font-size: 13px;
+  color: #cccccc;
   font-weight: 500;
 }
 
-.ok-chat-typing-dots span {
-  font-size: 20px;
-  line-height: 1;
+.property-status-row {
+  display: flex;
+  gap: 4px;
+}
+
+.property-status-row .action-button {
+  flex: 1;
+  font-size: 11px;
+}
+
+.property-status-row .action-button.active[data-status="active"],
+.property-status-row .action-button:nth-child(1).active {
+  background: #0e639c;
+  color: #75beff;
+}
+
+.property-status-row .action-button.active[data-status="completed"],
+.property-status-row .action-button:nth-child(2).active {
+  background: #1e3a2e;
   color: #4ec9b0;
 }
 
+.property-status-row .action-button.active[data-status="archived"],
+.property-status-row .action-button:nth-child(3).active {
+  background: #3a1e1e;
+  color: #f14c4c;
+}
 
+.property-select {
+  width: 100%;
+  background: #3c3c3c;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #cccccc;
+  font-size: 12px;
+  outline: none;
+}
+
+.property-input {
+  width: 100%;
+  background: #3c3c3c;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #cccccc;
+  font-size: 12px;
+  outline: none;
+}
+
+.property-input:focus {
+  border-color: #858585;
+}
+
+.property-tags-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.property-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: #264f78;
+  color: #75beff;
+}
+
+.property-textarea {
+  width: 100%;
+  background: #3c3c3c;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #cccccc;
+  font-size: 12px;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.property-textarea:focus {
+  border-color: #858585;
+}
+
+.property-metadata-section {
+  border-top: 1px solid #3c3c3c;
+  padding-top: 12px;
+}
+
+.property-metadata {
+  font-size: 10px;
+  color: #858585;
+  line-height: 1.8;
+}
 

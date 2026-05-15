@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardBody } from '../UI/Card';
 import { Button } from '../UI/Button';
+import { useUSXTheme } from '../USX/USXThemeProvider';
+import type { FontSize } from '../../types/usx';
 
 type IconSize = 'small' | 'medium' | 'large';
 type CornerRadius = '4px' | '8px' | '12px' | '16px';
@@ -8,7 +10,6 @@ type CornerRadius = '4px' | '8px' | '12px' | '16px';
 interface AppearanceSettings {
   iconSize: IconSize;
   cornerRadius: CornerRadius;
-  fontSize: number;
   sidebarWidth: number;
   showActivityLabels: boolean;
   compactMode: boolean;
@@ -17,20 +18,39 @@ interface AppearanceSettings {
 const DEFAULT_SETTINGS: AppearanceSettings = {
   iconSize: 'medium',
   cornerRadius: '8px',
-  fontSize: 14,
   sidebarWidth: 280,
   showActivityLabels: false,
   compactMode: false,
 };
 
+/** Font size progression for +/- controls */
+const FONT_SIZES: FontSize[] = ['small', 'medium', 'large', 'xlarge', 'xxlarge'];
+
 export function AppearancePanel() {
   const [settings, setSettings] = useState<AppearanceSettings>(DEFAULT_SETTINGS);
+  const usxTheme = useUSXTheme();
 
   const updateSetting = <K extends keyof AppearanceSettings>(
     key: K,
     value: AppearanceSettings[K]
   ) => {
     setSettings(prev => ({ ...prev, [key]: value }));
+  };
+
+  /** Increase font size via USXThemeProvider */
+  const increaseFontSize = () => {
+    const idx = FONT_SIZES.indexOf(usxTheme.fontSize);
+    if (idx < FONT_SIZES.length - 1) {
+      usxTheme.setFontSize(FONT_SIZES[idx + 1]);
+    }
+  };
+
+  /** Decrease font size via USXThemeProvider */
+  const decreaseFontSize = () => {
+    const idx = FONT_SIZES.indexOf(usxTheme.fontSize);
+    if (idx > 0) {
+      usxTheme.setFontSize(FONT_SIZES[idx - 1]);
+    }
   };
 
   return (
@@ -87,14 +107,18 @@ export function AppearancePanel() {
             <div className="font-size-control">
               <button
                 className="size-btn"
-                onClick={() => updateSetting('fontSize', Math.max(12, settings.fontSize - 1))}
+                onClick={decreaseFontSize}
+                disabled={usxTheme.fontSize === 'small'}
               >
                 <i className="codicon codicon-remove"></i>
               </button>
-              <span className="font-size-value">{settings.fontSize}px</span>
+              <span className="font-size-value">
+                {usxTheme.fontSize === 'small' ? 'S' : usxTheme.fontSize === 'medium' ? 'M' : usxTheme.fontSize === 'large' ? 'L' : usxTheme.fontSize === 'xlarge' ? 'XL' : 'XXL'}
+              </span>
               <button
                 className="size-btn"
-                onClick={() => updateSetting('fontSize', Math.min(24, settings.fontSize + 1))}
+                onClick={increaseFontSize}
+                disabled={usxTheme.fontSize === 'xxlarge'}
               >
                 <i className="codicon codicon-add"></i>
               </button>

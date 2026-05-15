@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MCPServerStatus } from '../../../shared/types';
 import { Icon } from '../UI/Icon';
+import { useUSXTheme } from '../USX/USXThemeProvider';
 
 interface ChatMessage {
   id: string;
@@ -16,6 +17,7 @@ interface OKChatPanelProps {
 }
 
 export function OKChatPanel({ onClose }: OKChatPanelProps) {
+  const { theme, toggleTheme } = useUSXTheme();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
@@ -169,6 +171,7 @@ export function OKChatPanel({ onClose }: OKChatPanelProps) {
             <span className="ok-chat-header-title">OK Chat</span>
           </div>
           <div className="ok-chat-header-actions">
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} size="sm" onClick={toggleTheme} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} />
             <Icon name="trash" size="sm" onClick={handleClearChat} title="Clear Chat" />
             {onClose && <Icon name="close" size="sm" onClick={onClose} title="Close" />}
           </div>
@@ -281,6 +284,7 @@ export function OKChatPanel({ onClose }: OKChatPanelProps) {
           <span className="ok-chat-header-title">OK Chat</span>
         </div>
         <div className="ok-chat-header-actions">
+          <Icon name={theme === 'dark' ? 'sun' : 'moon'} size="sm" onClick={toggleTheme} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} />
           <Icon name="trash" size="sm" onClick={handleClearChat} title="Clear Chat" />
           {onClose && <Icon name="close" size="sm" onClick={onClose} title="Close" />}
         </div>

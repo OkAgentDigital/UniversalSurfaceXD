@@ -49,16 +49,25 @@ export function Workbench() {
   useEffect(() => { saveLayoutSize('usxd-right-panel-width', rightPanelWidth); }, [rightPanelWidth]);
   useEffect(() => { saveLayoutSize('usxd-panel-height', panelHeight); }, [panelHeight]);
 
-  // Listen for custom events from the title bar
+  // Listen for custom events from the title bar and activity bar
   useEffect(() => {
     const handleOpenSettings = () => {
       setActiveSidebarView('settings');
       setShowSidebar(true);
     };
 
+    const handleToggleSidebar = () => {
+      setShowSidebar(prev => !prev);
+    };
+
     window.addEventListener('universui:openSettings', handleOpenSettings);
-    return () => window.removeEventListener('universui:openSettings', handleOpenSettings);
+    window.addEventListener('universui:toggleSidebar', handleToggleSidebar);
+    return () => {
+      window.removeEventListener('universui:openSettings', handleOpenSettings);
+      window.removeEventListener('universui:toggleSidebar', handleToggleSidebar);
+    };
   }, []);
+
 
   const handleTaskUpdate = useCallback(async (updatedTask: Task) => {
     try {
@@ -210,12 +219,17 @@ export function Workbench() {
       <div className="workbench-body">
         <ActivityBar
           activeView={activeSidebarView}
-          onViewChange={setActiveSidebarView}
+          onViewChange={(viewId) => {
+            setActiveSidebarView(viewId);
+            // Show sidebar when switching to a different view
+            setShowSidebar(true);
+          }}
           showPanel={showPanel}
           onPanelToggle={handleTogglePanel}
           showRightPanel={showRightPanel}
           onRightPanelToggle={handleToggleRightPanel}
         />
+
         {showSidebar && (
           <>
             <div

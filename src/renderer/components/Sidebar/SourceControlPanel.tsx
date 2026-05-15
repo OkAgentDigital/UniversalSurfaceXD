@@ -59,11 +59,11 @@ export function SourceControlPanel() {
 
   const getStatusIcon = (statusChar: string) => {
     switch (statusChar) {
-      case 'M': return <i className="codicon codicon-circle-filled" style={{ color: '#ffcc00', fontSize: 12 }}></i>;
-      case 'A': return <i className="codicon codicon-circle-filled" style={{ color: '#4ec9b0', fontSize: 12 }}></i>;
-      case 'D': return <i className="codicon codicon-circle-filled" style={{ color: '#f14c4c', fontSize: 12 }}></i>;
-      case '??': return <i className="codicon codicon-circle-outline" style={{ color: '#858585', fontSize: 12 }}></i>;
-      default: return <i className="codicon codicon-circle-outline" style={{ color: '#858585', fontSize: 12 }}></i>;
+      case 'M': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-warning))', fontSize: 12 }}></i>;
+      case 'A': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-success))', fontSize: 12 }}></i>;
+      case 'D': return <i className="codicon codicon-circle-filled" style={{ color: 'rgb(var(--usx-color-danger))', fontSize: 12 }}></i>;
+      case '??': return <i className="codicon codicon-circle-outline" style={{ color: 'rgb(var(--usx-color-text-muted))', fontSize: 12 }}></i>;
+      default: return <i className="codicon codicon-circle-outline" style={{ color: 'rgb(var(--usx-color-text-muted))', fontSize: 12 }}></i>;
     }
   };
 
@@ -88,12 +88,12 @@ export function SourceControlPanel() {
           <i className="codicon codicon-refresh" onClick={refresh} title="Refresh"></i>
         </div>
       </div>
-      <div style={{ padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#cccccc' }}>
+      <div className="source-control-body">
+        <div className="source-control-branch">
           <i className="codicon codicon-source-control"></i>
           <span>{branch}</span>
         </div>
-        <div style={{ display: 'flex', gap: 4 }}>
+        <div className="source-control-actions">
           <button className="action-button" onClick={handlePull} disabled={isPulling}>
             <i className="codicon codicon-cloud-download"></i>
             {isPulling ? '...' : 'Pull'}
@@ -103,41 +103,25 @@ export function SourceControlPanel() {
             {isPushing ? '...' : 'Push'}
           </button>
         </div>
-        <div style={{ display: 'flex', gap: 4 }}>
+        <div className="source-control-commit-row">
           <input
             type="text"
             value={commitMessage}
             onChange={(e) => setCommitMessage(e.target.value)}
             placeholder="Commit message..."
             onKeyDown={(e) => e.key === 'Enter' && handleCommit()}
-            style={{
-              flex: 1,
-              background: '#3c3c3c',
-              border: '1px solid #555',
-              borderRadius: 4,
-              padding: '4px 8px',
-              color: '#cccccc',
-              fontSize: 12,
-              outline: 'none',
-            }}
+            className="source-control-commit-input"
           />
           <button
-            className="action-button"
+            className="action-button source-control-commit-btn"
             onClick={handleCommit}
             disabled={isCommitting || !commitMessage.trim()}
-            style={{ background: '#0e639c' }}
           >
             {isCommitting ? '...' : 'Commit'}
           </button>
         </div>
         {commitResult && (
-          <div style={{
-            fontSize: 11,
-            padding: '4px 8px',
-            borderRadius: 4,
-            background: commitResult.success ? '#1e3a2e' : '#3a1e1e',
-            color: commitResult.success ? '#4ec9b0' : '#f14c4c',
-          }}>
+          <div className={`source-control-result ${commitResult.success ? 'success' : 'error'}`}>
             {commitResult.success ? '✓ Commit successful' : `✗ ${commitResult.error}`}
           </div>
         )}
@@ -154,21 +138,10 @@ export function SourceControlPanel() {
         )}
         {status.map((item, index) => (
           <div key={index} className="file-explorer-item" style={{ paddingLeft: 12 }}>
-            <span style={{
-              width: 20,
-              height: 16,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 10,
-              fontWeight: 'bold',
-              borderRadius: 2,
-              background: item.status === 'M' ? '#ffcc0022' : item.status === 'A' ? '#4ec9b022' : item.status === 'D' ? '#f14c4c22' : '#85858522',
-              color: item.status === 'M' ? '#ffcc00' : item.status === 'A' ? '#4ec9b0' : item.status === 'D' ? '#f14c4c' : '#858585',
-            }}>
+            <span className={`git-status-badge git-status-${item.status === '??' ? 'untracked' : item.status.toLowerCase()}`}>
               {getStatusLabel(item.status)}
             </span>
-            <span className="task-title" style={{ fontSize: 12 }}>{item.file}</span>
+            <span className="task-title">{item.file}</span>
           </div>
         ))}
       </div>
@@ -178,8 +151,8 @@ export function SourceControlPanel() {
       <div className="sidebar-content">
         {log.map((item, index) => (
           <div key={index} className="file-explorer-item" style={{ paddingLeft: 12 }}>
-            <span style={{ color: '#75beff', fontSize: 11, fontFamily: 'monospace', width: 48 }}>{item.hash}</span>
-            <span className="task-title" style={{ fontSize: 11 }}>{item.message}</span>
+            <span className="git-commit-hash">{item.hash}</span>
+            <span className="task-title">{item.message}</span>
           </div>
         ))}
       </div>

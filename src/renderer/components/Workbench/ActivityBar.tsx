@@ -37,6 +37,16 @@ export function ActivityBar({
   showRightPanel,
   onRightPanelToggle,
 }: ActivityBarProps) {
+  const handleViewClick = (viewId: string) => {
+    if (activeView === viewId) {
+      // Same view clicked — toggle sidebar visibility
+      // This is handled by the parent via a custom event
+      window.dispatchEvent(new CustomEvent('universui:toggleSidebar'));
+    } else {
+      onViewChange(viewId);
+    }
+  };
+
   return (
     <div className="activity-bar">
       <div className="activity-bar-top">
@@ -44,13 +54,14 @@ export function ActivityBar({
           <div
             key={item.id}
             className={`activity-item ${activeView === item.id ? 'active' : ''}`}
-            onClick={() => onViewChange(item.id)}
+            onClick={() => handleViewClick(item.id)}
             title={item.label}
           >
             <i className={`codicon ${item.icon}`}></i>
           </div>
         ))}
       </div>
+
       <div className="activity-bar-bottom">
         <div
           className={`activity-item ${showPanel ? 'active' : ''}`}

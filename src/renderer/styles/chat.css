@@ -177,6 +177,7 @@
 /* === Messages === */
 .chat-messages {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: var(--usx-spacing-6);
   display: flex;

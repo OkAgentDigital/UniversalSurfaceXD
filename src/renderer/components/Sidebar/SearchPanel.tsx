@@ -86,16 +86,9 @@ export function SearchPanel() {
           <span>SEARCH</span>
         </div>
       </div>
-      <div style={{ padding: '8px 12px' }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          background: '#3c3c3c',
-          borderRadius: 4,
-          padding: '4px 8px',
-          gap: 6,
-        }}>
-          <i className="codicon codicon-search" style={{ color: '#858585', fontSize: 14 }}></i>
+      <div className="search-input-container">
+        <div className="search-input-wrapper">
+          <i className="codicon codicon-search"></i>
           <input
             ref={inputRef}
             type="text"
@@ -103,19 +96,11 @@ export function SearchPanel() {
             onChange={(e) => handleInputChange(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search tasks and documents..."
-            style={{
-              flex: 1,
-              background: 'transparent',
-              border: 'none',
-              color: '#cccccc',
-              fontSize: 12,
-              outline: 'none',
-            }}
+            className="search-input"
           />
           {query && (
             <i
-              className="codicon codicon-close"
-              style={{ color: '#858585', cursor: 'pointer', fontSize: 14 }}
+              className="codicon codicon-close search-input-clear"
               onClick={() => { setQuery(''); setResults([]); }}
             ></i>
           )}
@@ -149,17 +134,16 @@ export function SearchPanel() {
           >
             <i
               className={`codicon ${result.type === 'document' ? 'codicon-file' : 'codicon-checklist'}`}
-              style={{ color: result.type === 'document' ? '#75beff' : '#c586c0' }}
             ></i>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div className="task-title" style={{ fontSize: 12 }}>
+            <div className="search-result-text">
+              <div className="task-title">
                 {highlightMatch(result.title, query)}
               </div>
-              <div style={{ fontSize: 10, color: '#858585', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div className="search-result-snippet">
                 {result.snippet && highlightMatch(result.snippet.substring(0, 80), query)}
               </div>
             </div>
-            <span className="task-badge" style={{ flexShrink: 0 }}>
+            <span className="task-badge">
               {result.type === 'document' ? 'doc' : 'task'}
             </span>
           </div>

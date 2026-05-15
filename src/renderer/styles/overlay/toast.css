@@ -1,0 +1,104 @@
+/* ============================================
+ * Toast — Non-blocking notifications
+ * Stackable, bottom-centered
+ * ============================================ */
+
+.toast-container {
+  position: fixed;
+  bottom: var(--usx-spacing-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--usx-spacing-3);
+  z-index: 1100;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--usx-spacing-3);
+  min-width: 280px;
+  max-width: 480px;
+  padding: var(--usx-spacing-3) var(--usx-spacing-4);
+  background-color: rgb(var(--usx-color-surface));
+  border: 1px solid rgb(var(--usx-color-border));
+  border-radius: var(--usx-radius-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toast--enter {
+  animation: toast-slide-up 200ms ease;
+}
+
+.toast--exit {
+  animation: toast-slide-down 200ms ease forwards;
+}
+
+@keyframes toast-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes toast-slide-down {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(20px); opacity: 0; }
+}
+
+.toast-icon {
+  flex-shrink: 0;
+}
+
+.toast--info .toast-icon { color: rgb(var(--usx-color-text-muted)); }
+.toast--success .toast-icon { color: rgb(var(--usx-color-success)); }
+.toast--warning .toast-icon { color: rgb(var(--usx-color-warning)); }
+.toast--error .toast-icon { color: rgb(var(--usx-color-danger)); }
+
+.toast-content {
+  flex: 1;
+}
+
+.toast-message {
+  margin: 0;
+  font-size: var(--usx-font-size-sm);
+  line-height: 1.4;
+}
+
+.toast-actions {
+  display: flex;
+  gap: var(--usx-spacing-2);
+  margin-top: var(--usx-spacing-2);
+}
+
+.toast-action-btn {
+  background: transparent;
+  border: none;
+  font-size: var(--usx-font-size-sm);
+  font-weight: var(--usx-font-weight-medium);
+  color: rgb(var(--usx-color-text));
+  cursor: pointer;
+  padding: var(--usx-spacing-1) var(--usx-spacing-2);
+  border-radius: var(--usx-radius-md);
+}
+
+.toast-action-btn:hover {
+  background-color: rgb(var(--usx-color-surface));
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--usx-spacing-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--usx-radius-md);
+  color: rgb(var(--usx-color-text-muted));
+}
+
+.toast-close:hover {
+  color: rgb(var(--usx-color-text));
+}
