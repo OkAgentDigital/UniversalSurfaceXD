@@ -1,0 +1,21 @@
+/* USX Code Block Component */
+.usx-code-block {
+  margin: var(--usx-spacing-4) 0;
+  background-color: rgb(var(--usx-color-surface));
+  border: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  border-radius: var(--usx-radius-lg);
+  overflow-x: auto;
+}
+
+.usx-code-block pre {
+  padding: var(--usx-spacing-4);
+  margin: 0;
+  font-family: var(--usx-font-family-mono);
+  font-size: var(--usx-font-size-sm);
+  line-height: var(--usx-line-height-normal);
+  color: rgb(var(--usx-color-text));
+}
+
+.usx-code-block code {
+  font-family: inherit;
+}

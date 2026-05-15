@@ -45,7 +45,7 @@ contextBridge.exposeInMainWorld('electron', {
 
   // AI / DeepSeek operations
   aiChat: (request: { messages: { role: string; content: string }[]; stream?: boolean }) =>
-    ipcRenderer.invoke(IPC_CHANNELS.AI_CHAT, request),
+    ipcRenderer.invoke(IPC_CHANNELS.OK_CHAT, request),
   aiExplain: (params: { text: string; context?: string }) =>
     ipcRenderer.invoke(IPC_CHANNELS.AI_EXPLAIN, params),
 

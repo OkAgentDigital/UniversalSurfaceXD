@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DEFAULT_SETTINGS } from '../../../shared/constants';
 
 export function SettingsPanel() {
-  const [theme, setTheme] = useState<'dark' | 'light'>(DEFAULT_SETTINGS.theme);
+  const [theme, setTheme] = useState<'dark' | 'light'>((DEFAULT_SETTINGS.theme as 'dark' | 'light'));
   const [fontSize, setFontSize] = useState(DEFAULT_SETTINGS.fontSize);
   const [autoSaveInterval, setAutoSaveInterval] = useState(DEFAULT_SETTINGS.autoSaveInterval);
   const [fontFamily, setFontFamily] = useState(DEFAULT_SETTINGS.fontFamily);
@@ -159,11 +159,14 @@ export function SettingsPanel() {
 
         {/* About */}
         <div className="setting-group" style={{ borderTop: '1px solid #3c3c3c', paddingTop: 12 }}>
-          <label className="setting-label">About Universui</label>
+          <label className="setting-label">About UniversalSurfaceXD</label>
           <div style={{ fontSize: 11, color: '#858585', lineHeight: 1.6 }}>
-            <div>Version: 1.3.0</div>
+            <div>Version: 1.4.0</div>
             <div>Local-first desktop editor</div>
             <div>Electron + React + Monaco + SQLite</div>
+            <div style={{ marginTop: 8, fontSize: 10, color: '#666' }}>
+              USX Font Pack: SourceCodePro, SF Pro, Poppins, Quicksand, ChicagoFLF, Teletext50, PetMe128, PressStart2P
+            </div>
           </div>
         </div>
       </div>

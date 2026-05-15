@@ -1,0 +1,31 @@
+/* USX Table Component */
+.usx-table-wrapper {
+  overflow-x: auto;
+  margin: var(--usx-spacing-4) 0;
+}
+
+.usx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--usx-font-family-body);
+  font-size: var(--usx-font-size-base);
+}
+
+.usx-table th {
+  text-align: left;
+  padding: var(--usx-spacing-3) var(--usx-spacing-4);
+  background-color: rgb(var(--usx-color-surface));
+  border-bottom: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  font-weight: var(--usx-font-weight-semibold);
+  color: rgb(var(--usx-color-text));
+}
+
+.usx-table td {
+  padding: var(--usx-spacing-3) var(--usx-spacing-4);
+  border-bottom: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  color: rgb(var(--usx-color-text));
+}
+
+.usx-table tr:last-child td {
+  border-bottom: none;
+}

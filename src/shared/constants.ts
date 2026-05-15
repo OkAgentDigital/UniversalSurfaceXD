@@ -1,6 +1,6 @@
 export const APP_NAME = 'UniversalSurfaceXD';
 export const APP_SHORT_NAME = 'USXD';
-export const APP_VERSION = '1.4.0';
+export const APP_VERSION = '1.5.0';
 export const DB_FILENAME = 'usxd.db';
 
 export const TASK_STATUS = {
@@ -58,7 +58,7 @@ export const IPC_CHANNELS = {
   SAVE_SETTINGS: 'settings:save',
 
   // AI / DeepSeek
-  AI_CHAT: 'ai:chat',
+  OK_CHAT: 'ok:chat',
   AI_STREAM: 'ai:stream',
   AI_EXPLAIN: 'ai:explain',
 
@@ -160,9 +160,10 @@ export const IPC_CHANNELS = {
 } as const;
 
 export const DEFAULT_SETTINGS = {
+  theme: 'dark',
   fontSize: 14,
   autoSaveInterval: 1000,
-  fontFamily: "Monaco, Menlo, 'Courier New', monospace",
+  fontFamily: "SourceCodePro, Consolas, 'Courier New', monospace",
   sidebarWidth: 260,
   panelHeight: 200,
 };

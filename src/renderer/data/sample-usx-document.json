@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "title": "Getting Started with USX",
+    "author": "uDOS Operator",
+    "created": "2026-05-15T10:00:00Z",
+    "modified": "2026-05-15T10:30:00Z",
+    "tags": ["tutorial", "basics"]
+  },
+  "blocks": [
+    {
+      "id": "header-main",
+      "type": "heading",
+      "content": "Welcome to USX",
+      "attributes": { "level": 1 }
+    },
+    {
+      "id": "intro",
+      "type": "paragraph",
+      "content": "USX is a block-based document format that renders consistently across terminal, web, and desktop surfaces."
+    },
+    {
+      "id": "features-card",
+      "type": "card",
+      "content": "Zero hardcoding. Pure CSS variables. Light/dark switching. Font zoom. Separate heading and body fonts.",
+      "attributes": { "title": "Key Features" }
+    },
+    {
+      "id": "tasks",
+      "type": "task",
+      "content": [
+        { "id": "1", "text": "Review the USX specification", "completed": false },
+        { "id": "2", "text": "Install the USX viewer", "completed": false },
+        { "id": "3", "text": "Create your first document", "completed": true }
+      ]
+    },
+    {
+      "id": "example-code",
+      "type": "code",
+      "content": "const usx = new USXDocument();\nusx.load('sample.usx');\nusx.render();",
+      "attributes": { "language": "javascript" }
+    },
+    {
+      "id": "divider-1",
+      "type": "divider",
+      "content": ""
+    }
+  ]
+}

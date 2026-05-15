@@ -177,7 +177,7 @@ export function DocumentEditor() {
           theme="vs-dark"
           options={{
             fontSize: 14,
-            fontFamily: 'Monaco, Menlo, "Courier New", monospace',
+            fontFamily: 'SourceCodePro, Consolas, "Courier New", monospace',
             automaticLayout: true,
             minimap: { enabled: true },
             lineNumbers: 'on',

@@ -1,0 +1,30 @@
+/* USX Card Component — Flat, border-only, no shadow */
+.usx-card {
+  background-color: rgb(var(--usx-color-surface));
+  border: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  border-radius: var(--usx-radius-2xl);
+  padding: var(--usx-spacing-6);
+  transition: background-color var(--usx-transition-base);
+}
+
+.usx-card__title {
+  font-family: var(--usx-font-family-heading);
+  font-size: var(--usx-font-size-xl);
+  font-weight: var(--usx-font-weight-semibold);
+  color: rgb(var(--usx-color-text));
+  margin-bottom: var(--usx-spacing-4);
+}
+
+.usx-card__body {
+  font-family: var(--usx-font-family-body);
+  font-size: var(--usx-font-size-base);
+  color: rgb(var(--usx-color-text));
+  line-height: var(--usx-line-height-normal);
+  margin-bottom: var(--usx-spacing-6);
+}
+
+.usx-card__actions {
+  display: flex;
+  gap: var(--usx-spacing-3);
+  justify-content: flex-end;
+}

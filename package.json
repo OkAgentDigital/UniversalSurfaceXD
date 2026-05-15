@@ -1,7 +1,7 @@
 {
   "name": "universalsurfacexd",
   "productName": "UniversalSurfaceXD",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "UniversalSurfaceXD (USXD) — Local-first desktop editor combining task management with professional code editing. Repackaged from Universui.",
   "main": "dist/main/main.js",
   "scripts": {
@@ -61,6 +61,7 @@
     "@types/react-dom": "^18.2.0",
     "@types/styled-components": "^5.1.36",
     "concurrently": "^8.2.0",
+    "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^6.8.0",
     "electron": "^28.0.0",
     "electron-builder": "^26.8.1",

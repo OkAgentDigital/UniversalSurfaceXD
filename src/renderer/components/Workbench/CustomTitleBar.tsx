@@ -133,7 +133,7 @@ export function CustomTitleBar({
             <button
               className={`title-bar-action ${showRightPanel ? 'active' : ''}`}
               onClick={onToggleRightPanel}
-              title="Toggle AI Chat Panel"
+              title="Toggle OK Chat Panel"
             >
               {Icons.chat}
             </button>

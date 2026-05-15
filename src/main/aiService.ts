@@ -20,7 +20,7 @@ interface ChatRequest {
  */
 export function registerAiHandlers(): void {
   // Handle AI chat requests (non-streaming)
-  ipcMain.handle(IPC_CHANNELS.AI_CHAT, async (_event, request: ChatRequest) => {
+  ipcMain.handle(IPC_CHANNELS.OK_CHAT, async (_event, request: ChatRequest) => {
     try {
       const apiKey = process.env.DEEPSEEK_API_KEY;
       if (!apiKey) {

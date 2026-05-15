@@ -1,0 +1,6 @@
+/* USX Divider Component */
+.usx-divider {
+  margin: var(--usx-spacing-6) 0;
+  border: none;
+  border-top: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+}

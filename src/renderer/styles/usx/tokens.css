@@ -1,0 +1,105 @@
+/* ============================================
+   USX Design Tokens v1.0 — Flat Style, Zero Hardcoding
+   ============================================
+   All values derive from CSS custom properties.
+   No shadows, gradients, or transparency (except full opacity).
+   ============================================ */
+
+:root {
+  /* ===== COLOR SYSTEM ===== */
+  /* Light Mode (default) — RGB values for opacity control */
+  --usx-color-background: 255 255 255;      /* Pure white */
+  --usx-color-surface: 248 250 252;         /* Light gray */
+  --usx-color-text: 15 23 42;               /* Dark slate */
+  --usx-color-text-muted: 100 116 139;      /* Muted slate */
+  --usx-color-primary: 37 99 235;           /* Blue */
+  --usx-color-secondary: 100 116 139;       /* Slate */
+  --usx-color-success: 22 163 74;           /* Green */
+  --usx-color-danger: 220 38 38;            /* Red */
+  --usx-color-warning: 234 179 8;           /* Yellow */
+  --usx-color-border: 226 232 240;          /* Light border */
+
+  /* ===== TYPOGRAPHY — Separate Heading & Body Fonts ===== */
+  --usx-font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --usx-font-family-body: 'Georgia', 'Times New Roman', serif;
+  --usx-font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+  /* Font sizes (rem-based, scale via root font-size) */
+  --usx-font-size-xs: 0.75rem;      /* 12px @ 16px base */
+  --usx-font-size-sm: 0.875rem;     /* 14px */
+  --usx-font-size-base: 1rem;       /* 16px */
+  --usx-font-size-lg: 1.125rem;     /* 18px */
+  --usx-font-size-xl: 1.25rem;      /* 20px */
+  --usx-font-size-2xl: 1.5rem;      /* 24px */
+  --usx-font-size-3xl: 1.875rem;    /* 30px */
+  --usx-font-size-4xl: 2.25rem;     /* 36px */
+  --usx-font-size-5xl: 3rem;        /* 48px */
+
+  /* Font weights */
+  --usx-font-weight-normal: 400;
+  --usx-font-weight-medium: 500;
+  --usx-font-weight-semibold: 600;
+  --usx-font-weight-bold: 700;
+
+  /* Line heights */
+  --usx-line-height-tight: 1.2;
+  --usx-line-height-normal: 1.5;
+  --usx-line-height-relaxed: 1.75;
+
+  /* ===== SPACING SCALE (rem-based) ===== */
+  --usx-spacing-0: 0;
+  --usx-spacing-1: 0.25rem;   /* 4px */
+  --usx-spacing-2: 0.5rem;    /* 8px */
+  --usx-spacing-3: 0.75rem;   /* 12px */
+  --usx-spacing-4: 1rem;      /* 16px */
+  --usx-spacing-5: 1.25rem;   /* 20px */
+  --usx-spacing-6: 1.5rem;    /* 24px */
+  --usx-spacing-8: 2rem;      /* 32px */
+  --usx-spacing-10: 2.5rem;   /* 40px */
+  --usx-spacing-12: 3rem;     /* 48px */
+  --usx-spacing-16: 4rem;     /* 64px */
+
+  /* ===== BORDERS (Flat, no shadows) ===== */
+  --usx-border-width: 1px;
+  --usx-border-style: solid;
+  --usx-border-color: rgb(var(--usx-color-border));
+
+  /* Border radius */
+  --usx-radius-sm: 0.25rem;
+  --usx-radius-md: 0.5rem;
+  --usx-radius-lg: 0.75rem;
+  --usx-radius-xl: 1rem;
+  --usx-radius-2xl: 1.5rem;
+  --usx-radius-full: 9999px;
+
+  /* ===== TRANSITIONS (flat, no opacity) ===== */
+  --usx-transition-fast: 100ms ease;
+  --usx-transition-base: 200ms ease;
+  --usx-transition-slow: 300ms ease;
+}
+
+/* ===== DARK MODE ===== */
+.dark,
+[data-theme="dark"] {
+  --usx-color-background: 10 14 23;        /* Dark blue-gray */
+  --usx-color-surface: 21 27 41;           /* Slightly lighter */
+  --usx-color-text: 241 245 249;           /* Off-white */
+  --usx-color-text-muted: 148 163 184;     /* Gray-blue */
+  --usx-color-primary: 59 130 246;         /* Bright blue */
+  --usx-color-secondary: 100 116 139;      /* Slate */
+  --usx-color-border: 51 65 85;            /* Dark border */
+
+  /* Border color update */
+  --usx-border-color: rgb(var(--usx-color-border));
+}
+
+/* ===== FONT ZOOM SUPPORT (runtime adjustable) ===== */
+:root {
+  font-size: 16px; /* Base — overridden by zoom controls */
+}
+
+[data-font-size="small"] { font-size: 14px; }
+[data-font-size="medium"] { font-size: 16px; }
+[data-font-size="large"] { font-size: 18px; }
+[data-font-size="xlarge"] { font-size: 20px; }
+[data-font-size="xxlarge"] { font-size: 24px; }

@@ -31,7 +31,7 @@ const SAMPLE_EXTENSIONS = [
     downloads: 980,
     rating: 4.7,
     publishedAt: '2026-01-20',
-    universui: { minVersion: '1.3.0', panels: ['ai-chat'], commands: ['deepseek:chat', 'deepseek:explain'], mcpServers: ['deepseek'] },
+    universui: { minVersion: '1.3.0', panels: ['ok-chat'], commands: ['deepseek:chat', 'deepseek:explain'], mcpServers: ['deepseek'] },
   },
   {
     name: '@devstudio/extension-autoloop',

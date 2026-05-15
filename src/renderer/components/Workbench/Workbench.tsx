@@ -8,7 +8,7 @@ import { SearchPanel } from '../Sidebar/SearchPanel';
 import { SourceControlPanel } from '../Sidebar/SourceControlPanel';
 import { SettingsPanel } from '../Sidebar/SettingsPanel';
 import { TerminalPanel } from '../Panel/TerminalPanel';
-import { AIChatPanel } from '../Panel/AIChatPanel';
+import { OKChatPanel } from '../Panel/OKChatPanel';
 import { AccountPanel } from '../Account/AccountPanel';
 import { ExtensionMarketplace } from '../Extensions/ExtensionMarketplace';
 import { WorkflowsPanel } from '../Panel/SourceControlPanels';
@@ -175,7 +175,7 @@ export function Workbench() {
               className="right-panel"
               style={{ width: rightPanelWidth }}
             >
-              <AIChatPanel />
+              <OKChatPanel />
             </div>
           </>
         )}

@@ -1,0 +1,25 @@
+/* USX Grid Layout */
+.usx-grid {
+  display: grid;
+  gap: var(--usx-spacing-6);
+}
+
+.usx-grid--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.usx-grid--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.usx-grid--cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+  .usx-grid--cols-2,
+  .usx-grid--cols-3,
+  .usx-grid--cols-4 {
+    grid-template-columns: 1fr;
+  }
+}

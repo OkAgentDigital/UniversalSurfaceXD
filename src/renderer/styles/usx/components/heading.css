@@ -1,0 +1,44 @@
+/* USX Heading Component — Separate font from body */
+.usx-heading {
+  font-family: var(--usx-font-family-heading);
+  font-weight: var(--usx-font-weight-semibold);
+  color: rgb(var(--usx-color-text));
+  line-height: var(--usx-line-height-tight);
+  margin-bottom: var(--usx-spacing-4);
+}
+
+.usx-heading--1 {
+  font-size: var(--usx-font-size-5xl);
+  margin-bottom: var(--usx-spacing-6);
+}
+
+.usx-heading--2 {
+  font-size: var(--usx-font-size-4xl);
+  margin-bottom: var(--usx-spacing-5);
+}
+
+.usx-heading--3 {
+  font-size: var(--usx-font-size-3xl);
+  margin-bottom: var(--usx-spacing-4);
+}
+
+.usx-heading--4 {
+  font-size: var(--usx-font-size-2xl);
+  margin-bottom: var(--usx-spacing-3);
+}
+
+/* Body text — separate font family */
+.usx-body {
+  font-family: var(--usx-font-family-body);
+  font-size: var(--usx-font-size-base);
+  color: rgb(var(--usx-color-text));
+  line-height: var(--usx-line-height-normal);
+}
+
+.usx-body-lg {
+  font-size: var(--usx-font-size-lg);
+}
+
+.usx-body-sm {
+  font-size: var(--usx-font-size-sm);
+}

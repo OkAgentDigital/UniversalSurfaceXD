@@ -1,0 +1,341 @@
+/* ============================================
+   USX Font Pack v1.0 — Universal Surface XSchema Typography System
+   ============================================
+   Role-based font stacks mapped to Linux Mint defaults.
+   All fonts vendored from ~/Code/Vendor/fonts/
+   ============================================ */
+
+/* ============================================
+   MODERN FONTS — Body, UI, Titles
+   ============================================ */
+
+/* ChicagoFLF — Classic Mac OS Chicago (Desktop Titles, UI) */
+@font-face {
+  font-family: 'ChicagoFLF';
+  src: url('/assets/fonts/ChicagoFLF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SF Pro — Apple SF Pro (Body, Desktop, Document, UI) */
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/assets/fonts/SF-Pro.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SanFrisco — San Francisco variant (Desktop, UI) */
+@font-face {
+  font-family: 'SanFrisco';
+  src: url('/assets/fonts/Sanfrisco.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Athene — Elegant serif (Body, Desktop, Document, UI) */
+@font-face {
+  font-family: 'Athene';
+  src: url('/assets/fonts/Athene.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Liverpool — Display font (Desktop, UI) */
+@font-face {
+  font-family: 'Liverpool';
+  src: url('/assets/fonts/Liverpool.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Quicksand — Modern geometric sans (Body, Desktop, Document, UI) */
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/assets/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Poppins — Clean geometric sans (Body, Desktop, Document, UI) */
+@font-face {
+  font-family: 'Poppins';
+  src: url('/assets/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Source Code Pro — Professional coding monospace (Monospace) */
+@font-face {
+  font-family: 'SourceCodePro';
+  src: url('/assets/fonts/SourceCodePro-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
+   RETRO FONTS — Teletext, PETSCII, Pixel
+   ============================================ */
+
+/* Teletext50 — Teletext grid font (Monospace) */
+@font-face {
+  font-family: 'Teletext50';
+  src: url('/assets/fonts/Teletext50.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Teletext50 Condensed — Teletext condensed (Monospace, extended) */
+@font-face {
+  font-family: 'Teletext50 Condensed';
+  src: url('/assets/fonts/Teletext50-condensed.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PetMe128 — PETSCII-style bitmap (Monospace) */
+@font-face {
+  font-family: 'PetMe128';
+  src: url('/assets/fonts/PetMe128.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PetMe128 Double — PETSCII double-height (Monospace, extended) */
+@font-face {
+  font-family: 'PetMe128 Double';
+  src: url('/assets/fonts/PetMe1282Y.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PressStart2P — Retro pixel font (Monospace) */
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('/assets/fonts/PressStart2P-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
+   USX FONT STACK CSS VARIABLES
+   Role-based font stacks with Linux Mint-inspired fallbacks
+   ============================================ */
+
+:root {
+  /* ===== BODY (Default) — Ubuntu Regular equivalent ===== */
+  /* Paragraphs, lists, general text */
+  --usx-font-family-body:
+    'SF Pro', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* ===== DESKTOP TITLE — Ubuntu Bold equivalent ===== */
+  /* Window titles, surface headers, H1/H2 */
+  --usx-font-family-desktop:
+    'ChicagoFLF', 'SanFrisco', 'Liverpool', 'SF Pro', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* ===== DOCUMENT TITLE — Ubuntu Medium equivalent ===== */
+  /* Document headings, H3/H4 */
+  --usx-font-family-document:
+    'SF Pro', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* ===== MONOSPACE (Code) — Ubuntu Mono equivalent ===== */
+  /* Code blocks, inline code, terminals */
+  --usx-font-family-mono:
+    'SourceCodePro', 'Teletext50', 'PressStart2P', 'PetMe128',
+    'Ubuntu Mono', 'Courier New', 'Menlo', 'Monaco',
+    'Cascadia Code', 'Consolas', monospace;
+
+  /* ===== UI ELEMENTS — Ubuntu Regular equivalent ===== */
+  /* Buttons, tabs, inputs, controls */
+  --usx-font-family-ui:
+    'ChicagoFLF', 'SF Pro', 'SanFrisco', 'Liverpool', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* ===== TELETEXT EXTENDED — Grid-based code blocks ===== */
+  --usx-font-family-teletext:
+    'Teletext50 Condensed', 'Teletext50', 'PetMe128 Double', 'PetMe128',
+    monospace;
+
+  /* ===== FONT WEIGHTS ===== */
+  --usx-font-weight-body: 400;
+  --usx-font-weight-desktop: 700;
+  --usx-font-weight-document: 600;
+  --usx-font-weight-mono: 400;
+  --usx-font-weight-ui: 500;
+
+  /* ===== BASE FONT SIZES (Linux Mint defaults) ===== */
+  --usx-font-size-base: 16px;
+  --usx-font-size-desktop-title: 24px;
+  --usx-font-size-document-title: 20px;
+  --usx-font-size-code: 14px;
+  --usx-font-size-ui: 16px;
+}
+
+/* ============================================
+   USX CODE BLOCK RENDERERS
+   ============================================ */
+
+/* Standard code block — SourceCodePro */
+.usx-code--standard {
+  font-family: var(--usx-font-family-mono);
+  font-size: var(--usx-font-size-code);
+  line-height: 1.5;
+}
+
+/* Teletext code block — Teletext50 */
+.usx-code--teletext {
+  font-family: var(--usx-font-family-teletext);
+  font-size: var(--usx-font-size-code);
+  line-height: 1.2;
+  letter-spacing: 0;
+  font-feature-settings: 'halt' on, 'vhal' on;
+}
+
+/* Teletext condensed — Teletext50 Condensed */
+.usx-code--teletext-condensed {
+  font-family: 'Teletext50 Condensed', 'Teletext50', monospace;
+  font-size: var(--usx-font-size-code);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+/* PETSCII — PetMe128 */
+.usx-code--petscii {
+  font-family: 'PetMe128', monospace;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* PETSCII Double Height — PetMe128 Double */
+.usx-code--petscii-double {
+  font-family: 'PetMe128 Double', 'PetMe128', monospace;
+  font-size: 32px;
+  line-height: 1;
+  transform: scaleY(2);
+  transform-origin: top;
+}
+
+/* NES-style — PressStart2P */
+.usx-code--nes {
+  font-family: 'PressStart2P', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   TELETEXT GRID BLOCK
+   Character-cell aligned grid rendering
+   ============================================ */
+
+.usx-teletext-block {
+  background-color: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: var(--usx-font-family-teletext);
+}
+
+.usx-teletext-block--standard {
+  font-family: 'Teletext50', monospace;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.usx-teletext-block--condensed {
+  font-family: 'Teletext50 Condensed', monospace;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.usx-teletext-block--double {
+  font-family: 'PetMe128 Double', monospace;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.usx-teletext-block--press-start {
+  font-family: 'PressStart2P', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Grid-based teletext rendering (40-column standard) */
+.usx-teletext-grid {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  gap: 0;
+  font-family: 'Teletext50', monospace;
+  font-size: 16px;
+  line-height: 1;
+  background-color: black;
+  color: white;
+}
+
+.usx-teletext-grid-cell {
+  aspect-ratio: 1 / 1.2;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ============================================
+   USX FONT SETTINGS PREVIEW
+   ============================================ */
+
+.usx-font-preview {
+  padding: 16px;
+  background-color: #252526;
+  border-radius: 8px;
+  border: 1px solid #3c3c3c;
+}
+
+.usx-font-preview p {
+  font-family: var(--usx-font-family-body);
+  font-weight: var(--usx-font-weight-body);
+  font-size: var(--usx-font-size-base);
+}
+
+.usx-font-preview h2 {
+  font-family: var(--usx-font-family-desktop);
+  font-weight: var(--usx-font-weight-desktop);
+  font-size: var(--usx-font-size-desktop-title);
+}
+
+.usx-font-preview h3 {
+  font-family: var(--usx-font-family-document);
+  font-weight: var(--usx-font-weight-document);
+  font-size: var(--usx-font-size-document-title);
+}
+
+.usx-font-preview code {
+  font-family: var(--usx-font-family-mono);
+  font-weight: var(--usx-font-weight-mono);
+  font-size: var(--usx-font-size-code);
+}
+
+.usx-font-preview button {
+  font-family: var(--usx-font-family-ui);
+  font-weight: var(--usx-font-weight-ui);
+  font-size: var(--usx-font-size-ui);
+}

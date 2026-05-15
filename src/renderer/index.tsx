@@ -1,6 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import '@vscode/codicons/dist/codicon.css';
+import './styles/usx-fonts.css';
+import './styles/usx/tokens.css';
 import './styles/universui.css';
 import App from './App';
 

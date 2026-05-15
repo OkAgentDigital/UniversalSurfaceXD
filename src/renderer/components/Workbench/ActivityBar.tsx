@@ -63,7 +63,7 @@ export function ActivityBar({
           <div
             className={`activity-item ${showRightPanel ? 'active' : ''}`}
             onClick={onRightPanelToggle}
-            title="Toggle AI Chat Panel"
+            title="Toggle OK Chat Panel"
           >
             <i className="codicon codicon-comment-discussion"></i>
           </div>

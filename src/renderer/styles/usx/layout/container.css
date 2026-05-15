@@ -1,0 +1,20 @@
+/* USX Container Layout */
+.usx-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--usx-spacing-8);
+  background-color: rgb(var(--usx-color-background));
+  min-height: 100vh;
+}
+
+.usx-container--full {
+  max-width: none;
+}
+
+.usx-container--narrow {
+  max-width: 600px;
+}
+
+.usx-container--wide {
+  max-width: 1200px;
+}

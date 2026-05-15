@@ -1,0 +1,37 @@
+/* USX Task List Component */
+.usx-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--usx-spacing-3);
+  margin: var(--usx-spacing-4) 0;
+}
+
+.usx-task {
+  display: flex;
+  align-items: center;
+  gap: var(--usx-spacing-3);
+  padding: var(--usx-spacing-3);
+  background-color: rgb(var(--usx-color-surface));
+  border: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  border-radius: var(--usx-radius-lg);
+  cursor: pointer;
+}
+
+.usx-task input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.usx-task span {
+  font-family: var(--usx-font-family-body);
+  font-size: var(--usx-font-size-base);
+  color: rgb(var(--usx-color-text));
+  flex: 1;
+}
+
+.usx-task input:checked + span {
+  text-decoration: line-through;
+  color: rgb(var(--usx-color-text-muted));
+}

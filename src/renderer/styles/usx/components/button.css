@@ -1,0 +1,58 @@
+/* USX Button Component — Flat, no shadows */
+.usx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--usx-spacing-2);
+  padding: var(--usx-spacing-3) var(--usx-spacing-6);
+  font-family: var(--usx-font-family-body);
+  font-size: var(--usx-font-size-base);
+  font-weight: var(--usx-font-weight-medium);
+  line-height: 1;
+  border: var(--usx-border-width) var(--usx-border-style) transparent;
+  border-radius: var(--usx-radius-xl);
+  cursor: pointer;
+  transition: all var(--usx-transition-base);
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.usx-btn--primary {
+  background-color: rgb(var(--usx-color-primary));
+  border-color: rgb(var(--usx-color-primary));
+  color: white;
+}
+
+.usx-btn--primary:hover {
+  filter: brightness(0.9);
+}
+
+.usx-btn--secondary {
+  background-color: rgb(var(--usx-color-secondary));
+  border-color: rgb(var(--usx-color-secondary));
+  color: white;
+}
+
+.usx-btn--outline {
+  background-color: transparent;
+  border-color: rgb(var(--usx-color-primary));
+  color: rgb(var(--usx-color-primary));
+}
+
+.usx-btn--outline:hover {
+  background-color: rgb(var(--usx-color-primary) / 0.1);
+}
+
+.usx-btn--sm {
+  padding: var(--usx-spacing-2) var(--usx-spacing-4);
+  font-size: var(--usx-font-size-sm);
+}
+
+.usx-btn--lg {
+  padding: var(--usx-spacing-4) var(--usx-spacing-8);
+  font-size: var(--usx-font-size-lg);
+}
+
+.usx-btn:active {
+  transform: scale(0.98);
+}
