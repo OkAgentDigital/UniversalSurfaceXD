@@ -179,4 +179,41 @@ contextBridge.exposeInMainWorld('electron', {
   ghNextRunAutoloop: (programFile: string) => ipcRenderer.invoke(IPC_CHANNELS.GH_NEXT_RUN_AUTOLOOP, programFile),
   ghNextContinuousAI: (config: { enabled: boolean; triggers: any[] }) =>
     ipcRenderer.invoke(IPC_CHANNELS.GH_NEXT_CONTINUOUS_AI, config),
+
+  // ============================================================
+  // Auto-Updater
+  // ============================================================
+  updateCheck: () => ipcRenderer.invoke('update:check'),
+  updateDownload: () => ipcRenderer.invoke('update:download'),
+  updateInstall: () => ipcRenderer.invoke('update:install'),
+  onUpdateChecking: (callback: () => void) => {
+    const handler = () => callback();
+    ipcRenderer.on('update:checking', handler);
+    return () => ipcRenderer.removeListener('update:checking', handler);
+  },
+  onUpdateAvailable: (callback: (info: { version: string; releaseDate: string; releaseNotes: string }) => void) => {
+    const handler = (_event: any, info: any) => callback(info);
+    ipcRenderer.on('update:available', handler);
+    return () => ipcRenderer.removeListener('update:available', handler);
+  },
+  onUpdateNotAvailable: (callback: (info: { version: string }) => void) => {
+    const handler = (_event: any, info: any) => callback(info);
+    ipcRenderer.on('update:not-available', handler);
+    return () => ipcRenderer.removeListener('update:not-available', handler);
+  },
+  onUpdateDownloadProgress: (callback: (progress: { percent: number; bytesPerSecond: number; transferred: number; total: number }) => void) => {
+    const handler = (_event: any, progress: any) => callback(progress);
+    ipcRenderer.on('update:download-progress', handler);
+    return () => ipcRenderer.removeListener('update:download-progress', handler);
+  },
+  onUpdateDownloaded: (callback: (info: { version: string; releaseNotes: string }) => void) => {
+    const handler = (_event: any, info: any) => callback(info);
+    ipcRenderer.on('update:downloaded', handler);
+    return () => ipcRenderer.removeListener('update:downloaded', handler);
+  },
+  onUpdateError: (callback: (error: { message: string }) => void) => {
+    const handler = (_event: any, error: any) => callback(error);
+    ipcRenderer.on('update:error', handler);
+    return () => ipcRenderer.removeListener('update:error', handler);
+  },
 });

@@ -149,11 +149,13 @@
   font-size: var(--usx-font-size-base);
 }
 
-[data-font-size="small"] { font-size: var(--usx-font-size-base); }
-[data-font-size="medium"] { font-size: var(--usx-font-size-base); }
-[data-font-size="large"] { font-size: var(--usx-font-size-lg); }
-[data-font-size="xlarge"] { font-size: var(--usx-font-size-xl); }
-[data-font-size="xxlarge"] { font-size: var(--usx-font-size-2xl); }
+/* Use :root[data-font-size] to ensure these override @media :root rules
+   in grid-system.css (e.g. @media (min-width: 1920px) { :root { font-size: ... } }) */
+:root[data-font-size="small"] { font-size: var(--usx-font-size-base); }
+:root[data-font-size="medium"] { font-size: var(--usx-font-size-base); }
+:root[data-font-size="large"] { font-size: var(--usx-font-size-lg); }
+:root[data-font-size="xlarge"] { font-size: var(--usx-font-size-xl); }
+:root[data-font-size="xxlarge"] { font-size: var(--usx-font-size-2xl); }
 
 /* ===== FLOWBITE CSS VARIABLE BRIDGE ===== */
 @layer base {

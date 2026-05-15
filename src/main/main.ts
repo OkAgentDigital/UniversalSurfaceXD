@@ -11,6 +11,7 @@ import { registerMarketplaceHandlers } from './extensionMarketplace';
 import { registerContinueHandlers } from './continueIntegration';
 import { registerGithubNextHandlers } from './githubNextIntegration';
 import { modeManager } from './modeManager';
+import { initAutoUpdater } from './autoUpdater';
 import { APP_NAME } from '../shared/constants';
 
 
@@ -92,6 +93,11 @@ app.whenReady().then(() => {
 
   // Create the main window
   createWindow();
+
+  // Initialize auto-updater (only in production/packaged builds)
+  if (app.isPackaged && mainWindow) {
+    initAutoUpdater(mainWindow);
+  }
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {

@@ -7,11 +7,25 @@ files:
   - node_modules/**/*
   - assets/**/*
 mac:
-  target: dmg
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
   category: public.app-category.productivity
   icon: assets/icons/icon.icns
-  artifactName: "Surface-${version}-mac.${ext}"
+  artifactName: "Surface-${version}-mac-${arch}.${ext}"
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  # macOS signing (required for auto-update on macOS)
+  # Set CSC_LINK and CSC_KEY_PASSWORD env vars for signing
+  # Or use CSC_IDENTITY_AUTO_DISCOVERY=true to auto-detect
+  identity: null
+  # Notarization (required for macOS 10.14.5+)
+  # Set APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD, and APPLE_TEAM_ID env vars
+  notarize: false
 publish:
-  provider: github
-  owner: OkAgentDigital
-  repo: UniversalSurfaceXD
+  - provider: github
+    owner: OkAgentDigital
+    repo: UniversalSurfaceXD
+    releaseType: release

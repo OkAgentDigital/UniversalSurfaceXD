@@ -87,13 +87,13 @@
   .right-panel { grid-column: 4; }
   .activity-item .codicon { font-size: var(--usx-font-size-3xl); }
   
-  /* Larger base font on big screens */
-  :root { font-size: var(--usx-font-size-base); }
+  /* Larger base font on big screens (only if user hasn't set a font size preference) */
+  :root:not([data-font-size]) { font-size: var(--usx-font-size-base); }
 }
 
 /* 2XL: Ultra-wide */
 @media (min-width: 1920px) {
-  :root { font-size: var(--usx-font-size-lg); }
+  :root:not([data-font-size]) { font-size: var(--usx-font-size-lg); }
   
   .universui-grid {
     grid-template-columns: auto minmax(35ch, 45ch) minmax(70ch, 120ch) 400px;
