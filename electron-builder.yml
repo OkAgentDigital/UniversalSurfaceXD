@@ -3,9 +3,13 @@ productName: Surface
 directories:
   output: dist
 files:
-  - dist/**/*
-  - node_modules/**/*
-  - assets/**/*
+  - dist/main/**/*
+  - dist/renderer/**/*
+  - dist/preload/**/*
+  - dist/shared/**/*
+  - package.json
+asarUnpack:
+  - "**/*.node"
 mac:
   target:
     - target: dmg

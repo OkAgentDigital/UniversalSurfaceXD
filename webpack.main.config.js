@@ -23,6 +23,9 @@ module.exports = {
     'better-sqlite3': 'commonjs better-sqlite3',
     'electron': 'commonjs electron',
   },
+  performance: {
+    hints: false,
+  },
   node: {
     __dirname: false,
     __filename: false,
