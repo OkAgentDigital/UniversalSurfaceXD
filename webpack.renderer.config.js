@@ -21,6 +21,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
       {

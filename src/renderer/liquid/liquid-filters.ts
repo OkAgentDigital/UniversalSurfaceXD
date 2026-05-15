@@ -1,6 +1,7 @@
 /* ============================================
    USX Liquid Filter Extensions
    Custom filters for Liquid template rendering
+   Includes teletext/grid formatting support
    ============================================ */
 
 /**
@@ -64,10 +65,59 @@ export function usxBlockToAscii(type: string, content: string, attributes?: Reco
   }
 }
 
+/**
+ * Teletext format: uppercase, spaces to blocks, wrap at 40 columns
+ */
+export function teletextFormat(text: string): string {
+  // Convert to uppercase (teletext standard)
+  let output = text.toUpperCase();
+
+  // Replace spaces with teletext blank blocks
+  output = output.replace(/ /g, '░');
+
+  // Wrap at 40 columns
+  const lines: string[] = [];
+  for (let i = 0; i < output.length; i += 40) {
+    lines.push(output.slice(i, i + 40));
+  }
+
+  return lines.join('\n');
+}
+
+/**
+ * Teletext grid: convert text to 40-column character grid
+ */
+export function teletextGrid(text: string, columns: number = 40): string[][] {
+  const output = text.toUpperCase();
+  const grid: string[][] = [];
+  let row: string[] = [];
+
+  for (let i = 0; i < output.length; i++) {
+    const char = output[i] === ' ' ? '░' : output[i];
+    row.push(char);
+    if (row.length >= columns) {
+      grid.push(row);
+      row = [];
+    }
+  }
+
+  // Pad last row if needed
+  while (row.length < columns) {
+    row.push('░');
+  }
+  if (row.length > 0) {
+    grid.push(row);
+  }
+
+  return grid;
+}
+
 export const liquidFilters = {
   usx_wrap: usxWrap,
   usx_checkbox: usxCheckbox,
   usx_ascii_heading: usxAsciiHeading,
   usx_truncate: usxTruncate,
   usx_block_to_ascii: usxBlockToAscii,
+  teletext_format: teletextFormat,
+  teletext_grid: teletextGrid,
 };

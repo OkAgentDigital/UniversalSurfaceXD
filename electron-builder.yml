@@ -1,5 +1,5 @@
 appId: com.okagentdigital.universalsurfacexd
-productName: UniversalSurfaceXD
+productName: Surface
 directories:
   output: dist
 files:
@@ -10,18 +10,7 @@ mac:
   target: dmg
   category: public.app-category.productivity
   icon: assets/icons/icon.icns
-  artifactName: "UniversalSurfaceXD-${version}-mac.${ext}"
-win:
-  target: nsis
-  icon: assets/icons/icon.ico
-  artifactName: "UniversalSurfaceXD-${version}-win.${ext}"
-linux:
-  target: AppImage
-  icon: assets/icons
-  artifactName: "UniversalSurfaceXD-${version}-linux.${ext}"
-nsis:
-  oneClick: false
-  allowToChangeInstallationDirectory: true
+  artifactName: "Surface-${version}-mac.${ext}"
 publish:
   provider: github
   owner: OkAgentDigital

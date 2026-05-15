@@ -1,4 +1,4 @@
-/* USX Code Block Component */
+/* USX Code Block Component — Supports multiple renderers */
 .usx-code-block {
   margin: var(--usx-spacing-4) 0;
   background-color: rgb(var(--usx-color-surface));
@@ -18,4 +18,106 @@
 
 .usx-code-block code {
   font-family: inherit;
+}
+
+/* ===== CODE BLOCK RENDERER VARIANTS ===== */
+
+/* Standard — SourceCodePro (default) */
+.usx-code--standard {
+  font-family: var(--usx-font-family-mono);
+  font-size: var(--usx-font-size-code);
+  line-height: 1.5;
+}
+
+/* Teletext — Teletext50 */
+.usx-code--teletext {
+  font-family: var(--usx-font-family-teletext);
+  font-size: var(--usx-font-size-code);
+  line-height: 1.2;
+  letter-spacing: 0;
+  font-feature-settings: 'halt' on, 'vhal' on;
+}
+
+/* Teletext Condensed — Teletext50 Condensed */
+.usx-code--teletext-condensed {
+  font-family: 'Teletext50 Condensed', 'Teletext50', monospace;
+  font-size: var(--usx-font-size-code);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+/* PETSCII — PetMe128 */
+.usx-code--petscii {
+  font-family: 'PetMe128', monospace;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* PETSCII Double Height — PetMe128 Double */
+.usx-code--petscii-double {
+  font-family: 'PetMe128 Double', 'PetMe128', monospace;
+  font-size: 32px;
+  line-height: 1;
+  transform: scaleY(2);
+  transform-origin: top;
+}
+
+/* NES-style — PressStart2P */
+.usx-code--nes {
+  font-family: 'PressStart2P', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+/* ===== TELETEXT GRID BLOCK ===== */
+.usx-teletext-block {
+  background-color: rgb(var(--usx-color-surface));
+  border: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  border-radius: var(--usx-radius-lg);
+  overflow-x: auto;
+  font-family: var(--usx-font-family-teletext);
+}
+
+.usx-teletext-block--standard {
+  font-family: 'Teletext50', monospace;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.usx-teletext-block--condensed {
+  font-family: 'Teletext50 Condensed', monospace;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.usx-teletext-block--double {
+  font-family: 'PetMe128 Double', monospace;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.usx-teletext-block--press-start {
+  font-family: 'PressStart2P', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Grid-based teletext rendering (40-column standard) */
+.usx-teletext-grid {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  gap: 0;
+  font-family: 'Teletext50', monospace;
+  font-size: 16px;
+  line-height: 1;
+  background-color: rgb(var(--usx-color-background));
+  color: rgb(var(--usx-color-text));
+}
+
+.usx-teletext-grid-cell {
+  aspect-ratio: 1 / 1.2;
+  text-align: center;
+  vertical-align: middle;
 }

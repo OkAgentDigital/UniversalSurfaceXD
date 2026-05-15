@@ -34,11 +34,11 @@ export function Sidebar({ task, onSave, onDelete, onClose }: SidebarProps) {
     }
   }, [task]);
 
+  // Collapse to minimal state when no task is selected
   if (!task) {
     return (
-      <SidebarContainer>
-        <SidebarTitle>Task Details</SidebarTitle>
-        <p style={{ color: '#666', fontSize: 14 }}>Select a task to view details</p>
+      <SidebarContainer style={{ width: 0, minWidth: 0, padding: 0, overflow: 'hidden', borderLeft: 'none' }}>
+        {/* Fully collapsed — no content visible */}
       </SidebarContainer>
     );
   }
@@ -85,7 +85,11 @@ export function Sidebar({ task, onSave, onDelete, onClose }: SidebarProps) {
             color: '#888',
             cursor: 'pointer',
             fontSize: 18,
+            padding: '4px 8px',
+            borderRadius: 4,
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#3c3c3c')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
         >
           ✕
         </button>

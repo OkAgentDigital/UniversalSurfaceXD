@@ -5,7 +5,7 @@
     "author": "uDOS Operator",
     "created": "2026-05-15T10:00:00Z",
     "modified": "2026-05-15T10:30:00Z",
-    "tags": ["tutorial", "basics"]
+    "tags": ["tutorial", "basics", "teletext"]
   },
   "blocks": [
     {
@@ -22,7 +22,7 @@
     {
       "id": "features-card",
       "type": "card",
-      "content": "Zero hardcoding. Pure CSS variables. Light/dark switching. Font zoom. Separate heading and body fonts.",
+      "content": "Zero hardcoding. Pure CSS variables. Light/dark switching. Font zoom. Separate heading and body fonts. Teletext/grid code block renderers.",
       "attributes": { "title": "Key Features" }
     },
     {
@@ -31,7 +31,8 @@
       "content": [
         { "id": "1", "text": "Review the USX specification", "completed": false },
         { "id": "2", "text": "Install the USX viewer", "completed": false },
-        { "id": "3", "text": "Create your first document", "completed": true }
+        { "id": "3", "text": "Create your first document", "completed": true },
+        { "id": "4", "text": "Try teletext code block rendering", "completed": false }
       ]
     },
     {
@@ -39,6 +40,27 @@
       "type": "code",
       "content": "const usx = new USXDocument();\nusx.load('sample.usx');\nusx.render();",
       "attributes": { "language": "javascript" }
+    },
+    {
+      "id": "teletext-code",
+      "type": "code",
+      "content": "10 PRINT \"HELLO USX\"\n20 GOTO 10",
+      "attributes": {
+        "language": "basic",
+        "renderer": "teletext",
+        "variant": "condensed"
+      }
+    },
+    {
+      "id": "teletext-grid",
+      "type": "code",
+      "content": "HELLO USX TELETEXT WORLD",
+      "attributes": {
+        "language": "teletext",
+        "renderer": "teletext",
+        "grid": true,
+        "columns": 40
+      }
     },
     {
       "id": "divider-1",

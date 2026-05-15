@@ -115,7 +115,6 @@ export function TaskBoard() {
   return (
     <BoardContainer>
       <BoardHeader>
-        <BoardTitle>Universui</BoardTitle>
         <ViewToggle>
           <ViewButton $active={viewType === 'kanban'} onClick={() => setViewType('kanban')}>
             Kanban

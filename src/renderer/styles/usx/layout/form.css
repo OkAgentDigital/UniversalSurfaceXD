@@ -1,4 +1,4 @@
-/* USX Form Layout */
+/* USX Form Layout — Uses --usx-font-family-ui for controls */
 .usx-form-group {
   margin-bottom: var(--usx-spacing-6);
 }
@@ -6,7 +6,7 @@
 .usx-label {
   display: block;
   margin-bottom: var(--usx-spacing-2);
-  font-family: var(--usx-font-family-body);
+  font-family: var(--usx-font-family-ui);
   font-size: var(--usx-font-size-sm);
   font-weight: var(--usx-font-weight-medium);
   color: rgb(var(--usx-color-text));
@@ -15,7 +15,7 @@
 .usx-input {
   width: 100%;
   padding: var(--usx-spacing-3) var(--usx-spacing-4);
-  font-family: var(--usx-font-family-body);
+  font-family: var(--usx-font-family-ui);
   font-size: var(--usx-font-size-base);
   color: rgb(var(--usx-color-text));
   background-color: rgb(var(--usx-color-surface));
@@ -32,4 +32,22 @@
 .usx-textarea {
   min-height: 100px;
   resize: vertical;
+}
+
+/* Select element styling */
+.usx-select {
+  padding: var(--usx-spacing-2) var(--usx-spacing-4);
+  font-family: var(--usx-font-family-ui);
+  font-size: var(--usx-font-size-sm);
+  color: rgb(var(--usx-color-text));
+  background-color: rgb(var(--usx-color-surface));
+  border: var(--usx-border-width) var(--usx-border-style) var(--usx-border-color);
+  border-radius: var(--usx-radius-lg);
+  cursor: pointer;
+  transition: border-color var(--usx-transition-base);
+}
+
+.usx-select:focus {
+  outline: none;
+  border-color: rgb(var(--usx-color-primary));
 }

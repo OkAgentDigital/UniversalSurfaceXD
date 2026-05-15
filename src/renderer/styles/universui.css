@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* USXD Global Styles - VS Code Inspired 3-Column Layout */
 
 :root {
@@ -9,7 +11,7 @@
   --vscode-status-bar-height: 22px;
   --vscode-title-bar-height: 42px;
 
-  /* VS Code Color Tokens */
+  /* VS Code Color Tokens — Mono scheme */
   --vscode-bg: #1e1e1e;
   --vscode-sidebar-bg: #252526;
   --vscode-sidebar-header-bg: #2d2d2d;
@@ -22,11 +24,11 @@
   --vscode-activity-bar-active: #ffffff;
   --vscode-activity-bar-inactive: #858585;
   --vscode-activity-bar-hover: #3c3c3c;
-  --vscode-status-bar-bg: #007acc;
-  --vscode-status-bar-fg: #ffffff;
+  --vscode-status-bar-bg: #3c3c3c;
+  --vscode-status-bar-fg: #cccccc;
   --vscode-title-bar-bg: #2c2c2c;
   --vscode-title-bar-fg: #cccccc;
-  --vscode-selection-bg: #094771;
+  --vscode-selection-bg: #505050;
   --vscode-hover-bg: #2a2d2e;
 
   /* OK Chat Colors */
@@ -171,7 +173,7 @@ html, body, #root {
 }
 
 .activity-item .codicon {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 /* Side Bar */
@@ -183,6 +185,24 @@ html, body, #root {
   border-right: 1px solid var(--vscode-sidebar-border);
   flex-shrink: 0;
   overflow: hidden;
+  min-width: 170px;
+  max-width: 500px;
+}
+
+/* Sidebar Resize Handle */
+.sidebar-resize-handle {
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  transition: background 0.15s ease;
+}
+
+.sidebar-resize-handle:hover,
+.sidebar-resize-handle:active {
+  background: var(--vscode-selection-bg);
 }
 
 .sidebar-header {
@@ -538,6 +558,24 @@ html, body, #root {
   border-top: 1px solid #3c3c3c;
   flex-shrink: 0;
   overflow: hidden;
+  min-height: 100px;
+  max-height: 500px;
+}
+
+/* Panel Resize Handle (bottom panel) */
+.panel-resize-handle {
+  height: 4px;
+  cursor: row-resize;
+  background: transparent;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  transition: background 0.15s ease;
+}
+
+.panel-resize-handle:hover,
+.panel-resize-handle:active {
+  background: var(--vscode-selection-bg);
 }
 
 /* Action Buttons */
@@ -565,8 +603,8 @@ html, body, #root {
 }
 
 .action-button.active {
-  background: #0e639c;
-  color: #ffffff;
+  background: #cccccc;
+  color: #1e1e1e;
 }
 
 .action-button .codicon {
@@ -648,7 +686,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 4px;
+  padding: 0 8px;
   -webkit-app-region: drag;
 }
 
@@ -694,8 +732,8 @@ body.darwin .mac-traffic-light-spacer,
 }
 
 .title-bar-app-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
 .title-bar-app-name {
@@ -754,13 +792,13 @@ body.darwin .mac-traffic-light-spacer,
 }
 
 .title-bar-action.active {
-  color: var(--ok-chat-accent, #4ec9b0);
-  background: rgba(78, 201, 176, 0.12);
+  color: #1e1e1e;
+  background: #cccccc;
 }
 
 .title-bar-action svg {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
 }
 
 /* Center section: Command center */
@@ -788,11 +826,11 @@ body.darwin .mac-traffic-light-spacer,
 }
 
 .title-bar-command-center svg {
-  font-size: 14px;
+  font-size: 16px;
   color: #858585;
   flex-shrink: 0;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
 }
 
 .title-bar-command-text {
@@ -814,33 +852,43 @@ body.darwin .mac-traffic-light-spacer,
 }
 
 /* ============================================
-   RIGHT PANEL (OK Chat / Collaboration Hub)
+   RIGHT PANEL OVERLAY (OK Chat - Popover)
    ============================================ */
 
-.right-panel {
+.right-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 500;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.right-panel-popover {
   display: flex;
   flex-direction: column;
   background: var(--vscode-sidebar-bg);
   border-left: 1px solid var(--vscode-sidebar-border);
-  flex-shrink: 0;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
   overflow: hidden;
-  min-width: 200px;
+  min-width: 280px;
   max-width: 600px;
+  animation: slideInRight 0.2s ease-out;
 }
 
-.right-panel-resize-handle {
-  width: 4px;
-  cursor: col-resize;
-  background: transparent;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 10;
-  transition: background 0.15s ease;
-}
-
-.right-panel-resize-handle:hover,
-.right-panel-resize-handle:active {
-  background: var(--vscode-selection-bg);
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* ============================================
@@ -911,8 +959,8 @@ body.darwin .mac-traffic-light-spacer,
 }
 
 .ok-chat-mode-btn.active {
-  background: #0e639c;
-  color: #ffffff;
+  background: #cccccc;
+  color: #1e1e1e;
 }
 
 .ok-chat-mode-btn .codicon {
@@ -970,7 +1018,6 @@ body.darwin .mac-traffic-light-spacer,
 .ok-chat-message.system {
   background: var(--ok-chat-system-bg);
   border-left: 3px solid #858585;
-  font-style: italic;
   color: #a0a0a0;
 }
 
@@ -1014,7 +1061,6 @@ body.darwin .mac-traffic-light-spacer,
 
 .ok-chat-typing {
   color: var(--ok-chat-accent);
-  font-style: italic;
 }
 
 .ok-chat-typing-dots span {
@@ -1081,15 +1127,15 @@ body.darwin .mac-traffic-light-spacer,
   height: 36px;
   border: none;
   border-radius: 6px;
-  background: #0e639c;
-  color: white;
+  background: #cccccc;
+  color: #1e1e1e;
   cursor: pointer;
   align-self: flex-end;
   transition: background 0.15s ease;
 }
 
 .ok-chat-send-btn:hover {
-  background: #1177bb;
+  background: #e0e0e0;
 }
 
 .ok-chat-send-btn:disabled {
@@ -2065,8 +2111,8 @@ body.darwin .mac-traffic-light-spacer,
 
 /* Sidebar header action active state */
 .sidebar-header-action.active {
-  color: var(--ok-chat-accent, #4ec9b0);
-  background: rgba(78, 201, 176, 0.1);
+  color: #cccccc;
+  background: #3c3c3c;
 }
 
 /* Status Dot */
@@ -2959,8 +3005,8 @@ kbd {
 }
 
 .devops-tab.active {
-  color: var(--ok-chat-accent, #4ec9b0);
-  background: rgba(78, 201, 176, 0.12);
+  color: #cccccc;
+  background: #3c3c3c;
   font-weight: 600;
 }
 
@@ -3022,8 +3068,8 @@ kbd {
 }
 
 .ok-chat-mode-btn.active {
-  background: #0e639c;
-  color: #ffffff;
+  background: #cccccc;
+  color: #1e1e1e;
 }
 
 .ok-chat-mode-btn:hover:not(.active) {
@@ -3063,10 +3109,9 @@ kbd {
 .ok-chat-message.system {
   background: #252526;
   border: 1px solid rgba(133, 133, 133, 0.2);
-  font-style: italic;
   color: #a0a0a0;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .ok-chat-message-header {
@@ -3125,13 +3170,14 @@ kbd {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: #0e639c;
-  box-shadow: 0 2px 6px rgba(14, 99, 156, 0.3);
+  background: #cccccc;
+  color: #1e1e1e;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.15s ease;
 }
 
 .ok-chat-send-btn:hover:not(:disabled) {
-  background: #1177bb;
+  background: #e0e0e0;
   transform: scale(1.05);
 }
 

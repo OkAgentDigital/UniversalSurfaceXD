@@ -10,22 +10,149 @@ interface ChatMessage {
 
 type ChatMode = 'chat' | 'github' | 'explain';
 
-export function OKChatPanel() {
+const styles = {
+  panel: {
+    display: 'flex' as const,
+    flexDirection: 'column' as const,
+    height: '100%',
+    backgroundColor: '#212121',
+  },
+  header: {
+    display: 'flex' as const,
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    padding: '14px 16px',
+    borderBottom: '1px solid #2f2f2f',
+    flexShrink: 0,
+    position: 'relative' as const,
+  },
+  headerTitle: {
+    fontSize: 14,
+    fontWeight: 600,
+    color: '#ececec',
+    letterSpacing: '-0.2px',
+  },
+  headerActions: {
+    display: 'flex' as const,
+    gap: 2,
+    position: 'absolute' as const,
+    right: 12,
+    top: '50%',
+    transform: 'translateY(-50%)',
+  },
+  iconBtn: {
+    background: 'transparent',
+    border: 'none',
+    color: '#666',
+    cursor: 'pointer',
+    padding: 6,
+    borderRadius: 6,
+    display: 'flex',
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    transition: 'all 0.15s ease',
+  },
+  messages: {
+    flex: 1,
+    overflowY: 'auto' as const,
+    padding: '24px 16px',
+    display: 'flex' as const,
+    flexDirection: 'column' as const,
+    gap: 8,
+  },
+  messageRow: (role: string) => ({
+    display: 'flex' as const,
+    justifyContent: role === 'user' ? 'flex-end' as const : 'flex-start' as const,
+    padding: '0 0',
+  }),
+  messageContent: (role: string) => ({
+    maxWidth: '90%',
+    fontSize: 14,
+    lineHeight: 1.7,
+    color: role === 'user' ? '#ececec' : '#d4d4d4',
+    whiteSpace: 'pre-wrap' as const,
+    wordBreak: 'break-word' as const,
+    padding: role === 'user' ? '10px 16px' : '4px 4px',
+    backgroundColor: role === 'user' ? '#2f2f2f' : 'transparent',
+    borderRadius: role === 'user' ? 16 : 0,
+    borderBottomRightRadius: role === 'user' ? 4 : 16,
+  }),
+  systemMessage: {
+    textAlign: 'center' as const,
+    fontSize: 12,
+    color: '#666',
+    padding: '12px 16px',
+    lineHeight: 1.5,
+  },
+  inputArea: {
+    flexShrink: 0,
+    padding: '12px 16px 16px',
+    backgroundColor: '#212121',
+  },
+  inputContainer: {
+    display: 'flex' as const,
+    alignItems: 'flex-end' as const,
+    gap: 8,
+    backgroundColor: '#2f2f2f',
+    border: '1px solid #3f3f3f',
+    borderRadius: 16,
+    padding: '8px 8px 8px 16px',
+    maxWidth: 600,
+    margin: '0 auto',
+  },
+  textarea: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    border: 'none',
+    padding: '6px 0',
+    fontSize: 14,
+    color: '#ececec',
+    fontFamily: 'inherit',
+    resize: 'none' as const,
+    outline: 'none',
+    lineHeight: 1.5,
+    maxHeight: 120,
+  },
+  sendBtn: (disabled: boolean) => ({
+    display: 'flex' as const,
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    width: 32,
+    height: 32,
+    border: 'none',
+    borderRadius: 8,
+    backgroundColor: disabled ? '#3f3f3f' : '#ffffff',
+    color: disabled ? '#666' : '#1e1e1e',
+    cursor: disabled ? 'default' as const : 'pointer' as const,
+    transition: 'all 0.15s ease',
+    flexShrink: 0,
+  }),
+  typingIndicator: {
+    display: 'flex' as const,
+    alignItems: 'center' as const,
+    gap: 4,
+    color: '#888',
+    fontSize: 14,
+    padding: '4px 4px',
+  },
+};
+
+interface OKChatPanelProps {
+  onClose?: () => void;
+}
+
+export function OKChatPanel({ onClose }: OKChatPanelProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
       role: 'system',
-      content: 'Welcome to OK Chat! I can help you with:\n\n' +
-        '💬 **Chat** — General conversation and questions\n' +
-        '🐙 **GitHub** — Search repos, create issues, analyze code\n' +
-        '🔍 **Explain** — Explain selected code or text\n\n' +
-        'Select a mode above to get started.',
+      content: 'Welcome to OK Chat. I can help with questions, code, and GitHub.',
       timestamp: Date.now(),
     },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [chatMode, setChatMode] = useState<ChatMode>('chat');
+  const [chatMode] = useState<ChatMode>('chat');
   const [mcpStatuses, setMcpStatuses] = useState<MCPServerStatus[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -38,12 +165,10 @@ export function OKChatPanel() {
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
-  // Check MCP status on mount and when mode changes to github
+  // Check MCP status on mount
   useEffect(() => {
-    if (chatMode === 'github') {
-      window.electron.mcpStatus().then(setMcpStatuses).catch(() => {});
-    }
-  }, [chatMode]);
+    window.electron.mcpStatus().then(setMcpStatuses).catch(() => {});
+  }, []);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -61,7 +186,6 @@ export function OKChatPanel() {
 
     try {
       if (chatMode === 'github') {
-        // GitHub mode - use MCP server
         const mcpResult = await window.electron.mcpExecute(input.trim());
         const assistantMessage: ChatMessage = {
           id: `msg-${Date.now()}`,
@@ -73,7 +197,6 @@ export function OKChatPanel() {
         };
         setMessages(prev => [...prev, assistantMessage]);
       } else {
-        // Chat or Explain mode - use DeepSeek
         const systemPrompt = chatMode === 'explain'
           ? 'You are an expert code and document explainer. Provide clear, concise explanations with examples where helpful.'
           : 'You are OK Chat, a helpful assistant integrated into a local-first document editor. You help users with writing, coding, and managing their documents.';
@@ -129,121 +252,111 @@ export function OKChatPanel() {
     ]);
   };
 
-  const formatTimestamp = (ts: number) => {
-    return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-
   const renderMessage = (msg: ChatMessage) => {
-    const isUser = msg.role === 'user';
-    const isSystem = msg.role === 'system';
+    if (msg.role === 'system') {
+      return (
+        <div key={msg.id} style={styles.systemMessage}>
+          {msg.content}
+        </div>
+      );
+    }
 
     return (
-      <div
-        key={msg.id}
-        className={`ok-chat-message ${isUser ? 'user' : isSystem ? 'system' : 'assistant'}`}
-      >
-        <div className="ok-chat-message-header">
-          <span className="ok-chat-message-role">
-            {isUser ? 'You' : isSystem ? 'System' : 'OK Chat'}
-          </span>
-          <span className="ok-chat-message-time">{formatTimestamp(msg.timestamp)}</span>
-        </div>
-        <div className="ok-chat-message-content">
-          {msg.content.split('\n').map((line, i) => (
-            <React.Fragment key={i}>
-              {line}
-              {i < msg.content.split('\n').length - 1 && <br />}
-            </React.Fragment>
-          ))}
+      <div key={msg.id} style={styles.messageRow(msg.role)}>
+        <div style={styles.messageContent(msg.role)}>
+          {msg.content}
         </div>
       </div>
     );
   };
 
   return (
-    <div className="ok-chat-panel">
-      <div className="ok-chat-header">
-        <div className="ok-chat-header-left">
-          <i className="codicon codicon-comment-discussion"></i>
-          <span>OK CHAT</span>
-        </div>
-        <div className="ok-chat-header-actions">
-          <button className="action-button" onClick={handleClearChat} title="Clear Chat">
-            <i className="codicon codicon-clear-all"></i>
+    <div style={styles.panel}>
+      {/* Header */}
+      <div style={styles.header}>
+        <span style={styles.headerTitle}>OK Chat</span>
+        <div style={styles.headerActions}>
+          <button
+            onClick={handleClearChat}
+            style={styles.iconBtn}
+            title="Clear Chat"
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#3f3f3f'; e.currentTarget.style.color = '#ececec'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#666'; }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
           </button>
+          {onClose && (
+            <button
+              onClick={onClose}
+              style={styles.iconBtn}
+              title="Close"
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#3f3f3f'; e.currentTarget.style.color = '#ececec'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#666'; }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="ok-chat-mode-selector">
-        <button
-          className={`ok-chat-mode-btn ${chatMode === 'chat' ? 'active' : ''}`}
-          onClick={() => setChatMode('chat')}
-        >
-          <i className="codicon codicon-comment"></i> Chat
-        </button>
-        <button
-          className={`ok-chat-mode-btn ${chatMode === 'github' ? 'active' : ''}`}
-          onClick={() => setChatMode('github')}
-        >
-          <i className="codicon codicon-github"></i> GitHub
-        </button>
-        <button
-          className={`ok-chat-mode-btn ${chatMode === 'explain' ? 'active' : ''}`}
-          onClick={() => setChatMode('explain')}
-        >
-          <i className="codicon codicon-lightbulb"></i> Explain
-        </button>
-      </div>
-
-      {chatMode === 'github' && mcpStatuses.length > 0 && (
-        <div className={`ok-chat-mcp-status ${mcpStatuses.some(s => s.running) ? 'connected' : 'disconnected'}`}>
-          <i className={`codicon ${mcpStatuses.some(s => s.running) ? 'codicon-check' : 'codicon-warning'}`}></i>
-          <span>MCP Servers: {mcpStatuses.filter(s => s.running).length}/{mcpStatuses.length} connected</span>
-        </div>
-      )}
-
-      <div className="ok-chat-messages">
+      {/* Messages */}
+      <div style={styles.messages}>
         {messages.map(renderMessage)}
         {isLoading && (
-          <div className="ok-chat-message assistant">
-            <div className="ok-chat-message-header">
-              <span className="ok-chat-message-role">OK Chat</span>
-            </div>
-            <div className="ok-chat-message-content">
-              <span className="ok-chat-typing">Thinking</span>
-              <span className="ok-chat-typing-dots">
-                <span>.</span><span>.</span><span>.</span>
-              </span>
+          <div style={styles.messageRow('assistant')}>
+            <div style={styles.typingIndicator}>
+              <span>Thinking</span>
+              <span style={{ animation: 'none', opacity: 1 }}>.</span>
+              <span style={{ animation: 'none', opacity: 1 }}>.</span>
+              <span style={{ animation: 'none', opacity: 1 }}>.</span>
             </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="ok-chat-input-area">
-        <textarea
-          ref={inputRef}
-          className="ok-chat-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder={
-            chatMode === 'github'
-              ? 'Ask about GitHub repos, issues, PRs...'
-              : chatMode === 'explain'
-                ? 'Paste code or text to explain...'
-                : 'Ask anything...'
-          }
-          rows={3}
-          disabled={isLoading}
-        />
-        <button
-          className="ok-chat-send-btn"
-          onClick={handleSend}
-          disabled={!input.trim() || isLoading}
-        >
-          <i className="codicon codicon-send"></i>
-        </button>
+      {/* Input Area */}
+      <div style={styles.inputArea}>
+        <div style={styles.inputContainer}>
+          <textarea
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Message OK Chat..."
+            rows={1}
+            disabled={isLoading}
+            style={styles.textarea}
+          />
+          <button
+            onClick={handleSend}
+            disabled={!input.trim() || isLoading}
+            style={styles.sendBtn(!input.trim() || isLoading)}
+            onMouseEnter={(e) => {
+              if (input.trim() && !isLoading) {
+                e.currentTarget.style.backgroundColor = '#e8e8e8';
+                e.currentTarget.style.transform = 'scale(1.05)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (input.trim() && !isLoading) {
+                e.currentTarget.style.backgroundColor = '#ffffff';
+                e.currentTarget.style.transform = 'scale(1)';
+              }
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );

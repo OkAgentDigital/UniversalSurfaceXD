@@ -1,11 +1,12 @@
 /* USX Button Component — Flat, no shadows */
+/* Uses --usx-font-family-ui for UI-specific font */
 .usx-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--usx-spacing-2);
   padding: var(--usx-spacing-3) var(--usx-spacing-6);
-  font-family: var(--usx-font-family-body);
+  font-family: var(--usx-font-family-ui);
   font-size: var(--usx-font-size-base);
   font-weight: var(--usx-font-weight-medium);
   line-height: 1;

@@ -1,11 +1,46 @@
 /* ============================================
    USXBlockRenderer — Renders individual USX blocks
+   Supports standard + teletext/grid code block renderers
    ============================================ */
 import React from 'react';
 import type { USXBlock } from '../../types/usx';
 
 interface USXBlockRendererProps {
   block: USXBlock;
+}
+
+/** Get CSS class for code block renderer variant */
+function getCodeRendererClass(attributes?: Record<string, unknown>): string {
+  const renderer = attributes?.renderer as string | undefined;
+  const variant = attributes?.variant as string | undefined;
+
+  if (renderer === 'teletext') {
+    if (variant === 'condensed') return 'usx-code--teletext-condensed';
+    if (variant === 'double') return 'usx-code--petscii-double';
+    if (variant === 'press-start') return 'usx-code--nes';
+    return 'usx-code--teletext';
+  }
+  if (renderer === 'petscii') return 'usx-code--petscii';
+  if (renderer === 'petscii-double') return 'usx-code--petscii-double';
+  if (renderer === 'nes') return 'usx-code--nes';
+  return 'usx-code--standard';
+}
+
+/** Render a teletext grid block */
+function TeletextGridBlock({ content, columns = 40 }: { content: string; columns?: number }) {
+  const chars = content.split('');
+  return (
+    <div
+      className="usx-teletext-grid"
+      style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+    >
+      {chars.map((char, i) => (
+        <span key={i} className="usx-teletext-grid-cell">
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 export const USXBlockRenderer: React.FC<USXBlockRendererProps> = ({ block }) => {
@@ -101,14 +136,27 @@ export const USXBlockRenderer: React.FC<USXBlockRendererProps> = ({ block }) => 
       );
     }
 
-    case 'code':
+    case 'code': {
+      const content = block.content as string;
+      const renderer = block.attributes?.renderer as string | undefined;
+      const isGrid = block.attributes?.grid as boolean | undefined;
+      const columns = block.attributes?.columns as number | undefined;
+
+      // Teletext grid rendering
+      if (renderer === 'teletext' && isGrid) {
+        return <TeletextGridBlock content={content} columns={columns} />;
+      }
+
+      // Standard code block with renderer variant class
+      const codeClass = getCodeRendererClass(block.attributes);
       return (
         <div className="usx-code-block">
-          <pre>
-            <code>{block.content as string}</code>
+          <pre className={codeClass}>
+            <code>{content}</code>
           </pre>
         </div>
       );
+    }
 
     case 'divider':
       return <hr className="usx-divider" />;

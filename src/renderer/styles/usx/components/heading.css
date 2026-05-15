@@ -1,6 +1,9 @@
-/* USX Heading Component — Separate font from body */
+/* USX Heading Component — Role-based font families */
+/* H1/H2 use --usx-font-family-desktop (Desktop Title) */
+/* H3/H4 use --usx-font-family-document (Document Title) */
+/* Body text uses --usx-font-family-body */
+
 .usx-heading {
-  font-family: var(--usx-font-family-heading);
   font-weight: var(--usx-font-weight-semibold);
   color: rgb(var(--usx-color-text));
   line-height: var(--usx-line-height-tight);
@@ -8,22 +11,30 @@
 }
 
 .usx-heading--1 {
+  font-family: var(--usx-font-family-desktop);
   font-size: var(--usx-font-size-5xl);
+  font-weight: var(--usx-font-weight-desktop);
   margin-bottom: var(--usx-spacing-6);
 }
 
 .usx-heading--2 {
+  font-family: var(--usx-font-family-desktop);
   font-size: var(--usx-font-size-4xl);
+  font-weight: var(--usx-font-weight-desktop);
   margin-bottom: var(--usx-spacing-5);
 }
 
 .usx-heading--3 {
+  font-family: var(--usx-font-family-document);
   font-size: var(--usx-font-size-3xl);
+  font-weight: var(--usx-font-weight-document);
   margin-bottom: var(--usx-spacing-4);
 }
 
 .usx-heading--4 {
+  font-family: var(--usx-font-family-document);
   font-size: var(--usx-font-size-2xl);
+  font-weight: var(--usx-font-weight-document);
   margin-bottom: var(--usx-spacing-3);
 }
 

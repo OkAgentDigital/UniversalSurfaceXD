@@ -1,5 +1,5 @@
-export const APP_NAME = 'UniversalSurfaceXD';
-export const APP_SHORT_NAME = 'USXD';
+export const APP_NAME = 'Surface';
+export const APP_SHORT_NAME = 'Surface';
 export const APP_VERSION = '1.5.0';
 export const DB_FILENAME = 'usxd.db';
 

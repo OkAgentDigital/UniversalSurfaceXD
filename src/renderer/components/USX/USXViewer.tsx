@@ -7,6 +7,9 @@ import { ThemeControls } from './ThemeControls';
 import { USXBlockRenderer } from './USXBlockRenderer';
 import type { USXDocument } from '../../types/usx';
 
+// Import USX Font Pack
+import '../../styles/usx-fonts.css';
+
 // Import all modular USX CSS
 import '../../styles/usx/tokens.css';
 import '../../styles/usx/components/button.css';

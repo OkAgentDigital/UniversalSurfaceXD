@@ -19,10 +19,41 @@
   --usx-color-warning: 234 179 8;           /* Yellow */
   --usx-color-border: 226 232 240;          /* Light border */
 
-  /* ===== TYPOGRAPHY — Separate Heading & Body Fonts ===== */
-  --usx-font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --usx-font-family-body: 'Georgia', 'Times New Roman', serif;
-  --usx-font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  /* ===== TYPOGRAPHY — Role-Based Font Stacks ===== */
+  /* Body (Default) — Paragraphs, lists, general text */
+  --usx-font-family-body:
+    'SF Pro', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* Desktop Title — Window titles, surface headers, H1/H2 */
+  --usx-font-family-desktop:
+    'ChicagoFLF', 'SanFrisco', 'Liverpool', 'SF Pro', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* Document Title — Document headings, H3/H4 */
+  --usx-font-family-document:
+    'SF Pro', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* Monospace (Code) — Code blocks, inline code, terminals */
+  --usx-font-family-mono:
+    'SourceCodePro', 'Teletext50', 'PressStart2P', 'PetMe128',
+    'Ubuntu Mono', 'Courier New', 'Menlo', 'Monaco',
+    'Cascadia Code', 'Consolas', monospace;
+
+  /* UI Elements — Buttons, tabs, inputs, controls */
+  --usx-font-family-ui:
+    'ChicagoFLF', 'SF Pro', 'SanFrisco', 'Liverpool', 'Quicksand', 'Poppins', 'Athene',
+    'Ubuntu', 'Roboto', 'Cantarell', 'Noto Sans',
+    system-ui, -apple-system, sans-serif;
+
+  /* Teletext Extended — Grid-based code blocks */
+  --usx-font-family-teletext:
+    'Teletext50 Condensed', 'Teletext50', 'PetMe128 Double', 'PetMe128',
+    monospace;
 
   /* Font sizes (rem-based, scale via root font-size) */
   --usx-font-size-xs: 0.75rem;      /* 12px @ 16px base */
@@ -35,11 +66,24 @@
   --usx-font-size-4xl: 2.25rem;     /* 36px */
   --usx-font-size-5xl: 3rem;        /* 48px */
 
+  /* Role-specific base font sizes (Linux Mint defaults) */
+  --usx-font-size-desktop-title: 1.5rem;    /* 24px */
+  --usx-font-size-document-title: 1.25rem;  /* 20px */
+  --usx-font-size-code: 0.875rem;           /* 14px */
+  --usx-font-size-ui: 1rem;                 /* 16px */
+
   /* Font weights */
   --usx-font-weight-normal: 400;
   --usx-font-weight-medium: 500;
   --usx-font-weight-semibold: 600;
   --usx-font-weight-bold: 700;
+
+  /* Role-specific font weights */
+  --usx-font-weight-body: 400;
+  --usx-font-weight-desktop: 700;
+  --usx-font-weight-document: 600;
+  --usx-font-weight-mono: 400;
+  --usx-font-weight-ui: 500;
 
   /* Line heights */
   --usx-line-height-tight: 1.2;
