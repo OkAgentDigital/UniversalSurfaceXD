@@ -24,7 +24,7 @@ export const TitleInput = styled.input`
   border-radius: 4px;
   background-color: #3c3c3c;
   color: #e0e0e0;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   font-weight: 500;
 
   &:focus {
@@ -43,7 +43,7 @@ export const LanguageSelect = styled.select`
   border-radius: 4px;
   background-color: #3c3c3c;
   color: #e0e0e0;
-  font-size: 13px;
+  font-size: var(--usx-font-size-sm);
   cursor: pointer;
 
   &:focus {
@@ -59,7 +59,7 @@ export const ToolbarButton = styled.button`
   background-color: transparent;
   color: #ccc;
   cursor: pointer;
-  font-size: 13px;
+  font-size: var(--usx-font-size-sm);
   transition: all 0.2s;
   white-space: nowrap;
 
@@ -87,7 +87,7 @@ export const PrimaryButton = styled(ToolbarButton)`
 export const BackButton = styled(ToolbarButton)`
   border: none;
   color: #888;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   padding: 6px 8px;
 
   &:hover {
@@ -97,7 +97,7 @@ export const BackButton = styled(ToolbarButton)`
 `;
 
 export const SaveIndicator = styled.span<{ $saving: boolean }>`
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   color: ${props => props.$saving ? '#ff9800' : '#4caf50'};
   transition: color 0.3s;
   min-width: 60px;

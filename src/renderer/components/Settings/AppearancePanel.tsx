@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardBody } from '../UI/Card';
-import { Button } from '../UI/Button';
+import React, { useState } from 'react';
+import { Button, ToggleSwitch, Card, Label, Badge } from 'flowbite-react';
 import { useUSXTheme } from '../USX/USXThemeProvider';
 import type { FontSize } from '../../types/usx';
 
@@ -25,6 +24,14 @@ const DEFAULT_SETTINGS: AppearanceSettings = {
 
 /** Font size progression for +/- controls */
 const FONT_SIZES: FontSize[] = ['small', 'medium', 'large', 'xlarge', 'xxlarge'];
+
+const FONT_SIZE_LABELS: Record<FontSize, string> = {
+  small: 'S',
+  medium: 'M',
+  large: 'L',
+  xlarge: 'XL',
+  xxlarge: 'XXL',
+};
 
 export function AppearancePanel() {
   const [settings, setSettings] = useState<AppearanceSettings>(DEFAULT_SETTINGS);
@@ -54,12 +61,11 @@ export function AppearancePanel() {
   };
 
   return (
-    <div className="appearance-panel">
-      <h3 className="sidebar-section-title">Appearance</h3>
-
-      <div className="appearance-section">
-        <h4 className="appearance-section-title">Icon Size</h4>
-        <div className="icon-size-options">
+    <div className="flex flex-col h-full overflow-y-auto">
+      {/* Section: Icon Size */}
+      <div className="p-4 border-b border-usxd-border">
+        <Label value="Icon Size" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold mb-3 block" />
+        <div className="flex gap-2">
           {[
             { id: 'small' as IconSize, label: 'Small', preview: 16 },
             { id: 'medium' as IconSize, label: 'Medium', preview: 20 },
@@ -67,126 +73,148 @@ export function AppearancePanel() {
           ].map(size => (
             <button
               key={size.id}
-              className={`icon-size-option ${settings.iconSize === size.id ? 'active' : ''}`}
               onClick={() => updateSetting('iconSize', size.id)}
+              className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border transition-all duration-150 cursor-pointer ${
+                settings.iconSize === size.id
+                  ? 'bg-usxd-highlight/10 border-usxd-highlight text-usxd-highlight'
+                  : 'bg-transparent border-usxd-border text-usxd-text hover:bg-[var(--vscode-sidebar-hover)] hover:border-[#4c4c4c]'
+              }`}
             >
               <i
-                className="codicon codicon-symbol-misc"
+                className={`codicon codicon-symbol-misc ${
+                  settings.iconSize === size.id ? 'text-usxd-highlight' : 'text-usxd-secondary'
+                }`}
                 style={{ fontSize: size.preview }}
-              ></i>
-              <span>{size.label}</span>
+              />
+              <span className="text-xs">{size.label}</span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="appearance-section">
-        <h4 className="appearance-section-title">Corner Rounding</h4>
-        <div className="corner-radius-options">
+      {/* Section: Corner Rounding */}
+      <div className="p-4 border-b border-usxd-border">
+        <Label value="Corner Rounding" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold mb-3 block" />
+        <div className="flex gap-2">
           {(['4px', '8px', '12px', '16px'] as CornerRadius[]).map(radius => (
             <button
               key={radius}
-              className={`corner-radius-option ${settings.cornerRadius === radius ? 'active' : ''}`}
               onClick={() => updateSetting('cornerRadius', radius)}
+              className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border transition-all duration-150 cursor-pointer ${
+                settings.cornerRadius === radius
+                  ? 'bg-usxd-highlight/10 border-usxd-highlight text-usxd-highlight'
+                  : 'bg-transparent border-usxd-border text-usxd-text hover:bg-[var(--vscode-sidebar-hover)] hover:border-[#4c4c4c]'
+              }`}
             >
               <div
-                className="corner-radius-preview"
+                className="w-6 h-6 bg-[#4c4c4c] border border-[#6c6c6c]"
                 style={{ borderRadius: radius }}
-              ></div>
-              <span>{radius}</span>
+              />
+              <span className="text-xs">{radius}</span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="appearance-section">
-        <h4 className="appearance-section-title">Layout</h4>
-        <div className="layout-settings">
-          <div className="layout-setting-row">
-            <label>Font Size</label>
-            <div className="font-size-control">
-              <button
-                className="size-btn"
+      {/* Section: Layout */}
+      <div className="p-4 border-b border-usxd-border">
+        <Label value="Layout" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold mb-3 block" />
+        <div className="flex flex-col gap-4">
+          {/* Font Size */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm text-usxd-text min-w-[100px]">Font Size</span>
+            <div className="flex items-center gap-2">
+              <Button
+                size="xs"
+                color="gray"
                 onClick={decreaseFontSize}
                 disabled={usxTheme.fontSize === 'small'}
+                className="!p-1.5 !min-w-[28px] !h-[28px]"
               >
-                <i className="codicon codicon-remove"></i>
-              </button>
-              <span className="font-size-value">
-                {usxTheme.fontSize === 'small' ? 'S' : usxTheme.fontSize === 'medium' ? 'M' : usxTheme.fontSize === 'large' ? 'L' : usxTheme.fontSize === 'xlarge' ? 'XL' : 'XXL'}
-              </span>
-              <button
-                className="size-btn"
+                <i className="codicon codicon-remove text-sm" />
+              </Button>
+              <Badge
+                color="info"
+                size="sm"
+                className="!min-w-[36px] !text-center !font-medium"
+              >
+                {FONT_SIZE_LABELS[usxTheme.fontSize]}
+              </Badge>
+              <Button
+                size="xs"
+                color="gray"
                 onClick={increaseFontSize}
                 disabled={usxTheme.fontSize === 'xxlarge'}
+                className="!p-1.5 !min-w-[28px] !h-[28px]"
               >
-                <i className="codicon codicon-add"></i>
-              </button>
+                <i className="codicon codicon-add text-sm" />
+              </Button>
             </div>
           </div>
 
-          <div className="layout-setting-row">
-            <label>Sidebar Width</label>
-            <input
-              type="range"
-              min={200}
-              max={400}
-              value={settings.sidebarWidth}
-              onChange={e => updateSetting('sidebarWidth', parseInt(e.target.value))}
-              className="sidebar-width-slider"
+          {/* Sidebar Width */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm text-usxd-text min-w-[100px]">Sidebar Width</span>
+            <div className="flex items-center gap-3 flex-1 max-w-[200px]">
+              <input
+                type="range"
+                min={200}
+                max={400}
+                value={settings.sidebarWidth}
+                onChange={e => updateSetting('sidebarWidth', parseInt(e.target.value))}
+                className="flex-1 h-1 appearance-none bg-usxd-border rounded-full outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-usxd-highlight [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:border-none"
+              />
+              <span className="text-xs text-usxd-secondary min-w-[36px] text-right">{settings.sidebarWidth}px</span>
+            </div>
+          </div>
+
+          {/* Show Activity Labels */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm text-usxd-text min-w-[100px]">Activity Labels</span>
+            <ToggleSwitch
+              checked={settings.showActivityLabels}
+              onChange={(checked: boolean) => updateSetting('showActivityLabels', checked)}
+              label=""
             />
-            <span className="sidebar-width-value">{settings.sidebarWidth}px</span>
           </div>
 
-          <div className="layout-setting-row">
-            <label>Show Activity Labels</label>
-            <button
-              className={`toggle-switch ${settings.showActivityLabels ? 'active' : ''}`}
-              onClick={() => updateSetting('showActivityLabels', !settings.showActivityLabels)}
-            >
-              <div className="toggle-knob"></div>
-            </button>
-          </div>
-
-          <div className="layout-setting-row">
-            <label>Compact Mode</label>
-            <button
-              className={`toggle-switch ${settings.compactMode ? 'active' : ''}`}
-              onClick={() => updateSetting('compactMode', !settings.compactMode)}
-            >
-              <div className="toggle-knob"></div>
-            </button>
+          {/* Compact Mode */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm text-usxd-text min-w-[100px]">Compact Mode</span>
+            <ToggleSwitch
+              checked={settings.compactMode}
+              onChange={(checked: boolean) => updateSetting('compactMode', checked)}
+              label=""
+            />
           </div>
         </div>
       </div>
 
-      <div className="appearance-section">
-        <h4 className="appearance-section-title">Preview</h4>
-        <Card variant="elevated" padding="md">
-          <CardBody>
-            <div className="preview-content">
-              <div className="preview-button-row">
-                <Button variant="primary" size="small">Primary</Button>
-                <Button variant="secondary" size="small">Secondary</Button>
-                <Button variant="ghost" size="small">Ghost</Button>
-              </div>
-              <div className="preview-input-row">
-                <input
-                  type="text"
-                  className="ui-input ui-input-medium"
-                  placeholder="Sample input field..."
-                  readOnly
-                />
-              </div>
-              <div className="preview-card-row">
-                <div className="card" style={{ padding: '12px', borderRadius: settings.cornerRadius }}>
-                  <p style={{ fontSize: 'var(--usx-font-size-base)', color: '#b0b0b0' }}>
-                    This is how cards, buttons, and inputs will look with your current settings.
-                  </p>
-                </div>
-              </div>
+      {/* Section: Preview */}
+      <div className="p-4">
+        <Label value="Preview" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold mb-3 block" />
+        <Card className="!bg-usxd-surface !border-usxd-border">
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-2">
+              <Button size="xs" color="primary">Primary</Button>
+              <Button size="xs" color="gray">Secondary</Button>
+              <Button size="xs" color="light">Ghost</Button>
             </div>
-          </CardBody>
+            <input
+              type="text"
+              className="w-full p-2 text-sm bg-usxd-background border border-usxd-border rounded-usxd text-usxd-text placeholder:text-usxd-secondary focus:outline-none focus:border-usxd-highlight"
+              placeholder="Sample input field..."
+              readOnly
+            />
+            <div
+              className="p-3 bg-[#2f2f2f] border border-usxd-border"
+              style={{ borderRadius: settings.cornerRadius }}
+            >
+              <p className="text-sm text-usxd-secondary m-0">
+                This is how cards, buttons, and inputs will look with your current settings.
+              </p>
+            </div>
+          </div>
         </Card>
       </div>
     </div>

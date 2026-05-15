@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Select, Label, Badge } from 'flowbite-react';
 import { DEFAULT_SETTINGS } from '../../../shared/constants';
 import { useUSXTheme } from '../USX/USXThemeProvider';
 import type { FontRole, FontSize } from '../../types/usx';
@@ -107,19 +108,22 @@ const ROLE_DESCRIPTIONS: Record<FontRole, string> = {
 /** Font size progression for +/- controls */
 const FONT_SIZES: FontSize[] = ['small', 'medium', 'large', 'xlarge', 'xxlarge'];
 
+const FONT_SIZE_LABELS: Record<FontSize, string> = {
+  small: 'S',
+  medium: 'M',
+  large: 'L',
+  xlarge: 'XL',
+  xxlarge: 'XXL',
+};
+
 export function SettingsPanel() {
   const [theme, setTheme] = useState<'dark' | 'light'>((DEFAULT_SETTINGS.theme as 'dark' | 'light'));
   const [autoSaveInterval, setAutoSaveInterval] = useState(DEFAULT_SETTINGS.autoSaveInterval);
   const [fontFamily, setFontFamily] = useState(DEFAULT_SETTINGS.fontFamily);
   const [saved, setSaved] = useState(false);
 
-  // USX theme context (may not be available outside USXViewer)
-  let usxTheme: ReturnType<typeof useUSXTheme> | null = null;
-  try {
-    usxTheme = useUSXTheme();
-  } catch {
-    // Not inside USXThemeProvider — skip font role controls
-  }
+  // USXThemeProvider wraps the entire app (in App.tsx), so this is always available
+  const usxTheme = useUSXTheme();
 
   useEffect(() => {
     loadSettings();
@@ -151,14 +155,13 @@ export function SettingsPanel() {
     saveSetting('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     // Sync with USXThemeProvider
-    if (usxTheme && usxTheme.theme !== newTheme) {
+    if (usxTheme.theme !== newTheme) {
       usxTheme.toggleTheme();
     }
   };
 
   /** Increase font size via USXThemeProvider */
   const increaseFontSize = () => {
-    if (!usxTheme) return;
     const idx = FONT_SIZES.indexOf(usxTheme.fontSize);
     if (idx < FONT_SIZES.length - 1) {
       usxTheme.setFontSize(FONT_SIZES[idx + 1]);
@@ -167,7 +170,6 @@ export function SettingsPanel() {
 
   /** Decrease font size via USXThemeProvider */
   const decreaseFontSize = () => {
-    if (!usxTheme) return;
     const idx = FONT_SIZES.indexOf(usxTheme.fontSize);
     if (idx > 0) {
       usxTheme.setFontSize(FONT_SIZES[idx - 1]);
@@ -181,20 +183,18 @@ export function SettingsPanel() {
 
   /** Determine which font pack is active */
   const getActivePackIndex = (): number => {
-    if (!usxTheme) return 0;
     return FONT_PACKS.findIndex((pack) =>
       Object.entries(pack.fonts).every(
-        ([role, fontName]) => usxTheme!.fontSelection[role as keyof typeof usxTheme.fontSelection] === fontName
+        ([role, fontName]) => usxTheme.fontSelection[role as keyof typeof usxTheme.fontSelection] === fontName
       )
     );
   };
 
   /** Apply a font pack preset */
   const applyFontPack = (packIndex: number) => {
-    if (!usxTheme) return;
     const pack = FONT_PACKS[packIndex];
     (Object.entries(pack.fonts) as Array<[keyof typeof pack.fonts, string]>).forEach(
-      ([role, fontName]) => usxTheme!.setFontRole(role as FontRole, fontName)
+      ([role, fontName]) => usxTheme.setFontRole(role as FontRole, fontName)
     );
   };
 
@@ -206,230 +206,176 @@ export function SettingsPanel() {
           <span>SETTINGS</span>
         </div>
       </div>
-      <div className="sidebar-content" style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div className="sidebar-content px-3 py-4 flex flex-col gap-5">
         {saved && (
-          <div style={{
-            fontSize: "var(--usx-font-size-sm)",
-            padding: '4px 8px',
-            borderRadius: 4,
-            background: '#1e3a2e',
-            color: '#4ec9b0',
-            textAlign: 'center',
-          }}>
+          <div className="text-xs px-2 py-1 rounded bg-green-900/30 text-green-400 text-center">
             ✓ Settings saved
           </div>
         )}
 
         {/* Theme */}
-        <div className="setting-group">
-          <label className="setting-label">Theme</label>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button
-              className={`action-button ${theme === 'dark' ? 'active' : ''}`}
+        <div className="flex flex-col gap-1.5">
+          <Label value="Theme" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold" />
+          <div className="flex gap-2">
+            <Button
+              size="xs"
+              color={theme === 'dark' ? 'primary' : 'gray'}
               onClick={() => handleThemeChange('dark')}
-              style={{ flex: 1, background: theme === 'dark' ? '#0e639c' : '#3c3c3c' }}
+              className="flex-1"
             >
-              <i className="codicon codicon-color-mode"></i> Dark
-            </button>
-            <button
-              className={`action-button ${theme === 'light' ? 'active' : ''}`}
+              <i className="codicon codicon-color-mode mr-1"></i> Dark
+            </Button>
+            <Button
+              size="xs"
+              color={theme === 'light' ? 'primary' : 'gray'}
               onClick={() => handleThemeChange('light')}
-              style={{ flex: 1, background: theme === 'light' ? '#0e639c' : '#3c3c3c' }}
+              className="flex-1"
             >
-              <i className="codicon codicon-light-bulb"></i> Light
-            </button>
+              <i className="codicon codicon-light-bulb mr-1"></i> Light
+            </Button>
           </div>
         </div>
 
         {/* Font Size */}
-        <div className="setting-group">
-          <label className="setting-label">Font Size</label>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <button className="action-button" onClick={decreaseFontSize} disabled={!usxTheme || usxTheme.fontSize === 'small'}>
-              <i className="codicon codicon-remove"></i>
-            </button>
-            <span style={{ fontSize: "var(--usx-font-size-base)", color: '#cccccc', minWidth: 24, textAlign: 'center' }}>
-              {usxTheme ? (usxTheme.fontSize === 'small' ? 'S' : usxTheme.fontSize === 'medium' ? 'M' : usxTheme.fontSize === 'large' ? 'L' : usxTheme.fontSize === 'xlarge' ? 'XL' : 'XXL') : 'M'}
-            </span>
-            <button className="action-button" onClick={increaseFontSize} disabled={!usxTheme || usxTheme.fontSize === 'xxlarge'}>
-              <i className="codicon codicon-add"></i>
-            </button>
+        <div className="flex flex-col gap-1.5">
+          <Label value="Font Size" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold" />
+          <div className="flex items-center gap-2">
+            <Button
+              size="xs"
+              color="gray"
+              onClick={decreaseFontSize}
+              disabled={usxTheme.fontSize === 'small'}
+              className="!p-1.5 !min-w-[28px] !h-[28px]"
+            >
+              <i className="codicon codicon-remove text-sm" />
+            </Button>
+            <Badge
+              color="info"
+              size="sm"
+              className="!min-w-[36px] !text-center !font-medium"
+            >
+              {FONT_SIZE_LABELS[usxTheme.fontSize]}
+            </Badge>
+            <Button
+              size="xs"
+              color="gray"
+              onClick={increaseFontSize}
+              disabled={usxTheme.fontSize === 'xxlarge'}
+              className="!p-1.5 !min-w-[28px] !h-[28px]"
+            >
+              <i className="codicon codicon-add text-sm" />
+            </Button>
           </div>
         </div>
 
         {/* Auto-save Interval */}
-        <div className="setting-group">
-          <label className="setting-label">Auto-save Interval</label>
-          <select
+        <div className="flex flex-col gap-1.5">
+          <Label value="Auto-save Interval" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold" />
+          <Select
             value={autoSaveInterval}
-            onChange={(e) => handleAutoSaveChange(parseInt(e.target.value))}
-            style={{
-              width: '100%',
-              background: '#3c3c3c',
-              border: '1px solid #555',
-              borderRadius: 4,
-              padding: '4px 8px',
-              color: '#cccccc',
-              fontSize: "var(--usx-font-size-sm)",
-              outline: 'none',
-            }}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleAutoSaveChange(parseInt(e.target.value))}
+            sizing="sm"
           >
             <option value={500}>500ms (Fast)</option>
             <option value={1000}>1 second (Default)</option>
             <option value={2000}>2 seconds</option>
             <option value={5000}>5 seconds</option>
             <option value={10000}>10 seconds</option>
-          </select>
+          </Select>
         </div>
 
         {/* Editor Font */}
-        <div className="setting-group">
-          <label className="setting-label">Editor Font</label>
+        <div className="flex flex-col gap-1.5">
+          <Label value="Editor Font" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold" />
           <input
             type="text"
             value={fontFamily}
             onChange={(e) => setFontFamily(e.target.value)}
             onBlur={() => saveSetting('fontFamily', fontFamily)}
-            style={{
-              width: '100%',
-              background: '#3c3c3c',
-              border: '1px solid #555',
-              borderRadius: 4,
-              padding: '4px 8px',
-              color: '#cccccc',
-              fontSize: "var(--usx-font-size-sm)",
-              outline: 'none',
-              fontFamily: fontFamily,
-            }}
+            className="w-full p-2 text-sm bg-usxd-background border border-usxd-border rounded-usxd text-usxd-text placeholder:text-usxd-secondary focus:outline-none focus:border-usxd-highlight"
+            style={{ fontFamily: fontFamily }}
           />
         </div>
 
-        {/* USX Font Pack Settings (only when USXThemeProvider is active) */}
-        {usxTheme && (
-          <div className="setting-group" style={{ borderTop: '1px solid #3c3c3c', paddingTop: 12 }}>
-            <label className="setting-label" style={{ fontSize: "var(--usx-font-size-base)", fontWeight: 600, marginBottom: 12 }}>
-              <i className="codicon codicon-font"></i> USX Font Pack
-            </label>
+        {/* USX Font Pack Settings */}
+        <div className="flex flex-col gap-3 pt-3 border-t border-usxd-border">
+          <Label value="USX Font Pack" className="text-usxd-text text-sm font-semibold flex items-center gap-1.5">
+            <i className="codicon codicon-font"></i> USX Font Pack
+          </Label>
 
-            {/* 3-Mode Font Pack Toggle */}
-            <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: "var(--usx-font-size-sm)", color: '#858585', display: 'block', marginBottom: 6 }}>
-                Quick Presets
-              </label>
-              <div style={{ display: 'flex', gap: 6 }}>
-                {FONT_PACKS.map((pack, idx) => (
-                  <button
-                    key={pack.id}
-                    onClick={() => applyFontPack(idx)}
-                    title={pack.description}
-                    style={{
-                      flex: 1,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: 4,
-                      padding: '8px 4px',
-                      borderRadius: 6,
-                      border: `1px solid ${getActivePackIndex() === idx ? '#0e639c' : '#555'}`,
-                      background: getActivePackIndex() === idx ? '#0e639c22' : '#3c3c3c',
-                      color: getActivePackIndex() === idx ? '#75beff' : '#cccccc',
-                      cursor: 'pointer',
-                      fontSize: "var(--usx-font-size-sm)",
-                      transition: 'all 0.15s ease',
-                    }}
-                  >
-                    <span style={{ fontSize: "var(--usx-font-size-xl)" }}>{pack.icon}</span>
-                    <span style={{ fontWeight: getActivePackIndex() === idx ? 600 : 400 }}>{pack.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Per-Role Font Selectors */}
-            {(Object.keys(FONT_OPTIONS) as FontRole[]).map((role) => (
-              <div key={role} style={{ marginBottom: 12 }}>
-                <label style={{ fontSize: "var(--usx-font-size-sm)", color: '#858585', display: 'block', marginBottom: 4 }}>
-                  {ROLE_LABELS[role]}
-                </label>
-                <select
-                  value={usxTheme!.fontSelection[role]}
-                  onChange={(e) => usxTheme!.setFontRole(role, e.target.value)}
-                  style={{
-                    width: '100%',
-                    background: '#3c3c3c',
-                    border: '1px solid #555',
-                    borderRadius: 4,
-                    padding: '4px 8px',
-                    color: '#cccccc',
-                    fontSize: "var(--usx-font-size-sm)",
-                    outline: 'none',
-                  }}
+          {/* 3-Mode Font Pack Toggle */}
+          <div className="flex flex-col gap-1.5">
+            <span className="text-xs text-usxd-secondary">Quick Presets</span>
+            <div className="flex gap-1.5">
+              {FONT_PACKS.map((pack, idx) => (
+                <button
+                  key={pack.id}
+                  onClick={() => applyFontPack(idx)}
+                  title={pack.description}
+                  className={`flex-1 flex flex-col items-center gap-1 p-2 rounded-lg border transition-all duration-150 cursor-pointer ${
+                    getActivePackIndex() === idx
+                      ? 'bg-usxd-highlight/10 border-usxd-highlight text-usxd-highlight'
+                      : 'bg-usxd-background border-usxd-border text-usxd-text hover:bg-[var(--vscode-sidebar-hover)]'
+                  }`}
                 >
-                  {FONT_OPTIONS[role].map((font) => (
-                    <option key={font.name} value={font.name}>
-                      {font.name}
-                    </option>
-                  ))}
-                </select>
-                <div style={{ fontSize: "var(--usx-font-size-xs)", color: '#666', marginTop: 2 }}>
-                  {ROLE_DESCRIPTIONS[role]}
-                </div>
-              </div>
-            ))}
-
-            {/* Live Preview */}
-            <div
-              style={{
-                marginTop: 8,
-                padding: 12,
-                backgroundColor: '#252526',
-                borderRadius: 6,
-                border: '1px solid #3c3c3c',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 8,
-              }}
-            >
-              <div style={{ fontSize: "var(--usx-font-size-xs)", color: '#666', marginBottom: 4 }}>Preview</div>
-              <p style={{ fontFamily: 'var(--usx-font-family-body)', fontSize: "var(--usx-font-size-base)", margin: 0, color: '#cccccc' }}>
-                The quick brown fox jumps over the lazy dog. (Body)
-              </p>
-              <div style={{ fontFamily: 'var(--usx-font-family-desktop)', fontSize: "var(--usx-font-size-base)", fontWeight: 700, color: '#cccccc' }}>
-                Desktop Title Preview
-              </div>
-              <div style={{ fontFamily: 'var(--usx-font-family-document)', fontSize: "var(--usx-font-size-base)", fontWeight: 600, color: '#cccccc' }}>
-                Document Title Preview
-              </div>
-              <code style={{ fontFamily: 'var(--usx-font-family-mono)', fontSize: "var(--usx-font-size-sm)", color: '#ce9178' }}>
-                console.log('Code preview');
-              </code>
-              <button
-                style={{
-                  fontFamily: 'var(--usx-font-family-ui)',
-                  fontSize: "var(--usx-font-size-sm)",
-                  padding: '4px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #0e639c',
-                  background: '#0e639c',
-                  color: 'white',
-                  cursor: 'pointer',
-                  alignSelf: 'flex-start',
-                }}
-              >
-                Button Preview
-              </button>
+                  <span className="text-lg">{pack.icon}</span>
+                  <span className={`text-xs ${getActivePackIndex() === idx ? 'font-semibold' : ''}`}>{pack.label}</span>
+                </button>
+              ))}
             </div>
           </div>
-        )}
+
+          {/* Per-Role Font Selectors */}
+          {(Object.keys(FONT_OPTIONS) as FontRole[]).map((role) => (
+            <div key={role} className="flex flex-col gap-1">
+              <span className="text-xs text-usxd-secondary">{ROLE_LABELS[role]}</span>
+              <Select
+                value={usxTheme.fontSelection[role]}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => usxTheme.setFontRole(role, e.target.value)}
+                sizing="sm"
+              >
+                {FONT_OPTIONS[role].map((font) => (
+                  <option key={font.name} value={font.name}>
+                    {font.name}
+                  </option>
+                ))}
+              </Select>
+              <span className="text-[10px] text-usxd-secondary/60">{ROLE_DESCRIPTIONS[role]}</span>
+            </div>
+          ))}
+
+          {/* Live Preview */}
+          <div className="mt-2 p-3 bg-usxd-background rounded-lg border border-usxd-border flex flex-col gap-2">
+            <span className="text-[10px] text-usxd-secondary/60 mb-1">Preview</span>
+            <p className="text-sm text-usxd-text m-0" style={{ fontFamily: 'var(--usx-font-family-body)' }}>
+              The quick brown fox jumps over the lazy dog. (Body)
+            </p>
+            <div className="text-sm font-bold text-usxd-text" style={{ fontFamily: 'var(--usx-font-family-desktop)' }}>
+              Desktop Title Preview
+            </div>
+            <div className="text-sm font-semibold text-usxd-text" style={{ fontFamily: 'var(--usx-font-family-document)' }}>
+              Document Title Preview
+            </div>
+            <code className="text-xs text-[#ce9178]" style={{ fontFamily: 'var(--usx-font-family-mono)' }}>
+              console.log('Code preview');
+            </code>
+            <button
+              className="self-start text-xs px-3 py-1 rounded border border-usxd-highlight bg-usxd-highlight text-usxd-highlight-text cursor-pointer"
+              style={{ fontFamily: 'var(--usx-font-family-ui)' }}
+            >
+              Button Preview
+            </button>
+          </div>
+        </div>
 
         {/* About */}
-        <div className="setting-group" style={{ borderTop: '1px solid #3c3c3c', paddingTop: 12 }}>
-          <label className="setting-label">About Surface</label>
-          <div style={{ fontSize: "var(--usx-font-size-sm)", color: '#858585', lineHeight: 1.6 }}>
+        <div className="flex flex-col gap-1.5 pt-3 border-t border-usxd-border">
+          <Label value="About Surface" className="text-usxd-secondary text-xs uppercase tracking-wider font-semibold" />
+          <div className="text-xs text-usxd-secondary leading-relaxed">
             <div>Version: 1.5.0</div>
             <div>Local-first desktop editor</div>
             <div>Electron + React + Monaco + SQLite</div>
-            <div style={{ marginTop: 8, fontSize: "var(--usx-font-size-xs)", color: '#666' }}>
+            <div className="mt-2 text-[10px] text-usxd-secondary/60">
               USX Font Pack: SourceCodePro, SF Pro, Poppins, Quicksand, ChicagoFLF, Teletext50, PetMe128, PressStart2P
             </div>
           </div>

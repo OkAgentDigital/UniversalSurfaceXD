@@ -18,7 +18,7 @@ export const BoardHeader = styled.div`
 `;
 
 export const BoardTitle = styled.h1`
-  font-size: 20px;
+  font-size: var(--usx-font-size-xl);
   font-weight: 600;
   color: #e0e0e0;
   margin: 0;
@@ -36,7 +36,7 @@ export const ViewButton = styled.button<{ $active: boolean }>`
   background-color: ${props => props.$active ? '#0078d4' : 'transparent'};
   color: ${props => props.$active ? '#fff' : '#ccc'};
   cursor: pointer;
-  font-size: 13px;
+  font-size: var(--usx-font-size-sm);
   transition: all 0.2s;
 
   &:hover {
@@ -51,7 +51,7 @@ export const AddButton = styled.button`
   background-color: #0078d4;
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   font-weight: 500;
   transition: background-color 0.2s;
 
@@ -90,7 +90,7 @@ export const ColumnHeader = styled.div`
   padding: 8px 12px;
   margin-bottom: 12px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   color: #ccc;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -112,7 +112,7 @@ export const TaskCardContainer = styled.div`
 `;
 
 export const TaskTitle = styled.div`
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   color: #e0e0e0;
   margin-bottom: 8px;
   word-break: break-word;
@@ -122,14 +122,14 @@ export const TaskMeta = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   color: #888;
 `;
 
 export const StatusBadge = styled.span<{ $status: string }>`
   padding: 2px 8px;
   border-radius: 10px;
-  font-size: 11px;
+  font-size: var(--usx-font-size-xs);
   font-weight: 500;
   background-color: ${props => 
     props.$status === 'active' ? '#1a3a5c' : 
@@ -155,7 +155,7 @@ export const TableHeader = styled.th`
   padding: 12px 16px;
   border-bottom: 2px solid #333;
   color: #888;
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
@@ -173,7 +173,7 @@ export const TableRow = styled.tr`
 
 export const TableCell = styled.td`
   padding: 12px 16px;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   color: #d4d4d4;
 `;
 
@@ -187,7 +187,7 @@ export const SidebarContainer = styled.div`
 `;
 
 export const SidebarTitle = styled.h2`
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   color: #e0e0e0;
   margin-bottom: 16px;
 `;
@@ -198,7 +198,7 @@ export const SidebarSection = styled.div`
 
 export const SidebarLabel = styled.label`
   display: block;
-  font-size: 12px;
+  font-size: var(--usx-font-size-sm);
   color: #888;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -212,7 +212,7 @@ export const SidebarInput = styled.input`
   border-radius: 4px;
   background-color: #3c3c3c;
   color: #e0e0e0;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
 
   &:focus {
     outline: none;
@@ -227,7 +227,7 @@ export const SidebarSelect = styled.select`
   border-radius: 4px;
   background-color: #3c3c3c;
   color: #e0e0e0;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
 
   &:focus {
     outline: none;
@@ -243,7 +243,7 @@ export const OpenEditorButton = styled.button`
   background-color: #0078d4;
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   font-weight: 500;
   margin-top: 16px;
   transition: background-color 0.2s;
@@ -261,7 +261,7 @@ export const DeleteButton = styled.button`
   background-color: transparent;
   color: #c42b1c;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--usx-font-size-base);
   margin-top: 8px;
   transition: all 0.2s;
 
@@ -278,7 +278,7 @@ export const EmptyState = styled.div`
   justify-content: center;
   height: 100%;
   color: #666;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
   gap: 12px;
 `;
 
@@ -288,5 +288,5 @@ export const LoadingState = styled.div`
   justify-content: center;
   height: 100%;
   color: #888;
-  font-size: 16px;
+  font-size: var(--usx-font-size-base);
 `;
