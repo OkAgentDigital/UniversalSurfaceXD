@@ -40,7 +40,6 @@ export function ActivityBar({
   const handleViewClick = (viewId: string) => {
     if (activeView === viewId) {
       // Same view clicked — toggle sidebar visibility
-      // This is handled by the parent via a custom event
       window.dispatchEvent(new CustomEvent('universui:toggleSidebar'));
     } else {
       onViewChange(viewId);
@@ -83,7 +82,7 @@ export function ActivityBar({
           <div
             key={item.id}
             className={`activity-item ${activeView === item.id ? 'active' : ''}`}
-            onClick={() => onViewChange(item.id)}
+            onClick={() => handleViewClick(item.id)}
             title={item.label}
           >
             <i className={`codicon ${item.icon}`}></i>
