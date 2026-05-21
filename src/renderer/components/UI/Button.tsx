@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from './Icon';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
@@ -33,9 +34,9 @@ export function Button({
   return (
     <button className={classes} disabled={disabled || loading} {...props}>
       {loading ? (
-        <i className="codicon codicon-loading codicon-modifier-spin"></i>
+        <Icon name="loading" spin size={16} />
       ) : icon ? (
-        <i className={`codicon codicon-${icon}`}></i>
+        <Icon name={icon} size={16} />
       ) : null}
       {children && <span className="ui-button-label">{children}</span>}
     </button>

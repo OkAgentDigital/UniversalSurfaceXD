@@ -6,7 +6,38 @@
 
 ---
 
-## 🏆 v1.4.0 — Current Release (Complete)
+## 🏆 v1.6.0 — Current Release (Complete)
+
+### 🎨 Material3 Design System
+
+Applied the full Material3 design system with Material Symbols Rounded icons across the entire USXD app.
+
+- ✅ **Material3 Design Tokens** — Comprehensive M3 token system (color, shape, typography, elevation, motion, spacing)
+- ✅ **Material Symbols Rounded** — Replaced Codicons with 700+ Material Symbols icon mappings
+- ✅ **M3 Shape System** — Consistent border-radius tokens (xs, sm, md, lg, xl, full, dialog, button, nav, card)
+- ✅ **M3 Elevation** — Shadow levels 0-5 with proper M3 shadow values
+- ✅ **M3 Motion** — Duration and easing tokens for smooth animations
+- ✅ **M3 Typography** — Full type scale (display, headline, title, body, label) with weight/line-height
+- ✅ **Flowbite Theme Bridge** — Updated to reference M3 shape tokens
+- ✅ **Backward Compatible** — All existing USX CSS variables mapped to M3 tokens
+- ✅ **Zero TypeScript compilation errors**
+- ✅ **Icon component accepts both string and numeric sizes**
+- ✅ **Added `title` prop support to Icon component**
+- ✅ **Removed duplicate icon map entries (300+ lines cleaned up)**
+
+## 🏆 v1.5.0 — Previous Release (Complete)
+
+- ✅ **Mono Color Scheme** — Unified mono palette across all components
+- ✅ **ChatGPT-style Chat Panel** — Redesigned OK Chat with centered composer, message bubbles, typing indicator
+- ✅ **Consistent Icon Sizing** — Standardized 24px icons across activity bar, title bar, status bar
+- ✅ **Font Pack Integration** — USX Font Pack with 10+ retro and modern fonts
+- ✅ **App Rename** — Renamed to "Surface" for product name
+- ✅ **Flowbite React migration** with mono theme
+- ✅ **USX Story Form** with variable handles, JSON storage, overlay system
+- ✅ **60px activity bar, 56px title bar, 28px status bar**
+- ✅ **Centered search layout**
+
+## 🏆 v1.4.0 — Initial Release (Complete)
 
 A local-first document hub with AI-powered collaboration and GitHub integration, repackaged as UniversalSurfaceXD.
 
@@ -37,6 +68,8 @@ A local-first document hub with AI-powered collaboration and GitHub integration,
 | v1.3.0 | 3-column layout + AI + MCP + Custom Chrome | **10 total** | ~4,500+ |
 | v1.3.0+ | SonicScrewdriver + Autoloop + Sub-Sonic-Stack | **10 total** | ~6,000+ |
 | v1.4.0 | Repackaged as UniversalSurfaceXD (USXD) | **10 total** | ~6,000+ |
+| v1.5.0 | Mono color scheme, ChatGPT chat, Font Pack | **10 total** | ~7,000+ |
+| v1.6.0 | Material3 Design System, Material Symbols | **10 total** | ~8,000+ |
 
 ---
 

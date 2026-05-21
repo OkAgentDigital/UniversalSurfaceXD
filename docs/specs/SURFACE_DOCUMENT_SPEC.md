@@ -1,9 +1,12 @@
 # Surface Document Specification
 
-> **Version:** 1.0.0  
+> **Version:** 1.1.0  
 > **Status:** Draft  
 > **Part of:** UniversalSurfaceXD v2.0.0 "Surface Convergence"  
-> **Source:** Ported from USX beta archive (Era 1) interchange schemas
+> **Design System:** Material3 (M3) with Material Symbols Rounded  
+> **Source:** Ported from USX beta archive (Era 1) interchange schemas  
+> **Canonical spec:** [`uCode1/docs/specs/usx/`](https://github.com/OkAgentDigital/uCode1/tree/main/docs/specs/usx) — USX (Unified Surface eXchange)  
+> **System-layer counterpart:** [`uCode1/docs/specs/udo/`](https://github.com/OkAgentDigital/uCode1/tree/main/docs/specs/udo) — UDO (Unified Document Object)
 
 ---
 

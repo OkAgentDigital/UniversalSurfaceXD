@@ -1,7 +1,7 @@
 /* ============================================
  * UI Component Styles
- * Chunky, modern styling for Button, Input,
- * Card, Grid, and other UI components
+ * Material3 Design — Mono palette
+ * Uses M3 design tokens from m3-tokens.css
  * ============================================ */
 
 /* === BUTTON === */
@@ -9,11 +9,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm, 8px);
-  font-weight: 500;
-  border-radius: var(--radius-md, 8px);
+  gap: var(--m3-spacing-2, 8px);
+  font-weight: var(--m3-typescale-weight-medium, 500);
+  border-radius: var(--m3-shape-button, 9999px);
   cursor: pointer;
-  transition: all var(--transition-fast, 0.1s ease);
+  transition: all var(--m3-motion-duration-medium1, 200ms) var(--m3-motion-easing-standard, ease);
   border: none;
   white-space: nowrap;
   user-select: none;

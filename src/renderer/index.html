@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' data: blob: http://localhost:3000 https://cdn.jsdelivr.net; img-src 'self' data: blob:; connect-src 'self' ws://localhost:* http://localhost:3000 https://cdn.jsdelivr.net">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob: https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: blob: http://localhost:3000 https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' ws://localhost:* http://localhost:3000 https://cdn.jsdelivr.net">
 
   <title>Surface</title>
 
@@ -12,6 +12,9 @@
   <link rel="preload" href="/assets/fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/assets/fonts/SF-Pro.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/assets/fonts/Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+
+  <!-- Material Symbols Rounded — Full M3 Icon Set -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
   <div id="root"></div>

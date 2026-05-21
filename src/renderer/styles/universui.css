@@ -2,6 +2,46 @@
 
 /* USXD Global Styles - VS Code Inspired 3-Column Layout */
 
+/* ============================================
+ * Material Symbols Rounded — Icon Spin Animation
+ * ============================================ */
+@keyframes m3-icon-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.m3-icon-spin {
+  animation: m3-icon-spin 1.5s linear infinite;
+  display: inline-flex;
+}
+
+/* ============================================
+ * Codicon → Material Symbols backward compat
+ * Codicon class names still work, render as M3
+ * ============================================ */
+[class^="codicon-"],
+[class*=" codicon-"] {
+  font-family: 'Material Symbols Rounded', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+/* Codicon modifier spin */
+.codicon-modifier-spin {
+  animation: m3-icon-spin 1.5s linear infinite;
+}
+
 :root {
   /* VS Code Layout Variables */
   --vscode-activity-bar-width: 60px;

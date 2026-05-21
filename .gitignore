@@ -37,3 +37,6 @@ electron-builder.yml.env
 
 # TypeScript
 *.tsbuildinfo
+
+# Backup
+.icon-backup/

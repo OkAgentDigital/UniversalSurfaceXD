@@ -1,5 +1,6 @@
 /* ============================================
  * Curtain — Full-screen overlay
+ * Material3 Design — M3 tokens
  * ============================================ */
 
 .curtain-overlay {
@@ -8,12 +9,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(var(--usx-color-background));
+  background-color: rgb(var(--m3-ref-background));
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: curtain-fade-in 200ms ease;
+  animation: curtain-fade-in var(--m3-motion-duration-medium2) var(--m3-motion-easing-standard);
 }
 
 @keyframes curtain-fade-in {
@@ -28,20 +29,20 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background-color: rgb(var(--usx-color-background));
+  background-color: rgb(var(--m3-ref-background));
 }
 
 .curtain-header {
   display: flex;
   align-items: center;
-  padding: var(--usx-spacing-4) var(--usx-spacing-6);
-  border-bottom: 1px solid rgb(var(--usx-color-border));
+  padding: var(--m3-spacing-4) var(--m3-spacing-6);
+  border-bottom: 1px solid rgb(var(--m3-ref-outline-variant));
   position: relative;
 }
 
 .curtain-close {
   position: absolute;
-  left: var(--usx-spacing-4);
+  left: var(--m3-spacing-4);
   top: 50%;
   transform: translateY(-50%);
   background: transparent;
@@ -52,25 +53,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--usx-radius-md);
-  color: rgb(var(--usx-color-text));
+  border-radius: var(--m3-shape-xs);
+  color: rgb(var(--m3-ref-on-surface));
 }
 
 .curtain-close:hover {
-  background-color: rgb(var(--usx-color-surface));
+  background-color: rgb(var(--m3-ref-surface));
 }
 
 .curtain-title {
   flex: 1;
   text-align: center;
   font-family: var(--usx-font-family-heading);
-  font-size: var(--usx-font-size-xl);
-  font-weight: var(--usx-font-weight-semibold);
+  font-size: var(--m3-typescale-title-large);
+  font-weight: var(--m3-typescale-weight-semibold);
   margin: 0;
 }
 
 .curtain-content {
   flex: 1;
   overflow-y: auto;
-  padding: var(--usx-spacing-6);
+  padding: var(--m3-spacing-6);
 }

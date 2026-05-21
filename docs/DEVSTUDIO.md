@@ -43,9 +43,43 @@ DevStudio is the overarching framework that unifies **UniversalSurfaceXD** (the 
 | **Security** | SonicScrewdriver | AES-256 secrets, proxy, containers, audit |
 | **Build** | Sub-Sonic-Stack | Modular stack definitions, component registry |
 
+### Material3 Design System
+
+UniversalSurfaceXD v1.6.0+ uses **Material3 (M3)** as its design system foundation, with **Material Symbols Rounded** for icons.
+
+#### Design Tokens
+
+All M3 design tokens are defined in `src/renderer/styles/usx/m3-tokens.css`:
+
+| Token Category | Prefix | Examples |
+| :--- | :--- | :--- |
+| **Color** | `--m3-color-*` | primary, on-primary, surface, background, outline, error |
+| **Shape** | `--m3-shape-*` | xs (4px), sm (8px), md (12px), lg (16px), xl (24px), full (9999px) |
+| **Typography** | `--m3-typography-*` | display, headline, title, body, label scales |
+| **Elevation** | `--m3-elevation-*` | Levels 0-5 with proper M3 shadow values |
+| **Motion** | `--m3-motion-*` | Duration and easing tokens |
+| **Spacing** | `--m3-spacing-*` | 2px-24px scale |
+
+#### Icon System
+
+Codicon names are mapped to **Material Symbols Rounded** via `src/renderer/components/UI/Icon.tsx` (700+ mappings). The `<Icon>` component supports:
+
+- `fill` — Toggle filled/outlined style
+- `weight` — Font weight (100-700)
+- `grade` — Font grade (-25 to 200)
+- `opticalSize` — Optical size (20-48)
+- `spin` — Rotation animation
+- String size names (`xs`, `sm`, `md`, `lg`, `xl`) or numeric sizes
+
+#### Backward Compatibility
+
+All existing USX CSS variables (`--usx-*`) are mapped to M3 tokens via `universui.css`, ensuring all existing components continue to work without modification.
+
 ### USX Surface Format
 
-UniversalSurfaceXD uses the **USX (Universal Surface eXchange)** format for all surface layouts. USX combines:
+UniversalSurfaceXD uses the **USX (Unified Surface eXchange)** format for all surface layouts. USX is the style/design/surface layer of the uDos ecosystem (for system-layer definitions like skills and workflows, see the [UDO specification](https://github.com/OkAgentDigital/uCode1/tree/main/docs/specs/udo)).
+
+USX combines:
 
 - **JSON/YAML schemas** — Portable layout trees describing grid-based UIs
 - **Liquid templates** — Dynamic content rendering via the uCode1 Liquid Engine
@@ -53,7 +87,7 @@ UniversalSurfaceXD uses the **USX (Universal Surface eXchange)** format for all 
 
 The USX pipeline flows through uCode1's Python core (`core_py/usxd/` and `core_py/liquid_engine/`) for parsing, component mapping, and rendering before being displayed in the Electron + React frontend.
 
-See the [Surface Document Specification](./specs/SURFACE_DOCUMENT_SPEC.md) for the full schema reference.
+See the [Surface Document Specification](./specs/SURFACE_DOCUMENT_SPEC.md) for the full schema reference, and the [USX specification](https://github.com/OkAgentDigital/uCode1/tree/main/docs/specs/usx) for the canonical format definition.
 
 ### Component Map
 

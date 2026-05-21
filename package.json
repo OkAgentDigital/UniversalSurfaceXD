@@ -1,7 +1,7 @@
 {
   "name": "universalsurfacexd",
   "productName": "Surface",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Surface — Local-first desktop editor combining task management with professional code editing.",
   "main": "dist/main/main.js",
   "scripts": {
@@ -47,6 +47,7 @@
   "dependencies": {
     "better-sqlite3": "^11.0.0",
     "electron-updater": "^6.8.3",
+    "material-symbols": "^0.44.8",
     "node-pty": "^1.1.0"
   },
   "devDependencies": {

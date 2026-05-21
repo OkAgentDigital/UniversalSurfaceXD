@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, ToggleSwitch, Card, Label, Badge } from 'flowbite-react';
 import { useUSXTheme } from '../USX/USXThemeProvider';
+import { Icon } from '../UI/Icon';
 import type { FontSize } from '../../types/usx';
 
 type IconSize = 'small' | 'medium' | 'large';

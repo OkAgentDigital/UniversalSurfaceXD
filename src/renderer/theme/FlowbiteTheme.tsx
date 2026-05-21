@@ -4,8 +4,8 @@ import { ThemeProvider, createTheme } from 'flowbite-react';
 /**
  * USXD Custom Flowbite Theme
  * Bridges USXD CSS variables to Flowbite React components.
- * Mono colour scheme — no accent colors, pure grayscale.
- * Highlight inverts based on theme (light=dark, dark=light).
+ * Material3 Design — Mono palette, M3 shape tokens.
+ * Uses M3 design tokens from m3-tokens.css.
  */
 export const usxdFlowbiteTheme = createTheme({
   // ===== BUTTON =====
@@ -29,7 +29,7 @@ export const usxdFlowbiteTheme = createTheme({
       xl: 'text-xl px-6 py-3',
     },
     pill: {
-      off: 'rounded-usxd',
+      off: 'rounded-[var(--m3-shape-button)]',
       on: 'rounded-full',
     } as any,
   },

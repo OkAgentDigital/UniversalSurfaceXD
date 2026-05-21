@@ -1,0 +1,256 @@
+/* ============================================
+ * Material3 Design Tokens v1.0
+ * Full M3 design system with mono palette
+ * as a set within the color system.
+ * ============================================
+ * M3 Spec: m3.material.io
+ * ============================================ */
+
+:root {
+  /* ============================================
+     M3 COLOR SYSTEM — Mono Palette as Primary Set
+     ============================================
+     The mono (grayscale) palette serves as the
+     primary/surface color set. Semantic colors
+     (success, warning, error) use M3 tonal palettes.
+     ============================================ */
+
+  /* --- M3 Primary (Mono) --- */
+  --m3-ref-primary: 15 23 42;              /* #0f172a — Dark slate */
+  --m3-ref-on-primary: 255 255 255;         /* #ffffff */
+  --m3-ref-primary-container: 226 232 240;  /* #e2e8f0 */
+  --m3-ref-on-primary-container: 15 23 42;  /* #0f172a */
+
+  /* --- M3 Secondary (Muted Mono) --- */
+  --m3-ref-secondary: 100 116 139;          /* #64748b */
+  --m3-ref-on-secondary: 255 255 255;
+  --m3-ref-secondary-container: 226 232 240;
+  --m3-ref-on-secondary-container: 51 65 85;
+
+  /* --- M3 Tertiary (Warm accent for mono) --- */
+  --m3-ref-tertiary: 120 113 108;           /* #78716c — Warm gray */
+  --m3-ref-on-tertiary: 255 255 255;
+  --m3-ref-tertiary-container: 214 211 209;
+  --m3-ref-on-tertiary-container: 68 64 60;
+
+  /* --- M3 Error --- */
+  --m3-ref-error: 179 38 30;               /* #b3261e */
+  --m3-ref-on-error: 255 255 255;
+  --m3-ref-error-container: 249 222 220;
+  --m3-ref-on-error-container: 65 14 11;
+
+  /* --- M3 Surface / Background (Mono) --- */
+  --m3-ref-background: 255 255 255;         /* #ffffff */
+  --m3-ref-on-background: 15 23 42;         /* #0f172a */
+  --m3-ref-surface: 248 250 252;            /* #f8fafc */
+  --m3-ref-on-surface: 15 23 42;
+  --m3-ref-surface-variant: 241 243 245;    /* #f1f3f5 */
+  --m3-ref-on-surface-variant: 100 116 139;
+
+  /* --- M3 Surface Container Scale (Mono) --- */
+  --m3-ref-surface-container-lowest: 255 255 255;
+  --m3-ref-surface-container-low: 243 245 247;
+  --m3-ref-surface-container: 241 243 245;
+  --m3-ref-surface-container-high: 237 239 241;
+  --m3-ref-surface-container-highest: 226 232 240;
+
+  /* --- M3 Outline --- */
+  --m3-ref-outline: 121 133 147;            /* #798593 */
+  --m3-ref-outline-variant: 196 199 197;    /* #c4c7c5 */
+
+  /* --- M3 Shadow --- */
+  --m3-ref-shadow: 0 0 0;
+  --m3-ref-surface-tint: 15 23 42;
+
+  /* ============================================
+     M3 DARK MODE — Inverted Mono
+     ============================================ */
+  .dark,
+  [data-theme="dark"] {
+    --m3-ref-primary: 179 191 209;           /* #b3bfd1 */
+    --m3-ref-on-primary: 30 41 59;
+    --m3-ref-primary-container: 51 65 85;
+    --m3-ref-on-primary-container: 226 232 240;
+
+    --m3-ref-secondary: 168 178 190;
+    --m3-ref-on-secondary: 30 41 59;
+    --m3-ref-secondary-container: 71 85 105;
+    --m3-ref-on-secondary-container: 226 232 240;
+
+    --m3-ref-tertiary: 168 162 158;
+    --m3-ref-on-tertiary: 41 37 36;
+    --m3-ref-tertiary-container: 79 73 70;
+    --m3-ref-on-tertiary-container: 214 211 209;
+
+    --m3-ref-error: 242 184 181;
+    --m3-ref-on-error: 65 14 11;
+    --m3-ref-error-container: 140 29 24;
+    --m3-ref-on-error-container: 249 222 220;
+
+    --m3-ref-background: 18 18 18;           /* #121212 */
+    --m3-ref-on-background: 227 227 227;
+    --m3-ref-surface: 30 30 30;              /* #1e1e1e */
+    --m3-ref-on-surface: 227 227 227;
+    --m3-ref-surface-variant: 40 40 40;
+    --m3-ref-on-surface-variant: 168 168 168;
+
+    --m3-ref-surface-container-lowest: 10 10 10;
+    --m3-ref-surface-container-low: 24 24 24;
+    --m3-ref-surface-container: 30 30 30;
+    --m3-ref-surface-container-high: 36 36 36;
+    --m3-ref-surface-container-highest: 44 44 44;
+
+    --m3-ref-outline: 142 142 142;
+    --m3-ref-outline-variant: 66 66 66;
+    --m3-ref-shadow: 0 0 0;
+    --m3-ref-surface-tint: 179 191 209;
+  }
+
+  /* ============================================
+     M3 ELEVATION SYSTEM
+     ============================================ */
+  --m3-elevation-level0: none;
+  --m3-elevation-level1: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+  --m3-elevation-level2: 0 1px 2px 0 rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
+  --m3-elevation-level3: 0 1px 3px 0 rgba(0,0,0,0.3), 0 4px 8px 3px rgba(0,0,0,0.15);
+  --m3-elevation-level4: 0 2px 3px 0 rgba(0,0,0,0.3), 0 6px 10px 4px rgba(0,0,0,0.15);
+  --m3-elevation-level5: 0 4px 4px 0 rgba(0,0,0,0.3), 0 8px 12px 6px rgba(0,0,0,0.15);
+
+  /* ============================================
+     M3 SHAPE SYSTEM
+     ============================================ */
+  --m3-shape-none: 0;
+  --m3-shape-xs: 4px;
+  --m3-shape-sm: 8px;
+  --m3-shape-md: 12px;
+  --m3-shape-lg: 16px;
+  --m3-shape-xl: 20px;
+  --m3-shape-full: 9999px;
+
+  /* Shape by component role */
+  --m3-shape-button: var(--m3-shape-full);
+  --m3-shape-card: var(--m3-shape-md);
+  --m3-shape-dialog: var(--m3-shape-xl);
+  --m3-shape-fab: var(--m3-shape-lg);
+  --m3-shape-nav-bar: var(--m3-shape-none);
+  --m3-shape-nav-drawer: var(--m3-shape-none);
+  --m3-shape-sheet: var(--m3-shape-lg) var(--m3-shape-lg) var(--m3-shape-none) var(--m3-shape-none);
+  --m3-shape-chip: var(--m3-shape-sm);
+  --m3-shape-field: var(--m3-shape-xs);
+  --m3-shape-badge: var(--m3-shape-full);
+
+  /* ============================================
+     M3 TYPOGRAPHY — Type Scale
+     ============================================ */
+  --m3-typescale-display-large: 3.5625rem;    /* 57px */
+  --m3-typescale-display-medium: 2.8125rem;   /* 45px */
+  --m3-typescale-display-small: 2.25rem;      /* 36px */
+  --m3-typescale-headline-large: 2rem;        /* 32px */
+  --m3-typescale-headline-medium: 1.75rem;    /* 28px */
+  --m3-typescale-headline-small: 1.5rem;      /* 24px */
+  --m3-typescale-title-large: 1.375rem;       /* 22px */
+  --m3-typescale-title-medium: 1rem;          /* 16px */
+  --m3-typescale-title-small: 0.875rem;       /* 14px */
+  --m3-typescale-body-large: 1rem;            /* 16px */
+  --m3-typescale-body-medium: 0.875rem;       /* 14px */
+  --m3-typescale-body-small: 0.75rem;         /* 12px */
+  --m3-typescale-label-large: 0.875rem;       /* 14px */
+  --m3-typescale-label-medium: 0.75rem;       /* 12px */
+  --m3-typescale-label-small: 0.6875rem;      /* 11px */
+
+  /* Type weights */
+  --m3-typescale-weight-regular: 400;
+  --m3-typescale-weight-medium: 500;
+  --m3-typescale-weight-semibold: 600;
+  --m3-typescale-weight-bold: 700;
+
+  /* Type line heights */
+  --m3-typescale-line-height-display: 1.15;
+  --m3-typescale-line-height-headline: 1.25;
+  --m3-typescale-line-height-title: 1.3;
+  --m3-typescale-line-height-body: 1.5;
+  --m3-typescale-line-height-label: 1.4;
+
+  /* ============================================
+     M3 MOTION / TRANSITION TOKENS
+     ============================================ */
+  /* Duration */
+  --m3-motion-duration-short1: 50ms;
+  --m3-motion-duration-short2: 100ms;
+  --m3-motion-duration-medium1: 200ms;
+  --m3-motion-duration-medium2: 300ms;
+  --m3-motion-duration-long1: 400ms;
+  --m3-motion-duration-long2: 500ms;
+
+  /* Easing */
+  --m3-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --m3-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --m3-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --m3-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --m3-motion-easing-linear: linear;
+
+  /* ============================================
+     M3 SPACING SCALE (8dp grid)
+     ============================================ */
+  --m3-spacing-0: 0;
+  --m3-spacing-1: 4px;
+  --m3-spacing-2: 8px;
+  --m3-spacing-3: 12px;
+  --m3-spacing-4: 16px;
+  --m3-spacing-5: 20px;
+  --m3-spacing-6: 24px;
+  --m3-spacing-7: 28px;
+  --m3-spacing-8: 32px;
+  --m3-spacing-9: 36px;
+  --m3-spacing-10: 40px;
+  --m3-spacing-12: 48px;
+  --m3-spacing-14: 56px;
+  --m3-spacing-16: 64px;
+
+  /* ============================================
+     M3 ICON SIZES
+     ============================================ */
+  --m3-icon-size-xs: 16px;
+  --m3-icon-size-sm: 20px;
+  --m3-icon-size-md: 24px;
+  --m3-icon-size-lg: 32px;
+  --m3-icon-size-xl: 40px;
+  --m3-icon-size-xxl: 48px;
+}
+
+/* ============================================
+   M3 UTILITY CLASSES
+   ============================================ */
+
+/* Elevation */
+.m3-elevation-0 { box-shadow: var(--m3-elevation-level0); }
+.m3-elevation-1 { box-shadow: var(--m3-elevation-level1); }
+.m3-elevation-2 { box-shadow: var(--m3-elevation-level2); }
+.m3-elevation-3 { box-shadow: var(--m3-elevation-level3); }
+.m3-elevation-4 { box-shadow: var(--m3-elevation-level4); }
+.m3-elevation-5 { box-shadow: var(--m3-elevation-level5); }
+
+/* Shape */
+.m3-shape-none { border-radius: var(--m3-shape-none); }
+.m3-shape-xs { border-radius: var(--m3-shape-xs); }
+.m3-shape-sm { border-radius: var(--m3-shape-sm); }
+.m3-shape-md { border-radius: var(--m3-shape-md); }
+.m3-shape-lg { border-radius: var(--m3-shape-lg); }
+.m3-shape-xl { border-radius: var(--m3-shape-xl); }
+.m3-shape-full { border-radius: var(--m3-shape-full); }
+
+/* Surface colors */
+.m3-surface { background-color: rgb(var(--m3-ref-surface)); }
+.m3-surface-variant { background-color: rgb(var(--m3-ref-surface-variant)); }
+.m3-surface-container { background-color: rgb(var(--m3-ref-surface-container)); }
+.m3-surface-container-low { background-color: rgb(var(--m3-ref-surface-container-low)); }
+.m3-surface-container-high { background-color: rgb(var(--m3-ref-surface-container-high)); }
+.m3-surface-container-highest { background-color: rgb(var(--m3-ref-surface-container-highest)); }
+
+/* Text colors */
+.m3-on-surface { color: rgb(var(--m3-ref-on-surface)); }
+.m3-on-surface-variant { color: rgb(var(--m3-ref-on-surface-variant)); }
+.m3-primary { color: rgb(var(--m3-ref-primary)); }
+.m3-on-primary { color: rgb(var(--m3-ref-on-primary)); }
+.m3-secondary { color: rgb(var(--m3-ref-secondary)); }
+.m3-tertiary { color: rgb(var(--m3-ref-tertiary)); }
